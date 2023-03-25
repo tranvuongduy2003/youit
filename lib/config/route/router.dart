@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
@@ -16,6 +17,10 @@ import './routes.dart';
 class Router {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.welcomePage:
+        {
+          return MaterialPageRoute(builder: (_) => const WelcomePage());
+        }
       case Routes.homePage:
         {
           return MaterialPageRoute(builder: (_) => const HomePage());

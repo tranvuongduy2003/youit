@@ -10,4 +10,6 @@ class AppColors {
   static const fontColor = Color(0xFF404040);
   static const fade = Color(0xFFD5D5D5);
   static const lineColor = Color(0xFFE0E0E0);
+  static const white = Color(0xFFFFFFFF);
+  static const inputValue = Color(0xFF070C1E);
 }
