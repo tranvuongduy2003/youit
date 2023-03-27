@@ -17,7 +17,7 @@ class EditProfilePage extends StatelessWidget {
     );
   }
 
-  Widget buildRowInformation(
+  Widget buildLinkInformationRow(
     BuildContext context,
     String linkgh,
     String linkgl,
@@ -119,9 +119,10 @@ class EditProfilePage extends StatelessWidget {
       appBar: AppBar(
         centerTitle: appBarTheme.centerTitle,
         elevation: appBarTheme.elevation,
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: appBarTheme.iconTheme?.color,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           'Thông tin cá nhân',
@@ -187,7 +188,8 @@ class EditProfilePage extends StatelessWidget {
                   'Ngày sinh', DateFormat('dd - MM - yyyy').format(birthDay)),
               const SizedBox(height: 3),
               const Divider(),
-              buildRowInformation(context, linkGitHub, linkGitLab, linkedin),
+              buildLinkInformationRow(
+                  context, linkGitHub, linkGitLab, linkedin),
               const SizedBox(height: 3),
               const Divider(),
               Row(

@@ -11,44 +11,42 @@ import '../../screens/profile/edit_profile_page.dart';
 import '../../widgets/personal_information.dart';
 
 class ProfilePage extends StatelessWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
-    Widget buildButton(BuildContext context, String title) {
-      return ElevatedButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (_) {
-                return const EditProfilePage();
-              },
-            ),
-          );
-        },
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.lightGray,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            elevation: 0,
-            minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 27),
-            padding: const EdgeInsets.all(0),
-            alignment: Alignment.center),
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-            fontFamily: 'Montserrat',
-            fontSize: 14,
+  Widget buildButton(BuildContext context, String title) {
+    return ElevatedButton(
+      onPressed: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) {
+              return const EditProfilePage();
+            },
           ),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.lightGray,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+          elevation: 0,
+          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 27),
+          padding: const EdgeInsets.all(0),
+          alignment: Alignment.center),
+      child: Text(
+        title,
+        style: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'Montserrat',
+          fontSize: 14,
         ),
-      );
-    }
-
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-
-      const ProfilePage({Key? key}) : super(key: key);
-   const name = 'Nguyễn Hoàng Anh';
+    const name = 'Nguyễn Hoàng Anh';
     int likeNumber = 200000;
     const department = 'Công nghệ phần mềm';
     int seesion = 16;
@@ -63,22 +61,21 @@ class ProfilePage extends StatelessWidget {
     String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
     likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
-      final AppBarTheme appBarTheme = AppBarTheme.of(context);
+    final AppBarTheme appBarTheme = AppBarTheme.of(context);
 
-   
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-      
-        centerTitle: .centerTitle,
-        elevation: AppBarTheme.of(context).elevation,
-        leading: const Icon(
-          Icons.arrow_back_ios_new,
+        centerTitle: appBarTheme.centerTitle,
+        elevation: appBarTheme.elevation,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
           color: Colors.black,
+          onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
+        title: Text(
           'Thông tin cá nhân',
-          style: AppTextStyles.sectionTitle,
+          style: appBarTheme.titleTextStyle,
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -87,7 +84,7 @@ class ProfilePage extends StatelessWidget {
             height: 1.0,
           ),
         ),
-        backgroundColor: Colors.white,
+        //backgroundColor: appBarTheme.backgroundColor,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
