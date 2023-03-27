@@ -15,7 +15,6 @@ class LinkInformation extends StatelessWidget {
 
   Widget buildTitle(String title) {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
@@ -46,6 +45,7 @@ class LinkInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildTitle('Liên kết'),
         buildLinkRow('Github', linkGithub),

@@ -12,35 +12,31 @@ class EditLinkPage extends StatelessWidget {
     final linkGlController = TextEditingController();
     final linkedinController = TextEditingController();
 
+    final appBarTheme = AppBarTheme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
+        centerTitle: appBarTheme.centerTitle,
+        elevation: appBarTheme.elevation,
         leading: TextButton(
-          child: const Text(
+          child: Text(
             'Huỷ',
-            style: AppTextStyles.appbarButtonTitle,
+            style: appBarTheme.toolbarTextStyle,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
-        title: const Text(
+        title: Text(
           'Thông tin cá nhân',
-          style: AppTextStyles.sectionTitle,
+          style: appBarTheme.titleTextStyle,
         ),
         actions: [
           TextButton(
-            // onPressed: (nameController.text.isEmpty ||
-            //         seesionController.text.isEmpty ||
-            //         departmentController.text.isEmpty ||
-            //         addressController.text.isEmpty ||
-            //         birthDayController.text.isEmpty)
-            //     ? null
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: const Text(
+            child: Text(
               'Lưu',
-              style: AppTextStyles.appbarButtonTitle,
+              style: appBarTheme.toolbarTextStyle,
             ),
           ),
         ],
@@ -73,7 +69,7 @@ class EditLinkPage extends StatelessWidget {
                 labelStyle: AppTextStyles.labelTextField,
                 contentPadding: EdgeInsets.symmetric(vertical: 20),
               ),
-              controller: linkGhController,
+              controller: linkGlController,
               onChanged: (value) {},
             ),
             TextFormField(
@@ -83,7 +79,7 @@ class EditLinkPage extends StatelessWidget {
                 labelStyle: AppTextStyles.labelTextField,
                 contentPadding: EdgeInsets.symmetric(vertical: 20),
               ),
-              controller: linkGhController,
+              controller: linkedinController,
               onChanged: (value) {},
             ),
           ])),

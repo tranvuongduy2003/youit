@@ -11,24 +11,6 @@ import '../../screens/profile/edit_profile_page.dart';
 import '../../widgets/personal_information.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    const name = 'Nguyễn Hoàng Anh';
-    int likeNumber = 200000;
-    const department = 'Công nghệ phần mềm';
-    int seesion = 16;
-    const address = 'Bình Dương';
-    DateTime birthDay = DateTime(2003, 8, 18);
-    const linkGithub = 'github.com/nguyenhoanganh1808';
-    const linkGitlab = 'gitlab.com/21521830';
-    const linkedin = 'linkedin.com/in/nguyenhoanganh';
-    const description =
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
-
-    String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
-    likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
     Widget buildButton(BuildContext context, String title) {
       return ElevatedButton(
@@ -61,11 +43,35 @@ class ProfilePage extends StatelessWidget {
       );
     }
 
+
+  @override
+  Widget build(BuildContext context) {
+
+      const ProfilePage({Key? key}) : super(key: key);
+   const name = 'Nguyễn Hoàng Anh';
+    int likeNumber = 200000;
+    const department = 'Công nghệ phần mềm';
+    int seesion = 16;
+    const address = 'Bình Dương';
+    DateTime birthDay = DateTime(2003, 8, 18);
+    const linkGithub = 'github.com/nguyenhoanganh1808';
+    const linkGitlab = 'gitlab.com/21521830';
+    const linkedin = 'linkedin.com/in/nguyenhoanganh';
+    const description =
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
+
+    String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
+    likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
+
+      final AppBarTheme appBarTheme = AppBarTheme.of(context);
+
+   
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
+      
+        centerTitle: .centerTitle,
+        elevation: AppBarTheme.of(context).elevation,
         leading: const Icon(
           Icons.arrow_back_ios_new,
           color: Colors.black,
@@ -86,6 +92,7 @@ class ProfilePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 10,

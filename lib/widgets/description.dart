@@ -8,7 +8,6 @@ class Description extends StatelessWidget {
 
   Widget buildTitle(String title) {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,
@@ -20,15 +19,13 @@ class Description extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildTitle('Mô tả'),
-        Container(
-          margin: const EdgeInsets.symmetric(),
-          child: Text(
-            description,
-            style: AppTextStyles.body,
-            textAlign: TextAlign.justify,
-          ),
+        Text(
+          description,
+          style: AppTextStyles.body,
+          textAlign: TextAlign.justify,
         ),
       ],
     );

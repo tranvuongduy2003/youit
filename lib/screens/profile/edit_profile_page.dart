@@ -103,7 +103,6 @@ class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const name = 'Nguyễn Hoàng Anh';
-    int likeNumber = 200000;
     const department = 'Công nghệ phần mềm';
     const seesion = 16;
     const address = 'Bình Dương';
@@ -114,18 +113,19 @@ class EditProfilePage extends StatelessWidget {
     const description =
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
 
+    final appBarTheme = AppBarTheme.of(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        centerTitle: true,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
+        centerTitle: appBarTheme.centerTitle,
+        elevation: appBarTheme.elevation,
+        leading: Icon(
+          Icons.arrow_back_ios_new,
+          color: appBarTheme.iconTheme?.color,
         ),
-        title: const Text(
+        title: Text(
           'Thông tin cá nhân',
-          style: AppTextStyles.sectionTitle,
+          style: appBarTheme.titleTextStyle,
         ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1.0),
@@ -134,7 +134,7 @@ class EditProfilePage extends StatelessWidget {
             height: 1.0,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: appBarTheme.backgroundColor,
       ),
       body: SingleChildScrollView(
         child: Padding(
