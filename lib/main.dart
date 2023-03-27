@@ -20,14 +20,14 @@ class MyApp extends StatelessWidget {
         primaryColor: AppColors.primaryColor,
         appBarTheme: const AppBarTheme(
           elevation: 0,
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.white,
           titleTextStyle: AppTextStyles.sectionTitle,
           iconTheme: IconThemeData(color: AppColors.black),
           centerTitle: true,
           toolbarTextStyle: AppTextStyles.appbarButtonTitle,
         ),
       ),
-      initialRoute: Routes.homePage,
+      initialRoute: Routes.signUpPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

@@ -64,7 +64,7 @@ class ProfilePage extends StatelessWidget {
     final AppBarTheme appBarTheme = AppBarTheme.of(context);
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.white,
       appBar: AppBar(
         centerTitle: appBarTheme.centerTitle,
         elevation: appBarTheme.elevation,
