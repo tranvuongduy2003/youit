@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/widgets/stateless/input.dart';
@@ -10,7 +11,6 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        alignment: Alignment.topCenter,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -38,21 +38,42 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Container(
+              padding: EdgeInsets.symmetric(horizontal: 60),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Input>[
+                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
                   Input(
                     'Mail đăng nhập',
                     'xxxxxxxx@gm.uit.edu.vn',
-                    AppColors.fontColor,
+                    AppColors.fade,
                     AppColors.white,
                   ),
                   Input(
                     'Mật khẩu',
                     'Nhập mật khẩu',
-                    AppColors.fontColor,
+                    AppColors.fade,
                     AppColors.white,
                   ),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.only(right: 15),
+                    child: RichText(
+                      textDirection: TextDirection.rtl,
+                      textAlign: TextAlign.right,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Quên mật khẩu',
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 14,
+                            ),
+                            recognizer: TapGestureRecognizer()..onTap = () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
             ),

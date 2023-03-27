@@ -21,20 +21,24 @@ class Input extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(right: 170),
+            width: double.infinity,
+            padding: EdgeInsets.only(left: 15),
+            // margin: EdgeInsets.only(right: 170),
             child: Text(
               label,
               style: TextStyle(
                 fontSize: 13,
-                color: AppColors.fontColor,
+                color: AppColors.white,
               ),
+              textAlign: TextAlign.start,
             ),
           ),
           Container(
             margin: EdgeInsets.only(top: 4),
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             height: 55,
-            width: 280,
+            width: double.infinity,
+            // width: 280,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(45),
               color: textfieldColor,
