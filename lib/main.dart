@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
       ),
-      initialRoute: Routes.logInPage,
+      initialRoute: Routes.signUpPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

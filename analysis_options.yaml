@@ -32,6 +32,5 @@ linter:
     sort_child_properties_last: false
     use_key_in_widget_constructors: false
 
-
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options
