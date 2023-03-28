@@ -40,14 +40,14 @@ class SignUpPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 SignButton(
-                  'Đăng kí',
-                  AppColors.white,
-                  AppColors.primaryColor,
+                  buttonText: 'Đăng kí',
+                  textColor: AppColors.white,
+                  backgroundColor: AppColors.primaryColor,
                 ),
                 SignButton(
-                  'Đăng nhập',
-                  AppColors.primaryColor,
-                  AppColors.white,
+                  buttonText: 'Đăng nhập',
+                  textColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.white,
                 ),
               ],
             )
