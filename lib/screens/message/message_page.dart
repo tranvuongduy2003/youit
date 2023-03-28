@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/widgets/stateless/input.dart';
 import '../../widgets/stateless/header_bar.dart';
 
 class MessagePage extends StatefulWidget {
@@ -18,7 +20,15 @@ class _MessagePageState extends State<MessagePage> {
         handler: () => Navigator.of(context).pop(),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          Input(
+            label: null,
+            hintText: 'Tìm kiếm',
+            textColor: AppColors.fontColor,
+            textfieldColor: Color(0xFFE6E6E6),
+            handleChange: () => {},
+          )
+        ],
       ),
     );
   }
