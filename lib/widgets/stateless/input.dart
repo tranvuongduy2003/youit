@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 
 class Input extends StatelessWidget {
-  final String label;
+  final label;
   final String hintText;
   final Color textColor;
   final Color textfieldColor;
@@ -21,20 +21,21 @@ class Input extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.only(left: 15),
-            // margin: EdgeInsets.only(right: 170),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppColors.white,
+          if (label != null)
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(left: 15),
+              // margin: EdgeInsets.only(right: 170),
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.white,
+                ),
+                textAlign: TextAlign.start,
               ),
-              textAlign: TextAlign.start,
             ),
-          ),
           Container(
             margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
