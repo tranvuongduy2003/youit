@@ -37,6 +37,34 @@ class AppTextStyles {
     fontSize: 18,
   );
 
+  static const unSeenMessageTitle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: Color(0xFF070C1E),
+    fontSize: 18,
+  );
+
+  static const seenMessageTitle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w400,
+    color: Color(0xFF070C1E),
+    fontSize: 18,
+  );
+
+  static const unSeenMessage = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: Color(0xFF070C1E),
+    fontSize: 16,
+  );
+
+  static const seenMessage = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w400,
+    color: Color(0xFF070C1E),
+    fontSize: 16,
+  );
+
   static const body3 = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
