@@ -18,16 +18,19 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildTitle('Mô tả'),
-        Text(
-          description,
-          style: AppTextStyles.body,
-          textAlign: TextAlign.justify,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildTitle('Mô tả'),
+          Text(
+            description,
+            style: AppTextStyles.body,
+            textAlign: TextAlign.justify,
+          ),
+        ],
+      ),
     );
   }
 }
