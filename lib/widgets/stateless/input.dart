@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/responsive.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 
 class Input extends StatelessWidget {
