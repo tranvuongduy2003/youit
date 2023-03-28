@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         appBarTheme: const AppBarTheme(
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
           toolbarTextStyle: AppTextStyles.appbarButtonTitle,
         ),
       ),
-      initialRoute: Routes.signUpPage,
+      initialRoute: Routes.profilePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

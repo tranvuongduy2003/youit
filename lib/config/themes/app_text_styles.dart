@@ -30,6 +30,13 @@ class AppTextStyles {
     fontSize: 14,
   );
 
+  static const appBarText = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.fontColor,
+    fontSize: 18,
+  );
+
   static const body3 = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w400,
