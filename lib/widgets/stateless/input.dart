@@ -25,6 +25,7 @@ class Input extends StatelessWidget {
             Container(
               width: double.infinity,
               padding: EdgeInsets.only(left: 15),
+              margin: EdgeInsets.only(bottom: 10),
               // margin: EdgeInsets.only(right: 170),
               child: Text(
                 label,
@@ -37,7 +38,6 @@ class Input extends StatelessWidget {
               ),
             ),
           Container(
-            margin: EdgeInsets.only(top: 10),
             padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(45),
