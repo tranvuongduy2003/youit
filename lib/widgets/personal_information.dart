@@ -18,7 +18,7 @@ class PersonalInformation extends StatelessWidget {
 
   Widget buildTitle(String title) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Text(
         title,
         style: AppTextStyles.sectionTitle,
@@ -46,7 +46,7 @@ class PersonalInformation extends StatelessWidget {
       children: [
         buildTitle('Thông tin cá nhân'),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,7 +59,7 @@ class PersonalInformation extends StatelessWidget {
               buildRowIconText(
                   Icons.school,
                   Text(
-                    'K $seesion',
+                    'K$seesion',
                     style: AppTextStyles.heading,
                   )),
               Row(
