@@ -89,7 +89,10 @@ class ProfilePage extends StatelessWidget {
       // ),
       appBar: HeaderBar(
         appBar: AppBar(),
-        title: 'Thông tin cá nhân',
+        title: Text(
+          'Thông tin cá nhân',
+          style: AppTextStyles.appBarText,
+        ),
         handler: () => Navigator.of(context).pop(),
       ),
       body: Padding(

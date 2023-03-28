@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/widgets/stateless/input.dart';
 import 'package:you_it/widgets/stateless/message_user.dart';
 import '../../widgets/stateless/header_bar.dart';
@@ -17,7 +18,10 @@ class _MessagePageState extends State<MessagePage> {
   Widget build(BuildContext context) {
     final headerBar = HeaderBar(
       appBar: AppBar(),
-      title: 'Trò chuyện',
+      title: Text(
+        'Trò chuyện',
+        style: AppTextStyles.appBarText,
+      ),
       handler: () => Navigator.of(context).pop(),
     );
 
@@ -28,7 +32,10 @@ class _MessagePageState extends State<MessagePage> {
       backgroundColor: Colors.white,
       appBar: HeaderBar(
         appBar: AppBar(),
-        title: 'Trò chuyện',
+        title: Text(
+          'Trò chuyện',
+          style: AppTextStyles.appBarText,
+        ),
         handler: () => Navigator.of(context).pop(),
       ),
       body: Column(
