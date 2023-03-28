@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:you_it/widgets/stateless/header_bar.dart';
 
 import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
@@ -65,26 +66,31 @@ class ProfilePage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        centerTitle: appBarTheme.centerTitle,
-        elevation: appBarTheme.elevation,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        title: Text(
-          'Thông tin cá nhân',
-          style: appBarTheme.titleTextStyle,
-        ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: AppColors.lineColor,
-            height: 1.0,
-          ),
-        ),
-        //backgroundColor: appBarTheme.backgroundColor,
+      // appBar: AppBar(
+      //   centerTitle: appBarTheme.centerTitle,
+      //   elevation: appBarTheme.elevation,
+      //   leading: IconButton(
+      //     icon: const Icon(Icons.arrow_back_ios_new),
+      //     color: Colors.black,
+      //     onPressed: () => Navigator.of(context).pop(),
+      //   ),
+      //   title: Text(
+      //     'Thông tin cá nhân',
+      //     style: appBarTheme.titleTextStyle,
+      //   ),
+      //   bottom: PreferredSize(
+      //     preferredSize: const Size.fromHeight(1.0),
+      //     child: Container(
+      //       color: AppColors.lineColor,
+      //       height: 1.0,
+      //     ),
+      //   ),
+      //   //backgroundColor: appBarTheme.backgroundColor,
+      // ),
+      appBar: HeaderBar(
+        appBar: AppBar(),
+        title: 'Thông tin cá nhân',
+        handler: () => Navigator.of(context).pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
