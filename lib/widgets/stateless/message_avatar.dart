@@ -12,10 +12,7 @@ class MessageAvatar extends StatelessWidget {
       children: <Widget>[
         CircleAvatar(
           radius: 35,
-          child: Image.network(
-            "https://picsum.photos/200",
-            fit: BoxFit.cover,
-          ),
+          backgroundImage: NetworkImage("https://picsum.photos/200"),
         ),
         Positioned(
           width: 20,
