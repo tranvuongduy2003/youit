@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/widgets/stateless/signButton.dart';
 
-class SignUpPage extends StatelessWidget {
-  const SignUpPage({Key? key}) : super(key: key);
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
