@@ -9,7 +9,6 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        alignment: Alignment.topCenter,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
@@ -21,36 +20,46 @@ class WelcomePage extends StatelessWidget {
           ),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 80, bottom: 150), //top: 100, left 50
+              padding:
+                  EdgeInsets.only(top: 100, bottom: 20), //top: 100, left 50
               child: Text(
                 'CHÀO MỪNG BẠN \nĐẾN VỚI YOUIT',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Montserrat-SemiBold',
+                  fontWeight: FontWeight.w800,
+                  fontFamily: 'Montserrat',
                   color: Colors.white,
                   decoration: TextDecoration.none,
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                SignButton(
-                  buttonText: 'Đăng kí',
-                  textColor: AppColors.white,
-                  backgroundColor: AppColors.primaryColor,
-                ),
-                SignButton(
-                  buttonText: 'Đăng nhập',
-                  textColor: AppColors.primaryColor,
-                  backgroundColor: AppColors.white,
-                ),
-              ],
-            )
+            Container(
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+              margin: EdgeInsets.only(bottom: 150),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  SignButton(
+                    buttonText: 'Đăng kí',
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColor,
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SignButton(
+                    buttonText: 'Đăng nhập',
+                    textColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.white,
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
