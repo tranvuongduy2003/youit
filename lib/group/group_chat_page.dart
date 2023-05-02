@@ -11,14 +11,14 @@ class SliderDrawerStateKey {
       GlobalKey<SliderDrawerState>();
 }
 
-class GroupChat extends StatefulWidget {
-  const GroupChat({super.key});
+class GroupChatPage extends StatefulWidget {
+  const GroupChatPage({super.key});
 
   @override
-  State<GroupChat> createState() => _GroupChatState();
+  State<GroupChatPage> createState() => _GroupChatPageState();
 }
 
-class _GroupChatState extends State<GroupChat> {
+class _GroupChatPageState extends State<GroupChatPage> {
   bool _isShowDrawer = false;
 
   void _openDrawer() {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../config/themes/app_text_styles.dart';
+import '../config/themes/app_text_styles.dart';
 
 class Description extends StatelessWidget {
   final String description;
   const Description({super.key, required this.description});
 
   Widget buildTitle(String title) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,

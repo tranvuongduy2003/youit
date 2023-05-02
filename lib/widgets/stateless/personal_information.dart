@@ -59,7 +59,7 @@ class PersonalInformation extends StatelessWidget {
               buildRowIconText(
                   Icons.school,
                   Text(
-                    'K $session',
+                    'K$session',
                     style: AppTextStyles.heading,
                   )),
               Row(

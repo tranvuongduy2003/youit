@@ -118,7 +118,10 @@ class EditProfilePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: HeaderBar(
         appBar: AppBar(),
-        title: 'Thông tin cá nhân',
+        title: Text(
+          'Thông tin cá nhân',
+          style: AppTextStyles.appBarText,
+        ),
         handler: () => Navigator.of(context).pop(),
       ),
       body: SingleChildScrollView(

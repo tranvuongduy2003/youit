@@ -21,56 +21,60 @@ class LoginPage extends StatelessWidget {
             ],
           ),
         ),
-        child: ListView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(top: 60, bottom: 70), //top: 100, left 50
+              padding: EdgeInsets.only(top: 100), //top: 100, left 50
               child: Text(
                 'CHÀO MỪNG BẠN \nĐẾN VỚI YOUIT',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 32,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Montserrat-SemiBold',
+                  fontWeight: FontWeight.w800,
+                  fontFamily: 'Montserrat',
                   color: Colors.white,
                   decoration: TextDecoration.none,
                 ),
               ),
             ),
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 60),
+              padding: EdgeInsets.symmetric(horizontal: 50),
               child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Input(
-                    'Mail đăng nhập',
-                    'xxxxxxxx@gm.uit.edu.vn',
-                    AppColors.fade,
-                    AppColors.white,
+                    label: 'Mail đăng nhập',
+                    hintText: 'xxxxxxxx@gm.uit.edu.vn',
+                    textColor: AppColors.fade,
+                    textfieldColor: AppColors.white,
+                    handleChange: () => {},
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Input(
-                    'Mật khẩu',
-                    'Nhập mật khẩu',
-                    AppColors.fade,
-                    AppColors.white,
+                    label: 'Mật khẩu',
+                    hintText: 'Nhập mật khẩu',
+                    textColor: AppColors.fade,
+                    textfieldColor: AppColors.white,
+                    handleChange: () => {},
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.only(right: 15),
                     child: RichText(
-                      textDirection: TextDirection.rtl,
                       textAlign: TextAlign.right,
                       text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: 'Quên mật khẩu',
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 14,
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = () {},
-                          ),
-                        ],
+                        text: 'Quên mật khẩu',
+                        style: TextStyle(
+                          color: AppColors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        recognizer: TapGestureRecognizer()..onTap = () {},
                       ),
                     ),
                   )
@@ -78,19 +82,23 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 80),
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   SignButton(
-                    'Đăng kí',
-                    AppColors.white,
-                    AppColors.primaryColor,
+                    buttonText: 'Đăng kí',
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColor,
+                  ),
+                  SizedBox(
+                    height: 20,
                   ),
                   SignButton(
-                    'Đăng nhập',
-                    AppColors.primaryColor,
-                    AppColors.white,
+                    buttonText: 'Đăng nhập',
+                    textColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.white,
                   ),
                 ],
               ),

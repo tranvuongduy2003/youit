@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/group/group_chat_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
@@ -60,6 +61,10 @@ class Router {
       case Routes.profilePage:
         {
           return MaterialPageRoute(builder: (_) => const ProfilePage());
+        }
+      case Routes.groupChatPage:
+        {
+          return MaterialPageRoute(builder: (_) => const GroupChatPage());
         }
       default:
         {
