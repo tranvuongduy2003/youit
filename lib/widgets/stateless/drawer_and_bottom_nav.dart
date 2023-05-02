@@ -3,7 +3,6 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 
 import '../../group/group_chat_page.dart';
-import '../../config/themes/app_colors.dart';
 import 'app_drawer.dart';
 
 class DrawerAndBottomNav extends StatefulWidget {
@@ -31,13 +30,18 @@ class _DrawerAndBottomNavState extends State<DrawerAndBottomNav> {
       isDraggable: false,
       appBar: SliderAppBar(
         drawerIcon: IconButton(
-          icon: widget.isShowDrawer ? Container() : Icon(Icons.menu),
+          padding: EdgeInsets.only(left: 15),
+          icon: widget.isShowDrawer
+              ? Container()
+              : Icon(
+                  Icons.menu,
+                  size: 30,
+                ),
           onPressed: () {
             widget.openDrawer();
           },
         ),
         isTitleCenter: false,
-        appBarPadding: EdgeInsets.zero,
         title: Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Text(
