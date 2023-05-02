@@ -5,11 +5,11 @@ import 'package:you_it/widgets/stateless/header_bar.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
 
-import '../../widgets/description.dart';
-import '../../widgets/link_information.dart';
+import '../../widgets/stateless/description.dart';
+import '../../widgets/stateless/link_information.dart';
 
 import '../../screens/profile/edit_profile_page.dart';
-import '../../widgets/personal_information.dart';
+import '../../widgets/stateless/personal_information.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -31,7 +31,7 @@ class ProfilePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           elevation: 0,
-          minimumSize: Size(MediaQuery.of(context).size.width * 0.9, 27),
+          minimumSize: Size(MediaQuery.of(context).size.width * 0.8, 27),
           padding: const EdgeInsets.all(0),
           alignment: Alignment.center),
       child: Text(
@@ -50,7 +50,7 @@ class ProfilePage extends StatelessWidget {
     const name = 'Nguyễn Hoàng Anh';
     int likeNumber = 200000;
     const department = 'Công nghệ phần mềm';
-    int seesion = 16;
+    int session = 16;
     const address = 'Bình Dương';
     DateTime birthDay = DateTime(2003, 8, 18);
     const linkGithub = 'github.com/nguyenhoanganh1808';
@@ -62,46 +62,21 @@ class ProfilePage extends StatelessWidget {
     String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
     likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
-    final AppBarTheme appBarTheme = AppBarTheme.of(context);
-
     return Scaffold(
       backgroundColor: AppColors.white,
-      // appBar: AppBar(
-      //   centerTitle: appBarTheme.centerTitle,
-      //   elevation: appBarTheme.elevation,
-      //   leading: IconButton(
-      //     icon: const Icon(Icons.arrow_back_ios_new),
-      //     color: Colors.black,
-      //     onPressed: () => Navigator.of(context).pop(),
-      //   ),
-      //   title: Text(
-      //     'Thông tin cá nhân',
-      //     style: appBarTheme.titleTextStyle,
-      //   ),
-      //   bottom: PreferredSize(
-      //     preferredSize: const Size.fromHeight(1.0),
-      //     child: Container(
-      //       color: AppColors.lineColor,
-      //       height: 1.0,
-      //     ),
-      //   ),
-      //   //backgroundColor: appBarTheme.backgroundColor,
-      // ),
       appBar: HeaderBar(
         appBar: AppBar(),
         title: 'Thông tin cá nhân',
         handler: () => Navigator.of(context).pop(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
               height: 10,
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 const CircleAvatar(
                   maxRadius: 40,
@@ -111,6 +86,7 @@ class ProfilePage extends StatelessWidget {
                   padding: const EdgeInsets.all(20),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const Text(
                         name,
@@ -146,7 +122,7 @@ class ProfilePage extends StatelessWidget {
                 department: department,
                 address: address,
                 birthDay: birthDay,
-                seesion: seesion),
+                session: session),
             const SizedBox(
               height: 3,
             ),

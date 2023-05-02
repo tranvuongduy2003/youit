@@ -13,8 +13,9 @@ class AppColors {
   static const lineColor = Color(0xFFE0E0E0);
   static const lightperiwinkle = Color(0xFFC7CEE3);
   static const redPigment = Color(0xFFF12424);
-
   static const black = Color(0x00000000);
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
+  static const pinkRed = Color(0xFFFF9AA2);
+  static const startDust = Color(0xFF979C9E);
 }
