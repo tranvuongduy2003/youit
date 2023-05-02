@@ -18,8 +18,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBarTheme = AppBarTheme.of(context);
-
     return AppBar(
       toolbarHeight: headerHeight,
       leading: IconButton(
@@ -36,7 +34,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
           height: 1.0,
         ),
       ),
-      //backgroundColor: appBarTheme.backgroundColor,
     );
   }
 

@@ -15,4 +15,5 @@ class Routes {
 
   static const String messagePage = 'MessagePage';
   static const String messageDetailPage = 'MessageDetailPage';
+  static const String groupChatPage = 'GroupChatPage';
 }

@@ -18,4 +18,6 @@ class AppColors {
   static const black = Color(0x00000000);
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
+  static const pinkRed = Color(0xFFFF9AA2);
+  static const startDust = Color(0xFF979C9E);
 }
