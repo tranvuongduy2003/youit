@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+import 'package:you_it/config/themes/app_colors.dart';
+
 class NewMessage extends StatelessWidget {
   const NewMessage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30),
+        topRight: Radius.circular(30),
+      ),
       child: Card(
-        margin: EdgeInsets.zero,
-        elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
+        elevation: 66,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

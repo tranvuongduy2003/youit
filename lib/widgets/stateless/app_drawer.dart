@@ -10,78 +10,75 @@ class AppDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Drawer(
-        width: MediaQuery.of(context).size.width * 0.6,
-        elevation: 0,
-        child: Container(
-          color: AppColors.white,
-          child: ClipRRect(
-            borderRadius: BorderRadius.only(
-              topRight: Radius.circular(70),
-            ),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    AppColors.pinkRed,
-                    AppColors.pinkRed.withOpacity(0.62),
-                  ],
-                ),
-              ),
-              child: ListView(
-                padding: EdgeInsets.zero,
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                    child: Text(
-                      groupName,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ),
-                  Button(
-                    Icon(
-                      FontAwesomeIcons.comment,
-                      color: AppColors.white,
-                    ),
-                    'Đoạn chat',
-                    () {},
-                  ),
-                  Button(
-                    Icon(
-                      FontAwesomeIcons.bell,
-                      color: AppColors.white,
-                    ),
-                    'Hoạt động',
-                    () {},
-                  ),
-                  Button(
-                    Icon(
-                      FontAwesomeIcons.link,
-                      color: AppColors.white,
-                      size: 20,
-                    ),
-                    'Tệp tin',
-                    () {},
-                  ),
-                  Button(
-                    Icon(
-                      Icons.info_outline,
-                      color: AppColors.white,
-                    ),
-                    'Thông tin',
-                    () {},
-                  ),
+    return Drawer(
+      width: MediaQuery.of(context).size.width * 0.6,
+      elevation: 0,
+      child: Container(
+        color: AppColors.white,
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(70),
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.pinkRed,
+                  AppColors.pinkRed.withOpacity(0.62),
                 ],
               ),
+            ),
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+                  child: Text(
+                    groupName,
+                    style: TextStyle(
+                      color: AppColors.white,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24,
+                    ),
+                  ),
+                ),
+                Button(
+                  Icon(
+                    FontAwesomeIcons.comment,
+                    color: AppColors.white,
+                  ),
+                  'Đoạn chat',
+                  () {},
+                ),
+                Button(
+                  Icon(
+                    FontAwesomeIcons.bell,
+                    color: AppColors.white,
+                  ),
+                  'Hoạt động',
+                  () {},
+                ),
+                Button(
+                  Icon(
+                    FontAwesomeIcons.link,
+                    color: AppColors.white,
+                    size: 20,
+                  ),
+                  'Tệp tin',
+                  () {},
+                ),
+                Button(
+                  Icon(
+                    Icons.info_outline,
+                    color: AppColors.white,
+                  ),
+                  'Thông tin',
+                  () {},
+                ),
+              ],
             ),
           ),
         ),
