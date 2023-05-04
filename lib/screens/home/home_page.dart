@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:you_it/widgets/description.dart';
-import 'package:you_it/widgets/personal_information.dart';
+import 'package:you_it/widgets/stateless/description.dart';
+import '../../widgets/stateless/personal_information.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -240,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                                     department: 'Công nghệ phần mềm',
                                     address: 'Bình Dương',
                                     birthDay: DateTime(2003, 04, 08),
-                                    seesion: 16),
+                                    session: 16),
                                 Divider(
                                   thickness: 1,
                                 ),
