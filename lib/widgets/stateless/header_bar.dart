@@ -5,7 +5,7 @@ import '../../config/themes/app_colors.dart';
 
 class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBar appBar;
-  final String title;
+  final Widget title;
   final VoidCallback handler;
 
   HeaderBar({
@@ -18,8 +18,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBarTheme = AppBarTheme.of(context);
-
     return AppBar(
       toolbarHeight: headerHeight,
       leading: IconButton(
@@ -27,12 +25,7 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
         color: AppColors.fontColor,
         onPressed: handler,
       ),
-      title: Container(
-        child: Text(
-          title,
-          style: AppTextStyles.appBarText,
-        ),
-      ),
+      title: title,
       centerTitle: true,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
@@ -41,7 +34,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
           height: 1.0,
         ),
       ),
-      //backgroundColor: appBarTheme.backgroundColor,
     );
   }
 
