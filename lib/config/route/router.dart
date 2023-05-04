@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
+import 'package:you_it/screens/group/group_information.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
@@ -60,6 +61,11 @@ class Router {
       case Routes.profilePage:
         {
           return MaterialPageRoute(builder: (_) => const ProfilePage());
+        }
+      case Routes.groupInformationPage:
+        {
+          return MaterialPageRoute(
+              builder: (_) => const GroupInformationPage());
         }
       default:
         {

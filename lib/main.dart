@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           toolbarTextStyle: AppTextStyles.appbarButtonTitle,
         ),
       ),
-      initialRoute: Routes.homePage,
+      initialRoute: Routes.groupInformationPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }
