@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import '../../config/themes/app_colors.dart';
 
 class AppTextStyles {
+  static const groupName = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.fontColor,
+    fontSize: 28,
+  );
   static const sectionTitle = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
