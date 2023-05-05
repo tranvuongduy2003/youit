@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:you_it/group/group_chat_page.dart';
+import 'package:you_it/screens/group/group_chat_page.dart';
 
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
@@ -23,9 +23,12 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           centerTitle: true,
         ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: AppColors.jordyBlue.withOpacity(0.36),
+        ),
       ),
       home: GroupChatPage(),
-      initialRoute: Routes.groupChatPage,
+      initialRoute: Routes.activityPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }
