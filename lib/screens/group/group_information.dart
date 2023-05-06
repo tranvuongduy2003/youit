@@ -3,27 +3,108 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
+import 'package:you_it/screens/group/member_list_page.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
 
 class GroupInformationPage extends StatefulWidget {
   const GroupInformationPage({super.key});
-
   @override
   State<GroupInformationPage> createState() => _GroupInformationPageState();
 }
 
 class _GroupInformationPageState extends State<GroupInformationPage> {
-  Future<void> openDialog(BuildContext context) => showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-          child: Container(
-            decoration: BoxDecoration(),
-            height: 319,
-            width: 321,
-          ),
-        );
-      });
+  String groupName = 'Nhóm UIT';
+  String groupDescription = 'Nhóm này là dành cho môn học yêu cầu ';
+
+  Future<void> openDialog(BuildContext context, String title, String content) =>
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30)),
+              child: Container(
+                decoration: BoxDecoration(),
+                width: 340,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 30),
+                      child: Text(
+                        title,
+                        style: AppTextStyles.appBarText,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: TextFormField(
+                        initialValue: content,
+                        keyboardType: TextInputType.multiline,
+                        maxLines: null,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20)),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.only(top: 20, bottom: 40),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleButton(
+                                  imageAsset: 'assets/images/save.png',
+                                  buttonColor: Color(0xffFCFF7B),
+                                  onPressed: () {},
+                                  size: 55),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(
+                                  'Lưu',
+                                  style: AppTextStyles.appBarText,
+                                ),
+                              )
+                            ],
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircleButton(
+                                  imageAsset: 'assets/images/cancel.png',
+                                  buttonColor: Color(0xff92A8F6),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  size: 55),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Text(
+                                  'Hủy',
+                                  style: AppTextStyles.appBarText,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            );
+          });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,11 +156,13 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                   CircleButton(
                       imageAsset: 'assets/images/announcement_bell.png',
                       buttonColor: AppColors.isabelline,
-                      onPressed: () {}),
+                      onPressed: () {},
+                      size: 55),
                   CircleButton(
                       imageAsset: 'assets/images/add_member.png',
                       buttonColor: AppColors.isabelline,
-                      onPressed: () {})
+                      onPressed: () {},
+                      size: 55)
                 ],
               ),
               Container(
@@ -100,7 +183,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    onPressed: () => openDialog(context),
+                    onPressed: () => openDialog(context, 'Tên nhóm', groupName),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -108,7 +191,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Nhóm UIT',
+                            groupName,
                             style: AppTextStyles.body,
                           ),
                         ),
@@ -137,7 +220,8 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    onPressed: () => {},
+                    onPressed: () =>
+                        openDialog(context, 'Mô tả', groupDescription),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,7 +230,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                           width: 275,
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Text(
-                            'Nhóm này là dành cho môn học yêu cầu ',
+                            groupDescription,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: AppTextStyles.body,
@@ -177,7 +261,10 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
-                    onPressed: () => {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MemberListPage())),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -210,7 +297,8 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                   child: CircleButton(
                       imageAsset: 'assets/images/out_group.png',
                       buttonColor: Color(0xffFF9AA2),
-                      onPressed: () {})),
+                      onPressed: () {},
+                      size: 55)),
             ],
           ),
         ),

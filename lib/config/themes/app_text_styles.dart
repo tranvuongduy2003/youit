@@ -8,6 +8,14 @@ class AppTextStyles {
     color: AppColors.fontColor,
     fontSize: 28,
   );
+
+  static const modalTitle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.fontColor,
+    fontSize: 20,
+  );
+
   static const sectionTitle = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,

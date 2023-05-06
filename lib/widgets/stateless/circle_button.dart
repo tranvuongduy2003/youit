@@ -8,10 +8,12 @@ class CircleButton extends StatelessWidget {
       {super.key,
       required this.imageAsset,
       required this.buttonColor,
-      required this.onPressed});
+      required this.onPressed,
+      required this.size});
   final String imageAsset;
   final Color buttonColor;
-  final Function onPressed;
+  final Function() onPressed;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -20,12 +22,10 @@ class CircleButton extends StatelessWidget {
       elevation: 2,
       child: InkWell(
           borderRadius: BorderRadius.circular(50),
-          onTap: () {
-            onPressed;
-          },
+          onTap: onPressed,
           child: Ink(
-            height: 55,
-            width: 55,
+            height: size,
+            width: size,
             decoration: BoxDecoration(
                 color: buttonColor, borderRadius: BorderRadius.circular(50)),
             child: Image.asset(imageAsset),

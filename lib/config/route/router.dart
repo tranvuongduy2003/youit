@@ -4,6 +4,7 @@ import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
 import 'package:you_it/screens/group/group_information.dart';
+import 'package:you_it/screens/group/member_list_page.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
@@ -71,6 +72,10 @@ class Router {
       case Routes.groupChatPage:
         {
           return MaterialPageRoute(builder: (_) => const GroupChatPage());
+        }
+      case Routes.memberListPage:
+        {
+          return MaterialPageRoute(builder: (_) => const MemberListPage());
         }
       default:
         {
