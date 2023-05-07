@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:you_it/group/group_chat_page.dart';
+import 'package:you_it/screens/group/group_chat_page.dart';
 
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: GroupChatPage(),
-      initialRoute: Routes.groupChatPage,
+      initialRoute: Routes.uploadFilePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

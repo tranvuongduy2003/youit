@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 
@@ -21,30 +20,47 @@ class BottomTabBar extends StatelessWidget {
         topRight: Radius.circular(30),
       ),
       child: BottomNavigationBar(
-        selectedItemColor: AppColors.redPigment,
+        //selectedItemColor: Colors.red,
+        fixedColor: Colors.red,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: [
           BottomNavigationBarItem(
             label: 'Home',
-            icon: Icon(Icons.home_outlined),
+            icon: Container(
+              height: 23,
+              child: Image.asset('assets/images/home.png'),
+            ),
           ),
           BottomNavigationBarItem(
             label: 'Chat',
-            icon: Icon(CupertinoIcons.chat_bubble),
+            icon: Container(
+              height: 23,
+              child: Image.asset('assets/images/message_circle.png'),
+            ),
           ),
           BottomNavigationBarItem(
             label: 'Users',
-            icon: Icon(Icons.group_outlined),
+            icon: Container(
+              height: 23,
+              child: Image.asset('assets/images/users.png'),
+            ),
           ),
           BottomNavigationBarItem(
             label: 'Smiley',
-            icon: Icon(CupertinoIcons.smiley),
+            icon: Container(
+              height: 23,
+              child: Image.asset('assets/images/smiley.png'),
+            ),
           ),
           BottomNavigationBarItem(
             label: 'Menu',
-            icon: Icon(Icons.menu),
+            icon: Icon(
+              Icons.menu,
+              size: 30,
+              color: AppColors.startDust.withOpacity(0.8),
+            ),
           ),
         ],
       ),
