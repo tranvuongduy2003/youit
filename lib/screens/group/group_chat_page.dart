@@ -17,21 +17,15 @@ class _GroupChatPageState extends State<GroupChatPage> {
   bool _isShowDrawer = false;
   final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
   void _openDrawer() {
-    if (!keyDrawer.currentState!.isDrawerOpen) {
-      keyDrawer.currentState!.openSlider();
-      setState(() {
-        _isShowDrawer = true;
-      });
-    }
+    setState(() {
+      _isShowDrawer = true;
+    });
   }
 
   void _closeDrawer() {
-    if (keyDrawer.currentState!.isDrawerOpen) {
-      keyDrawer.currentState!.closeSlider();
-      setState(() {
-        _isShowDrawer = false;
-      });
-    }
+    setState(() {
+      _isShowDrawer = false;
+    });
   }
 
   @override

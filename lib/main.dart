@@ -23,12 +23,9 @@ class MyApp extends StatelessWidget {
           elevation: 0,
           centerTitle: true,
         ),
-        floatingActionButtonTheme: FloatingActionButtonThemeData(
-          backgroundColor: AppColors.jordyBlue.withOpacity(0.36),
-        ),
       ),
       home: GroupChatPage(),
-      initialRoute: Routes.activityPage,
+      initialRoute: Routes.uploadFilePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

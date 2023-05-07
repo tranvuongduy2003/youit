@@ -75,7 +75,9 @@ class AppDrawer extends StatelessWidget {
                     child: Image.asset('assets/images/link.png'),
                   ),
                   'Tệp tin',
-                  () {},
+                  () {
+                    Navigator.of(context).pushNamed(Routes.uploadFilePage);
+                  },
                 ),
                 Button(
                   Container(
@@ -107,6 +109,7 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 37,
       margin: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
       child: Material(
         borderRadius: BorderRadius.circular(20),

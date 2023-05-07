@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:you_it/widgets/stateless/circle_button.dart';
+import 'package:you_it/widgets/stateless/post_form.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
@@ -28,69 +30,7 @@ class PostingPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            child: Text(
-              'Chủ đề',
-              style: AppTextStyles.mont20,
-              textAlign: TextAlign.start,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              style: AppTextStyles.postingInput,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: AppColors.black.withOpacity(0.11),
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      width: 1,
-                    ),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                  focusColor: AppColors.black.withOpacity(0.11)),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-            child: Text(
-              'Nội dung',
-              style: AppTextStyles.mont20,
-              textAlign: TextAlign.start,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: TextField(
-              style: AppTextStyles.postingInput,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: AppColors.black.withOpacity(0.11),
-                    ),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: BorderSide(
-                      width: 1,
-                    ),
-                  ),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  focusColor: AppColors.black.withOpacity(0.11)),
-              maxLines: 11,
-              onSubmitted: (value) {},
-            ),
-          ),
+          PostForm(),
           Spacer(),
           Container(
             height: 150,
@@ -109,18 +49,23 @@ class PostingPage extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      ElevatedButton(
-                        child: Icon(
-                          Icons.file_upload_outlined,
-                          color: AppColors.black,
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFFFCFF7B).withOpacity(0.39),
-                          shape: CircleBorder(),
-                          padding: EdgeInsets.all(20),
-                          elevation: 0,
-                        ),
+                      // ElevatedButton(
+                      //   child: Icon(
+                      //     Icons.file_upload_outlined,
+                      //     color: AppColors.black,
+                      //   ),
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor: Color(0xFFFCFF7B).withOpacity(0.39),
+                      //     shape: CircleBorder(),
+                      //     padding: EdgeInsets.all(20),
+                      //     elevation: 0,
+                      //   ),
+                      //   onPressed: () {},
+                      // ),
+                      CircleButton(
+                        buttonColor: Color(0xFFFCFF7B).withOpacity(0.39),
                         onPressed: () {},
+                        imageAsset: ('assets/images/upload.png'),
                       ),
                       SizedBox(height: 5),
                       Text('Đăng bài', style: AppTextStyles.mont20),
@@ -128,22 +73,27 @@ class PostingPage extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      ElevatedButton(
-                        child: Transform.rotate(
-                          angle: 180 * pi / 180,
-                          child: Icon(
-                            Icons.subdirectory_arrow_right_outlined,
-                            color: AppColors.black,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              AppColors.jordyBlue.withOpacity(0.36),
-                          shape: CircleBorder(),
-                          padding: EdgeInsets.all(20),
-                          elevation: 0,
-                        ),
+                      // ElevatedButton(
+                      //   child: Transform.rotate(
+                      //     angle: 180 * pi / 180,
+                      //     child: Icon(
+                      //       Icons.subdirectory_arrow_right_outlined,
+                      //       color: AppColors.black,
+                      //     ),
+                      //   ),
+                      //   style: ElevatedButton.styleFrom(
+                      //     backgroundColor:
+                      //         AppColors.jordyBlue.withOpacity(0.36),
+                      //     shape: CircleBorder(),
+                      //     padding: EdgeInsets.all(20),
+                      //     elevation: 0,
+                      //   ),
+                      //   onPressed: () {},
+                      // ),
+                      CircleButton(
+                        buttonColor: AppColors.jordyBlue.withOpacity(0.36),
                         onPressed: () {},
+                        imageAsset: 'assets/images/cancel.png',
                       ),
                       SizedBox(height: 5),
                       Text('Huỷ', style: AppTextStyles.mont20),

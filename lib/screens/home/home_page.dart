@@ -121,43 +121,45 @@ class _HomePageState extends State<HomePage> {
               initialChildSize: 0.2,
               minChildSize: 0.2,
               maxChildSize: 0.8,
+              snap: true,
+              snapSizes: [0.2],
               builder: (context, scrollController) {
                 return ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        topRight: Radius.circular(30),
-                        topLeft: Radius.circular(30)),
-                    child: SingleChildScrollView(
-                      controller: scrollController,
-                      child: Container(
-                        height: 606,
-                        color: Colors.white,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: Container(
-                                  height: 7,
-                                  width: 100,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Color(0xff404040),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 25,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 20),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Column(
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(30)),
+                  child: Container(
+                      color: Colors.white,
+                      child: Stack(children: [
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Container(
+                            margin: EdgeInsets.only(top: 10),
+                            height: 7,
+                            width: 100,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color(0xff404040),
+                            ),
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          controller: scrollController,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Container(
+                                    margin: EdgeInsets.only(top: 30),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       children: [
                                         Container(
                                           child: CircleAvatar(
@@ -166,86 +168,91 @@ class _HomePageState extends State<HomePage> {
                                             radius: 40,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          '201.023',
-                                          style: AppTextStyles.sectionTitle,
+                                        Column(
+                                          children: [
+                                            Text(
+                                              '201.023',
+                                              style: AppTextStyles.sectionTitle,
+                                            ),
+                                            Text(
+                                              'Số lượt thích',
+                                              style: AppTextStyles.body3,
+                                            ),
+                                          ],
                                         ),
-                                        Text(
-                                          'Số lượt thích',
-                                          style: AppTextStyles.body3,
-                                        ),
-                                      ],
-                                    ),
-                                    InkWell(
-                                      onTap: changeHeart,
-                                      child: Ink(
-                                        height: 50,
-                                        width: 50,
-                                        child: Card(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(60)),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Icon(
-                                              color: _isClicked
-                                                  ? AppColors.redPigment
-                                                  : AppColors.lightGray,
-                                              Icons.favorite,
+                                        InkWell(
+                                          onTap: changeHeart,
+                                          child: Ink(
+                                            height: 50,
+                                            width: 50,
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          60)),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(8.0),
+                                                child: Icon(
+                                                  color: _isClicked
+                                                      ? AppColors.redPigment
+                                                      : AppColors.lightGray,
+                                                  Icons.favorite,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 8),
-                                child: Text(
-                                  'Trần Vương Duy',
-                                  style: AppTextStyles.sectionTitle,
-                                ),
-                              ),
-                              Center(
-                                child: ElevatedButton(
-                                  onPressed: () {},
-                                  style: ElevatedButton.styleFrom(
-                                    minimumSize: Size(
-                                        MediaQuery.of(context).size.width * 0.8,
-                                        27),
-                                    backgroundColor: AppColors.lightperiwinkle,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
+                                        )
+                                      ],
+                                    ),
                                   ),
-                                  child: const Text('Trò chuyện',
-                                      style: AppTextStyles.heading),
                                 ),
-                              ),
-                              Divider(
-                                thickness: 1,
-                              ),
-                              PersonalInformation(
-                                  department: 'Công nghệ phần mềm',
-                                  address: 'Bình Dương',
-                                  birthDay: DateTime(2003, 04, 08),
-                                  session: 16),
-                              Divider(
-                                thickness: 1,
-                              ),
-                              Description(
-                                  description:
-                                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.')
-                            ],
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 8),
+                                  child: Text(
+                                    'Trần Vương Duy',
+                                    style: AppTextStyles.sectionTitle,
+                                  ),
+                                ),
+                                Center(
+                                  child: ElevatedButton(
+                                    onPressed: () {},
+                                    style: ElevatedButton.styleFrom(
+                                      minimumSize: Size(
+                                          MediaQuery.of(context).size.width *
+                                              0.8,
+                                          27),
+                                      backgroundColor:
+                                          AppColors.lightperiwinkle,
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                    ),
+                                    child: const Text('Trò chuyện',
+                                        style: AppTextStyles.heading),
+                                  ),
+                                ),
+                                Divider(
+                                  thickness: 1,
+                                ),
+                                PersonalInformation(
+                                    department: 'Công nghệ phần mềm',
+                                    address: 'Bình Dương',
+                                    birthDay: DateTime(2003, 04, 08),
+                                    session: 16),
+                                Divider(
+                                  thickness: 1,
+                                ),
+                                Description(
+                                    description:
+                                        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.')
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ));
+                        )
+                      ])),
+                );
               })
         ],
       ));

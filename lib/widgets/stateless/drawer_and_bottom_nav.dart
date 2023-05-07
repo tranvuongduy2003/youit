@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
 
-import '../../screens/group/group_chat_page.dart';
 import 'app_drawer.dart';
+import '../../config/themes/app_text_styles.dart';
 
 // class SliderDrawerStateKey {
 //   static final GlobalKey<SliderDrawerState> keyDrawer =
@@ -42,7 +41,12 @@ class DrawerAndBottomNav extends StatelessWidget {
                   size: 30,
                 ),
           onPressed: () {
-            openDrawer();
+            // openDrawer();
+
+            if (!keyDrawer.currentState!.isDrawerOpen) {
+              keyDrawer.currentState!.openSlider();
+              openDrawer();
+            }
           },
         ),
         isTitleCenter: false,
@@ -57,7 +61,12 @@ class DrawerAndBottomNav extends StatelessWidget {
       slider: AppDrawer(groupName),
       child: GestureDetector(
         onTap: () {
-          closeDrawer();
+          // closeDrawer();
+
+          if (keyDrawer.currentState!.isDrawerOpen) {
+            keyDrawer.currentState!.closeSlider();
+            closeDrawer();
+          }
         },
         child: childScreen,
       ),
