@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../config/themes/app_text_styles.dart';
+import '../../config/themes/app_text_styles.dart';
 
 class PersonalInformation extends StatelessWidget {
   final String department;
-  final int seesion;
+  final int session;
   final String address;
   final DateTime birthDay;
   const PersonalInformation({
@@ -13,12 +13,12 @@ class PersonalInformation extends StatelessWidget {
     required this.department,
     required this.address,
     required this.birthDay,
-    required this.seesion,
+    required this.session,
   });
 
   Widget buildTitle(String title) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Text(
         title,
         style: AppTextStyles.sectionTitle,
@@ -46,7 +46,7 @@ class PersonalInformation extends StatelessWidget {
       children: [
         buildTitle('Thông tin cá nhân'),
         Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -59,7 +59,7 @@ class PersonalInformation extends StatelessWidget {
               buildRowIconText(
                   Icons.school,
                   Text(
-                    'K $seesion',
+                    'K$session',
                     style: AppTextStyles.heading,
                   )),
               Row(

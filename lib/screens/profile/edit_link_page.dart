@@ -49,40 +49,42 @@ class EditLinkPage extends StatelessWidget {
         ),
         backgroundColor: Colors.white,
       ),
-      body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(children: [
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Github',
-                labelStyle: AppTextStyles.labelTextField,
-                contentPadding: EdgeInsets.symmetric(vertical: 20),
+      body: SingleChildScrollView(
+        child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Column(children: [
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Github',
+                  labelStyle: AppTextStyles.labelTextField,
+                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                ),
+                controller: linkGhController,
+                onChanged: (value) {},
               ),
-              controller: linkGhController,
-              onChanged: (value) {},
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Gitlab',
-                labelStyle: AppTextStyles.labelTextField,
-                contentPadding: EdgeInsets.symmetric(vertical: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Gitlab',
+                  labelStyle: AppTextStyles.labelTextField,
+                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                ),
+                controller: linkGlController,
+                onChanged: (value) {},
               ),
-              controller: linkGlController,
-              onChanged: (value) {},
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                border: UnderlineInputBorder(),
-                labelText: 'Linkedin',
-                labelStyle: AppTextStyles.labelTextField,
-                contentPadding: EdgeInsets.symmetric(vertical: 20),
+              TextFormField(
+                decoration: const InputDecoration(
+                  border: UnderlineInputBorder(),
+                  labelText: 'Linkedin',
+                  labelStyle: AppTextStyles.labelTextField,
+                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                ),
+                controller: linkedinController,
+                onChanged: (value) {},
               ),
-              controller: linkedinController,
-              onChanged: (value) {},
-            ),
-          ])),
+            ])),
+      ),
     );
   }
 }

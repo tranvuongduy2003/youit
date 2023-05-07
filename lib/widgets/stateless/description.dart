@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/themes/app_text_styles.dart';
+import '../../config/themes/app_text_styles.dart';
 
 class Description extends StatelessWidget {
   final String description;
@@ -18,16 +18,19 @@ class Description extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        buildTitle('Mô tả'),
-        Text(
-          description,
-          style: AppTextStyles.body,
-          textAlign: TextAlign.justify,
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          buildTitle('Mô tả'),
+          Text(
+            description,
+            style: AppTextStyles.body,
+            textAlign: TextAlign.justify,
+          ),
+        ],
+      ),
     );
   }
 }

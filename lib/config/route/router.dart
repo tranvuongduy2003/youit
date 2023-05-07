@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/group/activity_page.dart';
+import 'package:you_it/screens/group/group_chat_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
+import 'package:you_it/screens/group/posting_page.dart';
+import 'package:you_it/screens/group/group_information.dart';
+import 'package:you_it/screens/group/upload_file_page.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
@@ -61,6 +66,28 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const ProfilePage());
         }
+      case Routes.groupInformationPage:
+        {
+          return MaterialPageRoute(
+              builder: (_) => const GroupInformationPage());
+        }
+      case Routes.groupChatPage:
+        {
+          return MaterialPageRoute(builder: (_) => const GroupChatPage());
+        }
+      case Routes.activityPage:
+        {
+          return MaterialPageRoute(builder: (_) => const ActivityPage());
+        }
+      case Routes.postingPage:
+        {
+          return MaterialPageRoute(builder: (_) => const PostingPage());
+        }
+      case Routes.uploadFilePage:
+        {
+          return MaterialPageRoute(builder: (_) => const UploadFilePage());
+        }
+
       default:
         {
           MaterialPageRoute(
