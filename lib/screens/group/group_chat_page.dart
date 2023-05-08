@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
-import '../widgets/stateless/new_message.dart';
-import '../config/themes/app_colors.dart';
-import '../widgets/stateless/drawer_and_bottom_nav.dart';
-import '../widgets/stateless/bottom_tab_bar.dart';
-
-class SliderDrawerStateKey {
-  static final GlobalKey<SliderDrawerState> keyDrawer =
-      GlobalKey<SliderDrawerState>();
-}
+import '../../widgets/stateless/new_message.dart';
+import '../../config/themes/app_colors.dart';
+import '../../widgets/stateless/drawer_and_bottom_nav.dart';
+import '../../widgets/stateless/bottom_tab_bar.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage({super.key});
@@ -20,23 +15,17 @@ class GroupChatPage extends StatefulWidget {
 
 class _GroupChatPageState extends State<GroupChatPage> {
   bool _isShowDrawer = false;
-
+  final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
   void _openDrawer() {
-    if (!SliderDrawerStateKey.keyDrawer.currentState!.isDrawerOpen) {
-      SliderDrawerStateKey.keyDrawer.currentState!.openSlider();
-      setState(() {
-        _isShowDrawer = true;
-      });
-    }
+    setState(() {
+      _isShowDrawer = true;
+    });
   }
 
   void _closeDrawer() {
-    if (SliderDrawerStateKey.keyDrawer.currentState!.isDrawerOpen) {
-      SliderDrawerStateKey.keyDrawer.currentState!.closeSlider();
-      setState(() {
-        _isShowDrawer = false;
-      });
-    }
+    setState(() {
+      _isShowDrawer = false;
+    });
   }
 
   @override
@@ -46,11 +35,12 @@ class _GroupChatPageState extends State<GroupChatPage> {
 
     return Scaffold(
       body: DrawerAndBottomNav(
+        keyDrawer: keyDrawer,
         groupName: groupName,
         isShowDrawer: _isShowDrawer,
         openDrawer: _openDrawer,
         closeDrawer: _closeDrawer,
-        chatScreen: Scaffold(
+        childScreen: Scaffold(
           backgroundColor: AppColors.white,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -81,7 +71,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
                           fontFamily: 'Montserrat',
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
-                          color: Color(0xFF979C9E),
+                          color: AppColors.startDust,
                         ),
                       ),
                     ],

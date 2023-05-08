@@ -8,6 +8,14 @@ class AppTextStyles {
     color: AppColors.fontColor,
     fontSize: 28,
   );
+
+  static const modalTitle = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.fontColor,
+    fontSize: 20,
+  );
+
   static const sectionTitle = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
@@ -29,6 +37,13 @@ class AppTextStyles {
     fontSize: 14,
   );
 
+  static const mont20 = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.black,
+    fontSize: 20,
+  );
+
   static const heading = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
@@ -39,7 +54,7 @@ class AppTextStyles {
   static const appBarText = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
-    color: AppColors.fontColor,
+    color: AppColors.black,
     fontSize: 18,
   );
 
@@ -90,5 +105,11 @@ class AppTextStyles {
     fontWeight: FontWeight.w500,
     color: AppColors.redPigment,
     fontSize: 12,
+  );
+
+  static const postingInput = TextStyle(
+    fontFamily: 'Montserrat',
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
   );
 }
