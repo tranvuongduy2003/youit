@@ -1,18 +1,20 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
 class CircleButton extends StatelessWidget {
-  const CircleButton(
-      {super.key,
-      required this.imageAsset,
-      required this.buttonColor,
-      required this.onPressed,
-      required this.size});
+  const CircleButton({
+    super.key,
+    this.imageAsset = '',
+    required this.buttonColor,
+    required this.onPressed,
+    this.isImageButton = true,
+    this.icon = const Icon(Icons.add),
+    this.size = 55,
+  });
   final String imageAsset;
   final Color buttonColor;
-  final Function() onPressed;
+  final Function onPressed;
+  final bool isImageButton;
+  final Icon icon;
   final double size;
 
   @override
@@ -21,15 +23,26 @@ class CircleButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(50),
       elevation: 2,
       child: InkWell(
-          borderRadius: BorderRadius.circular(50),
-          onTap: onPressed,
-          child: Ink(
-            height: size,
-            width: size,
-            decoration: BoxDecoration(
-                color: buttonColor, borderRadius: BorderRadius.circular(50)),
-            child: Image.asset(imageAsset),
-          )),
+        borderRadius: BorderRadius.circular(50),
+        onTap: () {
+          onPressed();
+        },
+        child: Ink(
+          height: size,
+          width: size,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            color: buttonColor,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: isImageButton
+              ? Image.asset(
+                  imageAsset,
+                  color: Colors.black,
+                )
+              : icon,
+        ),
+      ),
     );
   }
 }

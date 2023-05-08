@@ -1,63 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
 
-import '../../group/group_chat_page.dart';
 import 'app_drawer.dart';
+import '../../config/themes/app_text_styles.dart';
 
-class DrawerAndBottomNav extends StatefulWidget {
+// class SliderDrawerStateKey {
+//   static final GlobalKey<SliderDrawerState> keyDrawer =
+//       GlobalKey<SliderDrawerState>();
+// }
+
+class DrawerAndBottomNav extends StatelessWidget {
   DrawerAndBottomNav({
     required this.groupName,
     required this.isShowDrawer,
     required this.openDrawer,
     required this.closeDrawer,
-    required this.chatScreen,
+    required this.childScreen,
+    required this.keyDrawer,
   });
+  final GlobalKey<SliderDrawerState> keyDrawer;
+
   final bool isShowDrawer;
   final String groupName;
   final Function openDrawer;
   final Function closeDrawer;
-  final Widget chatScreen;
+  final Widget childScreen;
 
-  @override
-  State<DrawerAndBottomNav> createState() => _DrawerAndBottomNavState();
-}
-
-class _DrawerAndBottomNavState extends State<DrawerAndBottomNav> {
   @override
   Widget build(BuildContext context) {
     return SliderDrawer(
       isDraggable: false,
       appBar: SliderAppBar(
+        appBarHeight: 80,
         drawerIcon: IconButton(
-          padding: EdgeInsets.only(left: 15),
-          icon: widget.isShowDrawer
+          padding: EdgeInsets.only(left: 15, top: 10),
+          icon: isShowDrawer
               ? Container()
               : Icon(
                   Icons.menu,
                   size: 30,
                 ),
           onPressed: () {
-            widget.openDrawer();
+            // openDrawer();
+
+            if (!keyDrawer.currentState!.isDrawerOpen) {
+              keyDrawer.currentState!.openSlider();
+              openDrawer();
+            }
           },
         ),
         isTitleCenter: false,
         title: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
+          padding: const EdgeInsets.only(left: 15, top: 10),
           child: Text(
-            widget.groupName,
+            groupName,
             style: AppTextStyles.appBarText,
           ),
         ),
       ),
-      slider: AppDrawer(widget.groupName),
+      slider: AppDrawer(groupName),
       child: GestureDetector(
         onTap: () {
-          widget.closeDrawer();
+          // closeDrawer();
+
+          if (keyDrawer.currentState!.isDrawerOpen) {
+            keyDrawer.currentState!.closeSlider();
+            closeDrawer();
+          }
         },
-        child: widget.chatScreen,
+        child: childScreen,
       ),
-      key: SliderDrawerStateKey.keyDrawer,
+      key: keyDrawer,
     );
   }
 }

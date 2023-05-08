@@ -66,37 +66,41 @@ class _MemberListPageState extends State<MemberListPage> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: CircleButton(
-                              imageAsset: 'assets/images/out_group.png',
-                              buttonColor: AppColors.pinkRed,
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return DeleteMemberModal();
-                                    });
-                              },
-                              size: 40),
+                            buttonColor: AppColors.pinkRed,
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return DeleteMemberModal();
+                                  });
+                            },
+                            size: 40,
+                            isImageButton: false,
+                            icon: Icon(Icons.close),
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: CircleButton(
-                              imageAsset: 'assets/images/out_group.png',
-                              buttonColor: AppColors.pinkRed,
-                              onPressed: () {
-                                showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    context: context,
-                                    builder: (context) {
-                                      return MoreInfoModal(
-                                        avtURL: avtURL,
-                                        name: name,
-                                      );
-                                    });
-                              },
-                              size: 40),
+                            buttonColor: Color(0xff92A8F6),
+                            onPressed: () {
+                              showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (context) {
+                                    return MoreInfoModal(
+                                      avtURL: avtURL,
+                                      name: name,
+                                    );
+                                  });
+                            },
+                            size: 40,
+                            isImageButton: false,
+                            icon: Icon(Icons.more_vert),
+                          ),
                         ),
                       ],
                     )

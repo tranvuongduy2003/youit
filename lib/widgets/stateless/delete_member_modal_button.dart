@@ -38,10 +38,9 @@ class DeleteMemberModal extends StatelessWidget {
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: 60,
+              Expanded(
                 child: Column(
                   children: [
                     CircleButton(
@@ -52,33 +51,32 @@ class DeleteMemberModal extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(
-                        'Xóa',
+                        'Xóa thành viên',
                         style: AppTextStyles.modalTitle,
                       ),
                     )
                   ],
                 ),
               ),
-              SizedBox(
-                width: 10,
-              ),
-              Column(
-                children: [
-                  CircleButton(
-                      imageAsset: 'assets/images/cancel.png',
-                      buttonColor: Color(0xff92A8F6),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      size: 60),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: Text(
-                      'Hủy',
-                      style: AppTextStyles.modalTitle,
+              Expanded(
+                child: Column(
+                  children: [
+                    CircleButton(
+                        imageAsset: 'assets/images/cancel.png',
+                        buttonColor: Color(0xff92A8F6),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        size: 60),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        'Hủy',
+                        style: AppTextStyles.modalTitle,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               )
             ],
           )
