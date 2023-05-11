@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/activity_page.dart';
 import 'package:you_it/screens/group/group_chat_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
@@ -92,7 +93,10 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const UploadFilePage());
         }
-
+      case Routes.generalPage:
+        {
+          return MaterialPageRoute(builder: (_) => const GeneralPage());
+        }
       default:
         {
           MaterialPageRoute(

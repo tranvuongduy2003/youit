@@ -117,7 +117,6 @@ class EditProfilePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: HeaderBar(
-        appBar: AppBar(),
         title: Text(
           'Thông tin cá nhân',
           style: AppTextStyles.appBarText,

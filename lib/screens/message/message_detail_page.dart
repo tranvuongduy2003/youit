@@ -13,7 +13,6 @@ class MessageDetailPage extends StatelessWidget {
           'Nhật Vy',
           style: AppTextStyles.appBarText,
         ),
-        appBar: AppBar(),
         handler: () => Navigator.of(context).pop(),
       ),
       body: Container(),

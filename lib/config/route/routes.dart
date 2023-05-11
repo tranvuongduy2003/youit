@@ -21,4 +21,5 @@ class Routes {
   static const String activityPage = 'ActivityPage';
   static const String postingPage = 'PostingPage';
   static const String uploadFilePage = 'UploadFilePage';
+  static const String generalPage = 'GeneralPage';
 }

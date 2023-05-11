@@ -29,7 +29,6 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
     });
   }
 
-  @override
   String groupName = 'Nhóm UIT';
   String groupDescription = 'Nhóm này là dành cho môn học yêu cầu ';
 
@@ -123,19 +122,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
             );
           });
   Widget build(BuildContext context) {
-    const groupName = 'Nhóm UIT';
-    int hoatdong = 1; // dung de test
-
     return Scaffold(
-      // appBar: AppBar(
-      //   bottom: PreferredSize(
-      //     preferredSize: const Size.fromHeight(1.0),
-      //     child: Container(
-      //       color: AppColors.lineColor,
-      //       height: 1.0,
-      //     ),
-      //   ),
-      // ),
       body: DrawerAndBottomNav(
         keyDrawer: keyDrawer,
         groupName: groupName,
