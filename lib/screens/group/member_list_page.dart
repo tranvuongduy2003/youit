@@ -24,7 +24,6 @@ class _MemberListPageState extends State<MemberListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HeaderBar(
-          appBar: AppBar(),
           title: Text(
             'Thành viên',
             style: AppTextStyles.appBarText,

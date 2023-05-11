@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import '../../config/themes/app_colors.dart';
 
 class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
-  final AppBar appBar;
+  final bool isIconButton;
   final Widget title;
   final VoidCallback handler;
-
   HeaderBar({
-    required this.appBar,
+    this.isIconButton = true,
     required this.title,
     required this.handler,
   });
@@ -19,11 +18,13 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: headerHeight,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new),
-        color: AppColors.fontColor,
-        onPressed: handler,
-      ),
+      leading: isIconButton
+          ? IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new),
+              color: AppColors.fontColor,
+              onPressed: handler,
+            )
+          : null,
       title: title,
       centerTitle: true,
       bottom: PreferredSize(

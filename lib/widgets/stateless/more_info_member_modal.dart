@@ -5,6 +5,7 @@ import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/profile/profile_page.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
+import 'package:you_it/widgets/stateless/text_circle_button.dart';
 
 class MoreInfoModal extends StatelessWidget {
   const MoreInfoModal({super.key, required this.avtURL, required this.name});
@@ -49,53 +50,36 @@ class MoreInfoModal extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Xem thông tin',
-                    style: AppTextStyles.modalTitle,
-                  ),
-                  CircleButton(
-                      imageAsset: 'assets/images/profile.png',
-                      buttonColor: Color(0xffFCFF7B),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const ProfilePage()));
-                      },
-                      size: 60)
-                ],
-              ),
+            TextCircleButton(
+              btn: CircleButton(
+                  imageAsset: 'assets/images/profile.png',
+                  buttonColor: Color(0xffFCFF7B),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const ProfilePage()));
+                  },
+                  size: 60),
+              txt: 'Xem thông tin',
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Trò chuyện',
-                    style: AppTextStyles.modalTitle,
+            TextCircleButton(
+              btn: CircleButton(
+                  isImageButton: false,
+                  icon: Icon(
+                    Icons.chat_outlined,
+                    size: 33,
                   ),
-                  CircleButton(
-                      imageAsset: 'assets/images/profile.png',
-                      buttonColor: Color(0xff92F696),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const MessageDetailPage()));
-                      },
-                      size: 60)
-                ],
-              ),
-            ),
+                  buttonColor: Color(0xff92F696),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const MessageDetailPage()));
+                  },
+                  size: 60),
+              txt: 'Trò chuyện',
+            )
           ],
         ),
       ),

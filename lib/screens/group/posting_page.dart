@@ -15,7 +15,6 @@ class PostingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HeaderBar(
-        appBar: AppBar(),
         title: Text(
           'Đăng bài viết',
           style: AppTextStyles.appBarText,

@@ -17,7 +17,6 @@ class _MessagePageState extends State<MessagePage> {
   @override
   Widget build(BuildContext context) {
     final headerBar = HeaderBar(
-      appBar: AppBar(),
       title: Text(
         'Trò chuyện',
         style: AppTextStyles.appBarText,
@@ -31,7 +30,6 @@ class _MessagePageState extends State<MessagePage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: HeaderBar(
-        appBar: AppBar(),
         title: Text(
           'Trò chuyện',
           style: AppTextStyles.appBarText,
