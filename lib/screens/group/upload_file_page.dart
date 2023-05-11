@@ -69,6 +69,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                   buttonColor: AppColors.jordyBlue.withOpacity(0.36),
                   onPressed: () {},
                   imageAsset: 'assets/images/upload.png',
+                  size: 55,
                 ),
           backgroundColor: AppColors.white,
           body: slfile == 0
@@ -101,6 +102,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                           Navigator.of(context).pushNamed(Routes.postingPage);
                         },
                         imageAsset: 'assets/images/upload.png',
+                        size: 55,
                       ),
                     ],
                   ),
@@ -235,6 +237,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                                     onPressed: () {},
                                     icon: Icon(Icons.file_download_outlined),
                                     isImageButton: false,
+                                    size: 55,
                                   ),
                                 ],
                               ),
@@ -259,6 +262,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                                       Icons.close,
                                       color: Color(0xFFF41B1B),
                                     ),
+                                    size: 55,
                                   ),
                                 ],
                               ),

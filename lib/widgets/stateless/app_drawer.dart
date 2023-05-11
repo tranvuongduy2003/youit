@@ -84,7 +84,10 @@ class AppDrawer extends StatelessWidget {
                     child: Image.asset('assets/images/info.png'),
                   ),
                   'Thông tin',
-                  () {},
+                  () {
+                    Navigator.of(context)
+                        .pushNamed(Routes.groupInformationPage);
+                  },
                 ),
               ],
             ),

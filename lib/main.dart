@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: GroupChatPage(),
-      initialRoute: Routes.uploadFilePage,
+      initialRoute: Routes.generalPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }
