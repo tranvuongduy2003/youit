@@ -4,11 +4,13 @@ class SignButton extends StatelessWidget {
   final String buttonText;
   final Color textColor;
   final Color backgroundColor;
+  final VoidCallback handleOnPress;
 
   SignButton({
     required this.buttonText,
     required this.textColor,
     required this.backgroundColor,
+    required this.handleOnPress,
   });
 
   @override
@@ -16,7 +18,7 @@ class SignButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: handleOnPress,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           shape: MaterialStateProperty.all(
