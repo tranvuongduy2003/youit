@@ -21,6 +21,7 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
     final appBarTheme = AppBarTheme.of(context);
 
     return AppBar(
+      centerTitle: true,
       toolbarHeight: headerHeight,
       leading: IconButton(
         icon: const Icon(Icons.arrow_back_ios_new),
@@ -28,7 +29,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
         onPressed: handler,
       ),
       title: title,
-      centerTitle: true,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
         child: Container(
