@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../config/themes/app_text_styles.dart';
+import '../../config/themes/app_text_styles.dart';
 
 class LinkInformation extends StatelessWidget {
   final String linkGithub;
@@ -15,7 +15,7 @@ class LinkInformation extends StatelessWidget {
 
   Widget buildTitle(String title) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Text(
         title,
         style: AppTextStyles.sectionTitle,
@@ -25,7 +25,7 @@ class LinkInformation extends StatelessWidget {
 
   Widget buildLinkRow(String title, String link) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 3),
+      padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

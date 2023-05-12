@@ -26,7 +26,6 @@ class MessageDetailPage extends StatelessWidget {
             ),
           ],
         ),
-        appBar: AppBar(),
         handler: () => Navigator.of(context).pop(),
       ),
       body: ListView(),
