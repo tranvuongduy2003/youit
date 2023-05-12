@@ -9,13 +9,26 @@ class MessageDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HeaderBar(
-        title: Text(
-          'Nhật Vy',
-          style: AppTextStyles.appBarText,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            CircleAvatar(
+              radius: 20,
+              backgroundImage: NetworkImage("https://picsum.photos/200"),
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            Text(
+              'Nhật Vy',
+              style: AppTextStyles.appBarText,
+            ),
+          ],
         ),
         handler: () => Navigator.of(context).pop(),
       ),
-      body: Container(),
+      body: ListView(),
     );
   }
 }

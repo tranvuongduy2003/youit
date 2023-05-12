@@ -6,15 +6,13 @@ class BottomTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
+    //return  Container(
+    //     //  color: AppColors.pinkRed.withOpacity(0.6),
+    //     width: MediaQuery.of(context).size.width * 0.6,
+    //     height: 50,
 
-        //  Container(
-        //     //  color: AppColors.pinkRed.withOpacity(0.6),
-        //     width: MediaQuery.of(context).size.width * 0.6,
-        //     height: 50,
-
-        // ),
-        ClipRRect(
+    // ),
+    return ClipRRect(
       borderRadius: BorderRadius.only(
         topLeft: Radius.circular(30),
         topRight: Radius.circular(30),

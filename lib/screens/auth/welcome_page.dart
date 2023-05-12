@@ -43,11 +43,13 @@ class WelcomePage extends StatelessWidget {
                   buttonText: 'Đăng kí',
                   textColor: AppColors.white,
                   backgroundColor: AppColors.primaryColor,
+                  handleOnPress: () {},
                 ),
                 SignButton(
                   buttonText: 'Đăng nhập',
                   textColor: AppColors.primaryColor,
                   backgroundColor: AppColors.white,
+                  handleOnPress: () {},
                 ),
               ],
             )

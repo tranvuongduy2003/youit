@@ -17,6 +17,7 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      centerTitle: true,
       toolbarHeight: headerHeight,
       leading: isIconButton
           ? IconButton(
@@ -26,7 +27,6 @@ class HeaderBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       title: title,
-      centerTitle: true,
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1.0),
         child: Container(
