@@ -4,6 +4,7 @@ import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/widgets/stateless/input.dart';
 import 'package:you_it/widgets/stateless/signButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:you_it/config/route/routes.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -18,11 +19,11 @@ class _LoginPageState extends State<LoginPage> {
   String _email = '';
   String _password = '';
 
-  void _handleLogin() async {
+  void _handleLogin(context) async {
     try {
       final credential = await _firebase.signInWithEmailAndPassword(
           email: _email, password: _password);
-      print(credential);
+      Navigator.of(context).pushNamed(Routes.homePage);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -124,7 +125,9 @@ class _LoginPageState extends State<LoginPage> {
                           buttonText: 'Đăng kí',
                           textColor: AppColors.white,
                           backgroundColor: AppColors.primaryColor,
-                          handleOnPress: () {},
+                          handleOnPress: () {
+                            Navigator.of(context).pushNamed(Routes.signUpPage);
+                          },
                         ),
                         SizedBox(
                           height: 20,
@@ -133,7 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                           buttonText: 'Đăng nhập',
                           textColor: AppColors.primaryColor,
                           backgroundColor: AppColors.white,
-                          handleOnPress: _handleLogin,
+                          handleOnPress: () => _handleLogin(context),
                         ),
                       ],
                     ),
