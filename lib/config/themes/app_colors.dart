@@ -15,6 +15,7 @@ class AppColors {
   static const redPigment = Color(0xFFF12424);
 
   static const black = Color(0x00000000);
+  static const textBlack = Color(0x404040);
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
 }
