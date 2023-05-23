@@ -7,10 +7,11 @@ import 'package:you_it/screens/profile/profile_page.dart';
 import '../../widgets/stateless/new_message.dart';
 import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/drawer_and_bottom_nav.dart';
-import '../../widgets/stateless/bottom_tab_bar.dart';
 
 class GroupChatPage extends StatefulWidget {
-  const GroupChatPage({super.key});
+  const GroupChatPage(this.callback);
+
+  final Function callback;
 
   @override
   State<GroupChatPage> createState() => _GroupChatPageState();
@@ -18,35 +19,20 @@ class GroupChatPage extends StatefulWidget {
 
 class _GroupChatPageState extends State<GroupChatPage> {
   bool _isShowDrawer = false;
-  int _selectedIndex = 0;
-
-  List<Widget> screens = [
-    HomePage(),
-    MessagePage(),
-    GroupChatPage(),
-    ProfilePage(),
-    Center(
-      child: Text('Hihi'),
-    ),
-  ];
 
   final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
   void _openDrawer() {
     setState(() {
       _isShowDrawer = true;
     });
+    widget.callback(_isShowDrawer);
   }
 
   void _closeDrawer() {
     setState(() {
       _isShowDrawer = false;
     });
-  }
-
-  void onItemTap(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    widget.callback(_isShowDrawer);
   }
 
   @override
@@ -61,7 +47,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
         isShowDrawer: _isShowDrawer,
         openDrawer: _openDrawer,
         closeDrawer: _closeDrawer,
-        childScreen: screens[_selectedIndex],
+        childScreen: MessagePage2(groupName: 'Nhom Uit', soluongMessage: 0),
       ),
       extendBody: true,
     );

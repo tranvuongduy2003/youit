@@ -4,7 +4,7 @@ import 'package:you_it/config/themes/app_text_styles.dart';
 
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
-import '../../widgets/stateless/bottom_tab_bar.dart';
+import '../bottom_bar/bottom_nav_bar_page.dart';
 import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
@@ -52,7 +52,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
       //     ),
       //   ),
       // ),
-      bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}) : null,
+      // bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}//) : null,
       extendBody: true,
       body: DrawerAndBottomNav(
         keyDrawer: keyDrawer,
@@ -69,6 +69,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                   buttonColor: AppColors.jordyBlue.withOpacity(0.36),
                   onPressed: () {},
                   imageAsset: 'assets/images/upload.png',
+                  size: 55,
                 ),
           backgroundColor: AppColors.white,
           body: slfile == 0
@@ -101,6 +102,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                           Navigator.of(context).pushNamed(Routes.postingPage);
                         },
                         imageAsset: 'assets/images/upload.png',
+                        size: 55,
                       ),
                     ],
                   ),
@@ -235,6 +237,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                                     onPressed: () {},
                                     icon: Icon(Icons.file_download_outlined),
                                     isImageButton: false,
+                                    size: 55,
                                   ),
                                 ],
                               ),
@@ -259,6 +262,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
                                       Icons.close,
                                       color: Color(0xFFF41B1B),
                                     ),
+                                    size: 55,
                                   ),
                                 ],
                               ),

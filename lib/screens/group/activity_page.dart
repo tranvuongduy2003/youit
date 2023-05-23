@@ -6,7 +6,7 @@ import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/drawer_and_bottom_nav.dart';
-import '../../widgets/stateless/bottom_tab_bar.dart';
+import '../bottom_bar/bottom_nav_bar_page.dart';
 import '../../widgets/stateless/post_form.dart';
 
 class ActivityPage extends StatefulWidget {
@@ -205,7 +205,7 @@ class _ActivityPageState extends State<ActivityPage> {
         ),
       ),
 
-      bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}) : null,
+      // bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}) : null,
       extendBody: true,
     );
   }

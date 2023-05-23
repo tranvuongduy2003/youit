@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+
+import 'package:you_it/screens/group/activity_page.dart';
+import 'package:you_it/screens/group/group_chat_page.dart';
+import 'package:you_it/screens/group/group_information.dart';
+import 'package:you_it/screens/group/upload_file_page.dart';
+import 'package:you_it/screens/profile/profile_page.dart';
 
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
   final String groupName;
 
   const AppDrawer(this.groupName);
 
   @override
+  State<AppDrawer> createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  @override
   Widget build(BuildContext context) {
+    bool showDrawer = false;
+
+    void callback(newValue) {
+      setState(() {
+        showDrawer = newValue;
+      });
+    }
+
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.6,
       elevation: 0,
@@ -36,7 +56,7 @@ class AppDrawer extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
                   child: Text(
-                    groupName,
+                    widget.groupName,
                     style: TextStyle(
                       color: AppColors.white,
                       fontFamily: 'Montserrat',
@@ -55,8 +75,14 @@ class AppDrawer extends StatelessWidget {
                   ),
                   'Đoạn chat',
                   () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(Routes.groupChatPage);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavBarPage(
+                          currentWidget: GroupChatPage(callback),
+                        ),
+                      ),
+                    );
                   },
                 ),
                 Button(
@@ -65,9 +91,10 @@ class AppDrawer extends StatelessWidget {
                   ),
                   'Hoạt động',
                   () {
-                    Navigator.of(context)
-                        .pushReplacementNamed(Routes.activityPage);
-                    Navigator.canPop(context);
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.bottomNavBarPage,
+                    );
                   },
                 ),
                 Button(
@@ -76,7 +103,10 @@ class AppDrawer extends StatelessWidget {
                   ),
                   'Tệp tin',
                   () {
-                    Navigator.of(context).pushNamed(Routes.uploadFilePage);
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.bottomNavBarPage,
+                    );
                   },
                 ),
                 Button(
@@ -84,7 +114,12 @@ class AppDrawer extends StatelessWidget {
                     child: Image.asset('assets/images/info.png'),
                   ),
                   'Thông tin',
-                  () {},
+                  () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.bottomNavBarPage,
+                    );
+                  },
                 ),
               ],
             ),
