@@ -43,11 +43,13 @@ class SignUpPage extends StatelessWidget {
                   buttonText: 'Đăng kí',
                   textColor: AppColors.white,
                   backgroundColor: AppColors.primaryColor,
+                  handler: () {},
                 ),
                 SignButton(
                   buttonText: 'Đăng nhập',
                   textColor: AppColors.primaryColor,
                   backgroundColor: AppColors.white,
+                  handler: () {},
                 ),
               ],
             )

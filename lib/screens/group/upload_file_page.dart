@@ -52,7 +52,7 @@ class _UploadFilePageState extends State<UploadFilePage> {
       //     ),
       //   ),
       // ),
-      bottomNavigationBar: _isShowDrawer ? BottomTabBar() : null,
+      bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}) : null,
       extendBody: true,
       body: DrawerAndBottomNav(
         keyDrawer: keyDrawer,

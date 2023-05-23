@@ -4,19 +4,21 @@ class SignButton extends StatelessWidget {
   final String buttonText;
   final Color textColor;
   final Color backgroundColor;
+  final VoidCallback handler;
 
   SignButton({
     required this.buttonText,
     required this.textColor,
     required this.backgroundColor,
+    required this.handler,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.85,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: handler,
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.all(backgroundColor),
           shape: MaterialStateProperty.all(

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 import 'package:you_it/screens/group/group_chat_page.dart';
 
 import './config/route/router.dart' as router;
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: GroupChatPage(),
-      initialRoute: Routes.uploadFilePage,
+      initialRoute: Routes.groupChatPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

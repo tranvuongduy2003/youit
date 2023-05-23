@@ -101,102 +101,111 @@ class _ActivityPageState extends State<ActivityPage> {
                     ],
                   ),
                 )
-              : ListView.builder(
-                  itemBuilder: (ctx, index) => Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        margin: EdgeInsets.only(top: 5),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'Được đăng bởi:   ',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: AppColors.startDust,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: 'Bình Đần',
-                                style: TextStyle(
-                                  color: Colors.black,
+              : Column(
+                  children: [
+                    Divider(
+                      thickness: 1,
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemBuilder: (ctx, index) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              margin: EdgeInsets.only(top: 5),
+                              child: RichText(
+                                text: TextSpan(
+                                  text: 'Được đăng bởi:   ',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: AppColors.startDust,
+                                  ),
+                                  children: [
+                                    TextSpan(
+                                      text: 'Bình Đần',
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return _BuildDialog();
-                              });
-                        },
-                        child: Container(
-                          height: 40,
-                          width: double.infinity,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 10,
-                          ),
-                          padding: EdgeInsets.only(
-                            left: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(20),
                             ),
-                            color: AppColors.jordyBlue.withOpacity(0.36),
-                          ),
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            'Thi cuối kì',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
+                            GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (ctx) {
+                                      return _BuildDialog();
+                                    });
+                              },
+                              child: Container(
+                                height: 40,
+                                width: double.infinity,
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
+                                padding: EdgeInsets.only(
+                                  left: 20,
+                                ),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(20),
+                                  ),
+                                  color: AppColors.jordyBlue.withOpacity(0.36),
+                                ),
+                                alignment: Alignment.centerLeft,
+                                child: Text(
+                                  'Thi cuối kì',
+                                  style: TextStyle(
+                                    fontFamily: 'Montserrat',
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
+                            Container(
+                              height: 124,
+                              width: double.infinity,
+                              margin: EdgeInsets.only(
+                                left: 20,
+                                right: 20,
+                                bottom: 25,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(20),
+                                ),
+                                color: Color(0xFFFFD3D3).withOpacity(0.56),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 14),
+                              child: Text(
+                                'T6 tuần này chúng ta sẽ có bài kt nhỏ: Nội dung gồm: \nA \nB \nC',
+                                style: TextStyle(
+                                  fontFamily: 'Montserrat',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color(0xFF9A1313),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
+                        itemCount: hoatdong,
                       ),
-                      Container(
-                        height: 124,
-                        width: double.infinity,
-                        margin: EdgeInsets.only(
-                          left: 20,
-                          right: 20,
-                          bottom: 25,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(20),
-                          ),
-                          color: Color(0xFFFFD3D3).withOpacity(0.56),
-                        ),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-                        child: Text(
-                          'T6 tuần này chúng ta sẽ có bài kt nhỏ: Nội dung gồm: \nA \nB \nC',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFF9A1313),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  itemCount: hoatdong,
+                    ),
+                  ],
                 ),
         ),
       ),
 
-      bottomNavigationBar: _isShowDrawer ? BottomTabBar() : null,
+      bottomNavigationBar: _isShowDrawer ? BottomTabBar(0, (i) {}) : null,
       extendBody: true,
     );
   }
