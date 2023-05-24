@@ -6,6 +6,8 @@ import 'package:you_it/screens/group/group_chat_page.dart';
 import 'package:you_it/screens/group/group_information.dart';
 import 'package:you_it/screens/group/upload_file_page.dart';
 import 'package:you_it/screens/profile/profile_page.dart';
+import 'package:you_it/widgets/stateless/link_information.dart';
+import 'package:you_it/widgets/stateless/personal_information.dart';
 
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
@@ -22,14 +24,6 @@ class AppDrawer extends StatefulWidget {
 class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
-    bool showDrawer = false;
-
-    void callback(newValue) {
-      setState(() {
-        showDrawer = newValue;
-      });
-    }
-
     return Drawer(
       width: MediaQuery.of(context).size.width * 0.6,
       elevation: 0,
@@ -75,11 +69,11 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   'Đoạn chat',
                   () {
-                    Navigator.push(
+                    Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNavBarPage(
-                          currentWidget: GroupChatPage(callback),
+                          currentWidget: GroupChatPage(),
                         ),
                       ),
                     );
@@ -91,9 +85,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   'Hoạt động',
                   () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushReplacement(
                       context,
-                      Routes.bottomNavBarPage,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavBarPage(
+                          currentWidget: ActivityPage(),
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -103,9 +101,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   'Tệp tin',
                   () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushReplacement(
                       context,
-                      Routes.bottomNavBarPage,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavBarPage(
+                          currentWidget: UploadFilePage(),
+                        ),
+                      ),
                     );
                   },
                 ),
@@ -115,9 +117,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                   'Thông tin',
                   () {
-                    Navigator.pushReplacementNamed(
+                    Navigator.pushReplacement(
                       context,
-                      Routes.bottomNavBarPage,
+                      MaterialPageRoute(
+                        builder: (context) => BottomNavBarPage(
+                          currentWidget: GroupInformationPage(),
+                        ),
+                      ),
                     );
                   },
                 ),

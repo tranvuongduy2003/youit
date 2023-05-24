@@ -9,31 +9,14 @@ import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
 class GroupChatPage extends StatefulWidget {
-  const GroupChatPage(this.callback);
-
-  final Function callback;
+  const GroupChatPage();
 
   @override
   State<GroupChatPage> createState() => _GroupChatPageState();
 }
 
 class _GroupChatPageState extends State<GroupChatPage> {
-  bool _isShowDrawer = false;
-
   final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
-  void _openDrawer() {
-    setState(() {
-      _isShowDrawer = true;
-    });
-    widget.callback(_isShowDrawer);
-  }
-
-  void _closeDrawer() {
-    setState(() {
-      _isShowDrawer = false;
-    });
-    widget.callback(_isShowDrawer);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +24,7 @@ class _GroupChatPageState extends State<GroupChatPage> {
     int soluongMessage = 0; //dung de test
 
     return Scaffold(
-      body: DrawerAndBottomNav(
-        keyDrawer: keyDrawer,
-        groupName: groupName,
-        isShowDrawer: _isShowDrawer,
-        openDrawer: _openDrawer,
-        closeDrawer: _closeDrawer,
-        childScreen: MessagePage2(groupName: 'Nhom Uit', soluongMessage: 0),
-      ),
-      extendBody: true,
+      body: MessagePage2(groupName: 'Nhom Uit', soluongMessage: 0),
     );
   }
 }

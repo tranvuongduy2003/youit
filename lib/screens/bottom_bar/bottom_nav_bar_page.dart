@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/screens/group/activity_page.dart';
+import 'package:you_it/screens/group/group_chat_page.dart';
 import 'package:you_it/screens/home/home_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/profile_page.dart';
+import 'package:you_it/widgets/stateless/drawer_and_bottom_nav.dart';
 
 class BottomNavBarPage extends StatefulWidget {
-  const BottomNavBarPage({this.currentWidget = const ActivityPage()});
+  const BottomNavBarPage({this.currentWidget = const GroupChatPage()});
 
   final Widget currentWidget;
 
@@ -15,12 +18,22 @@ class BottomNavBarPage extends StatefulWidget {
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
-  bool showDrawer = false;
   int selectedIndex = 2;
-
-  void callback(newValue) {
+  bool _isShowAppBar = true;
+  bool _isShowDrawer = false;
+  bool _showDrawerAndBottomNav = false;
+  final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
+  void _openDrawer() {
     setState(() {
-      showDrawer = newValue;
+      _isShowDrawer = true;
+      _showDrawerAndBottomNav = true;
+    });
+  }
+
+  void _closeDrawer() {
+    setState(() {
+      _isShowDrawer = false;
+      _showDrawerAndBottomNav = false;
     });
   }
 
@@ -40,9 +53,20 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       ),
     ];
     return Scaffold(
+      body: DrawerAndBottomNav(
+        openDrawer: _openDrawer,
+        closeDrawer: _closeDrawer,
+        groupName: 'Nhóm UIT',
+        isShowDrawer: _isShowDrawer,
+        keyDrawer: keyDrawer,
+        isShowAppBar: _isShowAppBar,
+        childScreen: Scaffold(
+          //  extendBody: selectedIndex == 2 ? true : false,
+          body: widgetOptions[selectedIndex],
+        ),
+      ),
       extendBody: selectedIndex == 2 ? true : false,
-      body: widgetOptions[selectedIndex],
-      bottomNavigationBar: showDrawer
+      bottomNavigationBar: _showDrawerAndBottomNav
           ? ClipRRect(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -57,12 +81,19 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                 showUnselectedLabels: false,
                 currentIndex: selectedIndex,
                 onTap: (index) {
-                  setState(() {
-                    selectedIndex = index;
-                  });
-                  if (selectedIndex == 2) {
-                    showDrawer = false;
-                  }
+                  setState(
+                    () {
+                      selectedIndex = index;
+                      if (index != 2) {
+                        _isShowAppBar = false;
+                      } else {
+                        _showDrawerAndBottomNav = false;
+                        _isShowAppBar = true;
+                      }
+                    },
+                  );
+                  keyDrawer.currentState?.closeSlider();
+                  _isShowDrawer = false;
                 },
                 items: [
                   BottomNavigationBarItem(
