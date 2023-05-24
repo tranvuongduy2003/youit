@@ -8,12 +8,14 @@ class CircleButton extends StatelessWidget {
     required this.onPressed,
     this.isImageButton = true,
     this.icon = const Icon(Icons.add),
+    this.size = 55,
   });
   final String imageAsset;
   final Color buttonColor;
   final Function onPressed;
   final bool isImageButton;
   final Icon icon;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,8 @@ class CircleButton extends StatelessWidget {
           onPressed();
         },
         child: Ink(
-          height: 55,
-          width: 55,
+          height: size,
+          width: size,
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: buttonColor,

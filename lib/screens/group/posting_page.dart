@@ -15,7 +15,6 @@ class PostingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HeaderBar(
-        appBar: AppBar(),
         title: Text(
           'Đăng bài viết',
           style: AppTextStyles.appBarText,
@@ -66,6 +65,7 @@ class PostingPage extends StatelessWidget {
                         buttonColor: Color(0xFFFCFF7B).withOpacity(0.39),
                         onPressed: () {},
                         imageAsset: ('assets/images/upload.png'),
+                        size: 55,
                       ),
                       SizedBox(height: 5),
                       Text('Đăng bài', style: AppTextStyles.mont20),
@@ -94,6 +94,7 @@ class PostingPage extends StatelessWidget {
                         buttonColor: AppColors.jordyBlue.withOpacity(0.36),
                         onPressed: () {},
                         imageAsset: 'assets/images/cancel.png',
+                        size: 55,
                       ),
                       SizedBox(height: 5),
                       Text('Huỷ', style: AppTextStyles.mont20),
