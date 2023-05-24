@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
-import 'package:you_it/widgets/stateless/header_bar.dart';
-import 'package:you_it/widgets/stateless/text_circle_button.dart';
+
+import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
+import '../../widgets/stateless/header_bar.dart';
+import '../../widgets/stateless/text_circle_button.dart';
 
 import '../../widgets/stateless/circle_button.dart';
 

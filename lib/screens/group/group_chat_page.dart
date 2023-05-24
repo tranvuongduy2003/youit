@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/screens/home/home_page.dart';
-import 'package:you_it/screens/message/message_page.dart';
-import 'package:you_it/screens/profile/profile_page.dart';
 
 import '../../widgets/stateless/new_message.dart';
 import '../../config/themes/app_colors.dart';
-import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage();
@@ -20,9 +16,6 @@ class _GroupChatPageState extends State<GroupChatPage> {
 
   @override
   Widget build(BuildContext context) {
-    const groupName = 'Nhóm UIT';
-    int soluongMessage = 0; //dung de test
-
     return Scaffold(
       body: MessagePage2(groupName: 'Nhom Uit', soluongMessage: 0),
     );

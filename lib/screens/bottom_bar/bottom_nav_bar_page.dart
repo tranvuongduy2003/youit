@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/screens/group/activity_page.dart';
-import 'package:you_it/screens/group/group_chat_page.dart';
-import 'package:you_it/screens/home/home_page.dart';
-import 'package:you_it/screens/message/message_page.dart';
-import 'package:you_it/screens/profile/profile_page.dart';
-import 'package:you_it/widgets/stateless/drawer_and_bottom_nav.dart';
+
+import '../../config/themes/app_colors.dart';
+import '../../screens/group/group_chat_page.dart';
+import '../../screens/home/home_page.dart';
+import '../../screens/message/message_page.dart';
+import '../../screens/profile/profile_page.dart';
+import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({this.currentWidget = const GroupChatPage()});

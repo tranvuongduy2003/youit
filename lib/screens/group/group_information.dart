@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:you_it/screens/group/member_list_page.dart';
-import 'package:you_it/widgets/stateless/circle_button.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import '../bottom_bar/bottom_nav_bar_page.dart';
-import '../../widgets/stateless/drawer_and_bottom_nav.dart';
+
+import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
+import '../../screens/group/member_list_page.dart';
+import '../../widgets/stateless/circle_button.dart';
 
 class GroupInformationPage extends StatefulWidget {
   const GroupInformationPage({super.key});
@@ -15,20 +13,6 @@ class GroupInformationPage extends StatefulWidget {
 }
 
 class _GroupInformationPageState extends State<GroupInformationPage> {
-  bool _isShowDrawer = false;
-  final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
-  void _openDrawer() {
-    setState(() {
-      _isShowDrawer = true;
-    });
-  }
-
-  void _closeDrawer() {
-    setState(() {
-      _isShowDrawer = false;
-    });
-  }
-
   String groupName = 'Nhóm UIT';
   String groupDescription = 'Nhóm này là dành cho môn học yêu cầu ';
 
@@ -121,6 +105,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
               ),
             );
           });
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Scaffold(

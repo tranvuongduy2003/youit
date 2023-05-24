@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
 
+import '../../config/themes/app_text_styles.dart';
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/circle_button.dart';
-import '../../widgets/stateless/drawer_and_bottom_nav.dart';
-import '../bottom_bar/bottom_nav_bar_page.dart';
 import '../../widgets/stateless/post_form.dart';
 
 class ActivityPage extends StatefulWidget {
@@ -19,7 +16,6 @@ class ActivityPage extends StatefulWidget {
 class _ActivityPageState extends State<ActivityPage> {
   @override
   Widget build(BuildContext context) {
-    const groupName = 'Nhóm UIT';
     int hoatdong = 1; // dung de test
 
     return Scaffold(

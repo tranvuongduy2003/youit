@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
 
+import '../../config/themes/app_text_styles.dart';
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
-import '../bottom_bar/bottom_nav_bar_page.dart';
 import '../../widgets/stateless/circle_button.dart';
-import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
 class UploadFilePage extends StatefulWidget {
   const UploadFilePage({super.key});
@@ -16,20 +13,7 @@ class UploadFilePage extends StatefulWidget {
 }
 
 class _UploadFilePageState extends State<UploadFilePage> {
-  bool _isShowDrawer = false;
   bool _showDowload = false;
-  final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
-  void _openDrawer() {
-    setState(() {
-      _isShowDrawer = true;
-    });
-  }
-
-  void _closeDrawer() {
-    setState(() {
-      _isShowDrawer = false;
-    });
-  }
 
   void _showDownloadContainer() {
     setState(() {
@@ -39,7 +23,6 @@ class _UploadFilePageState extends State<UploadFilePage> {
 
   @override
   Widget build(BuildContext context) {
-    const groupName = 'Nhóm UIT';
     int slfile = 2; //test
 
     return Scaffold(

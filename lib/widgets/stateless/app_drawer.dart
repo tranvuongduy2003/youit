@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
 
-import 'package:you_it/screens/group/activity_page.dart';
-import 'package:you_it/screens/group/group_chat_page.dart';
-import 'package:you_it/screens/group/group_information.dart';
-import 'package:you_it/screens/group/upload_file_page.dart';
-import 'package:you_it/screens/profile/profile_page.dart';
-import 'package:you_it/widgets/stateless/link_information.dart';
-import 'package:you_it/widgets/stateless/personal_information.dart';
-
-import '../../config/route/routes.dart';
+import '../../screens/bottom_bar/bottom_nav_bar_page.dart';
+import '../../screens/group/activity_page.dart';
+import '../../screens/group/group_chat_page.dart';
+import '../../screens/group/group_information.dart';
+import '../../screens/group/upload_file_page.dart';
 import '../../config/themes/app_colors.dart';
 
 class AppDrawer extends StatefulWidget {
