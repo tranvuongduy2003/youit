@@ -7,7 +7,7 @@ class Description extends StatelessWidget {
   const Description({super.key, required this.description});
 
   Widget buildTitle(String title) {
-    return Padding(
+    return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Text(
         title,

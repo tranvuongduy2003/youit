@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/route/routes.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/widgets/stateless/signButton.dart';
+import 'package:you_it/widgets/stateless/sign_button.dart';
+import 'package:you_it/config/route/routes.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -36,20 +38,31 @@ class WelcomePage extends StatelessWidget {
                 ),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                SignButton(
-                  'Đăng kí',
-                  AppColors.white,
-                  AppColors.primaryColor,
-                ),
-                SignButton(
-                  'Đăng nhập',
-                  AppColors.primaryColor,
-                  AppColors.white,
-                ),
-              ],
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 40),
+              child: Column(
+                children: <Widget>[
+                  SignButton(
+                    buttonText: 'Đăng kí',
+                    textColor: AppColors.white,
+                    backgroundColor: AppColors.primaryColor,
+                    handleOnPress: () {
+                      Navigator.of(context).pushNamed(Routes.signUpPage);
+                    },
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  SignButton(
+                    buttonText: 'Đăng nhập',
+                    textColor: AppColors.primaryColor,
+                    backgroundColor: AppColors.white,
+                    handleOnPress: () {
+                      Navigator.of(context).pushNamed(Routes.logInPage);
+                    },
+                  ),
+                ],
+              ),
             )
           ],
         ),
