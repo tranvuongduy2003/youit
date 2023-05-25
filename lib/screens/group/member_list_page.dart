@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:you_it/widgets/stateless/circle_button.dart';
-import 'package:you_it/widgets/stateless/header_bar.dart';
-import 'package:you_it/widgets/stateless/more_info_member_modal.dart';
 
+import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
+import '../../widgets/stateless/circle_button.dart';
+import '../../widgets/stateless/header_bar.dart';
+import '../../widgets/stateless/more_info_member_modal.dart';
 import '../../widgets/stateless/delete_member_modal_button.dart';
 
 class MemberListPage extends StatefulWidget {

@@ -16,7 +16,7 @@ class SignButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.85,
       child: ElevatedButton(
         onPressed: handleOnPress,
         style: ButtonStyle(

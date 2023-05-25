@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:you_it/widgets/stateless/circle_button.dart';
+
+import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
+import '../../widgets/stateless/circle_button.dart';
 
 class DeleteMemberModal extends StatelessWidget {
   const DeleteMemberModal({super.key});
