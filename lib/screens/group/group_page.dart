@@ -9,59 +9,14 @@ class GroupPage extends StatelessWidget {
   const GroupPage({Key? key}) : super(key: key);
 
   set result(String result) {}
-  createGroup() {
-    return CreateGroup();
-  }
+  createGroup() {}
 
   @override
   Widget build(BuildContext context) {
     Future createGroup() => showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
-              insetPadding: EdgeInsets.only(
-                top: 150,
-                bottom: 150,
-              ),
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(56),
-              ),
-              content: Column(
-                children: <Widget>[
-                  Text('hello'),
-                  Container(
-                    margin: EdgeInsets.only(top: 10),
-                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(45),
-                      color: AppColors.black.withOpacity(0.11),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintStyle: TextStyle(
-                          color: AppColors.black,
-                          fontSize: 16,
-                        ),
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Icon(Icons.add),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
+            return CreateGroup();
           },
         );
     return Scaffold(
