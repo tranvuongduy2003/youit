@@ -13,8 +13,12 @@ class AppColors {
   static const lineColor = Color(0xFFE0E0E0);
   static const lightperiwinkle = Color(0xFFC7CEE3);
   static const redPigment = Color(0xFFF12424);
-
+  static const lightBlue = Color(0x92A8F6);
+  static const blueText = Color(0x6880FD);
+  static const blueDarkText = Color(0x051C40);
+  static const grey = Color(0xE6E6E6);
   static const black = Color(0x00000000);
+  static const textBlack = Color(0x404040);
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
 }

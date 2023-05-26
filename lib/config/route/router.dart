@@ -9,6 +9,7 @@ import 'package:you_it/screens/profile/edit_info_page.dart';
 import 'package:you_it/screens/profile/edit_link_page.dart';
 import 'package:you_it/screens/profile/edit_profile_page.dart';
 import 'package:you_it/screens/profile/profile_page.dart';
+import 'package:you_it/screens/group/group_page.dart';
 
 import '../../screens/home/home_page.dart';
 
@@ -17,6 +18,10 @@ import './routes.dart';
 class Router {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.groupPage:
+        {
+          return MaterialPageRoute(builder: (_) => const GroupPage());
+        }
       case Routes.welcomePage:
         {
           return MaterialPageRoute(builder: (_) => const WelcomePage());
