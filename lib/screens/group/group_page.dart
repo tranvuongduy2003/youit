@@ -1,28 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:you_it/widgets/stateful/createGroup.dart';
 import 'package:you_it/widgets/stateful/groupListButton.dart';
+import 'package:you_it/widgets/stateless/groupCard.dart';
+import 'package:you_it/widgets/stateless/groupForm.dart';
 
-class GroupPage extends StatelessWidget {
+class GroupPage extends StatefulWidget {
   const GroupPage({Key? key}) : super(key: key);
 
-  set result(String result) {}
-  createGroup() {}
+  @override
+  State<GroupPage> createState() => _GroupPageState();
+}
 
+class _GroupPageState extends State<GroupPage> {
+  List groupList = [
+    ['Nhom 1'],
+    ['UITTogether'],
+  ];
+
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Future createGroup() => showDialog(
+    void createNewGroup() {
+      setState(() {
+        groupList.add([_controller.text]);
+      });
+      Navigator.of(context).pop();
+    }
+
+    void createGroup() => showDialog(
           context: context,
           builder: (BuildContext context) {
-            return CreateGroup();
+            return GroupForm(
+              controller: _controller,
+              onCreate: createNewGroup,
+              onCancel: () => Navigator.of(context).pop(),
+            );
           },
         );
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(color: AppColors.lightGreen),
+          decoration: BoxDecoration(color: AppColors.white),
           child: Column(
             children: <Widget>[
               Container(
@@ -85,6 +104,17 @@ class GroupPage extends StatelessWidget {
                 ),
               ),
               GroupListButton(),
+              Container(
+                height: 2000,
+                color: AppColors.white,
+                margin: EdgeInsets.only(top: 10),
+                child: ListView.builder(
+                  itemCount: groupList.length,
+                  itemBuilder: (context, index) {
+                    return GroupCard(groupName: groupList[index]);
+                  },
+                ),
+              ),
             ],
           ),
         ),

@@ -22,4 +22,5 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
   static const yellow = Color(0xFCFF7B);
+  static const groupBlack = Color(0x070C1E);
 }
