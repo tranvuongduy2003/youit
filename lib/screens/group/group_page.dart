@@ -14,8 +14,8 @@ class GroupPage extends StatefulWidget {
 
 class _GroupPageState extends State<GroupPage> {
   List groupList = [
-    ['Nhom 1'],
-    ['UITTogether'],
+    ['Nhom 1', false],
+    ['UITTogether', false],
   ];
 
   final _controller = TextEditingController();
@@ -23,7 +23,8 @@ class _GroupPageState extends State<GroupPage> {
   Widget build(BuildContext context) {
     void createNewGroup() {
       setState(() {
-        groupList.add([_controller.text]);
+        groupList.add([_controller.text, false]);
+        _controller.clear();
       });
       Navigator.of(context).pop();
     }
@@ -38,6 +39,13 @@ class _GroupPageState extends State<GroupPage> {
             );
           },
         );
+
+    void entryGroup(bool value, int index) {
+      setState(() {
+        groupList[index][1] = !groupList[index][1];
+      });
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -111,7 +119,11 @@ class _GroupPageState extends State<GroupPage> {
                 child: ListView.builder(
                   itemCount: groupList.length,
                   itemBuilder: (context, index) {
-                    return GroupCard(groupName: groupList[index]);
+                    return GroupCard(
+                      groupName: groupList[index][0],
+                      isJoinGroup: groupList[index][1],
+                      onChanged: (value) => entryGroup,
+                    );
                   },
                 ),
               ),

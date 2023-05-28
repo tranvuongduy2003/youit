@@ -3,13 +3,22 @@ import 'package:you_it/config/themes/app_colors.dart';
 
 class GroupCard extends StatelessWidget {
   final String groupName;
-  const GroupCard({
+  late final bool isJoinGroup;
+  Function(bool?)? onChanged;
+
+  GroupCard({
     super.key,
     required this.groupName,
+    required this.isJoinGroup,
+    required this.onChanged,
   });
 
   @override
   Widget build(BuildContext context) {
+    // void onChanged() {
+    //   isJoinGroup = !isJoinGroup;
+    // }
+
     return Container(
       margin: EdgeInsets.only(
         top: 15,
@@ -63,7 +72,17 @@ class GroupCard extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(),
+          Container(
+            //margin: EdgeInsets.only(right:),
+            child: ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    isJoinGroup ? AppColors.redPigment : AppColors.lightBlue),
+              ),
+              onPressed: () {},
+              child: Text('Truy cập'),
+            ),
+          ),
         ],
       ),
     );
