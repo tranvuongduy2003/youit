@@ -16,10 +16,18 @@ class AppColors {
   static const isabelline = Color(0xffEDFAFA);
   static const blue = Color(0xFF6880FD);
 
-  static const black = Color(0xFF000000);
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
   static const pinkRed = Color(0xFFFF9AA2);
   static const startDust = Color(0xFF979C9E);
   static const jordyBlue = Color(0xFF92A8F6);
+  static const lightBlue = Color(0xFF92A8F6);
+  static const blueText = Color(0xFF6880FD);
+  static const blueDarkText = Color(0xFF051C40);
+  static const grey = Color(0xFFE6E6E6);
+  static const black = Color(0x00000000);
+  static const textBlack = Color(0xFF404040);
+
+  static const yellow = Color(0xFFFCFF7B);
+  static const groupBlack = Color(0xFF070C1E);
 }
