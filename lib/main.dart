@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: BottomNavBarPage(),
-      // initialRoute: Routes.bottomNavBarPage,
+      initialRoute: Routes.bottomNavBarPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

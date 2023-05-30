@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -13,8 +14,8 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  String _email = '';
-  String _password = '';
+  String _email = 'hoanganh2@gmail.com';
+  String _password = '123456';
 
   void _handleSignUp() async {
     try {
@@ -22,7 +23,11 @@ class _SignUpPageState extends State<SignUpPage> {
         email: _email,
         password: _password,
       );
-      print(credential);
+      print(credential.user);
+      if (credential != null) {
+        await DatabaseService(uid: credential.user!.uid).updateUserData(_email);
+        print('hi');
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
