@@ -85,7 +85,7 @@ class _GroupPageState extends State<GroupPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    Container(
                       height: 45,
                       width: 45,
                       child: ElevatedButton(
@@ -102,8 +102,8 @@ class _GroupPageState extends State<GroupPage> {
                           ),
                         ),
                         child: Icon(
-                          Icons.favorite,
-                          color: Colors.pink,
+                          Icons.add,
+                          color: Colors.black,
                           size: 16,
                         ),
                       ),
@@ -115,7 +115,6 @@ class _GroupPageState extends State<GroupPage> {
               Container(
                 height: 2000,
                 color: AppColors.white,
-                margin: EdgeInsets.only(top: 10),
                 child: ListView.builder(
                   itemCount: groupList.length,
                   itemBuilder: (context, index) {

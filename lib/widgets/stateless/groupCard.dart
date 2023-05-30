@@ -81,14 +81,22 @@ class GroupCard extends StatelessWidget {
             ),
           ),
           Container(
+            width: 100,
+            height: 36,
             //margin: EdgeInsets.only(right:),
             child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    _isJoinGroup ? AppColors.redPigment : AppColors.lightBlue),
-              ),
               onPressed: () => onChanged(),
               child: Text('Truy cập'),
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                  AppColors.lightBlue.withOpacity(1),
+                ),
+                shape: MaterialStateProperty.all(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(37),
+                  ),
+                ),
+              ),
             ),
           ),
         ],
