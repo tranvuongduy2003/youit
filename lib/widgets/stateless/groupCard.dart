@@ -52,13 +52,17 @@ class GroupCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  child: Text(
-                    groupName,
-                    style: TextStyle(
-                      color: AppColors.groupBlack.withOpacity(1),
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
+                Flexible(
+                  child: Container(
+                    width: 150,
+                    child: Text(
+                      groupName,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        color: AppColors.groupBlack.withOpacity(1),
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ),
