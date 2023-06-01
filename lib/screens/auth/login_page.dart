@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(bottom: 100), //top: 100, left 50
+                    margin: EdgeInsets.only(top: 80, bottom: 50),
                     child: Text(
                       'CHÀO MỪNG BẠN \nĐẾN VỚI YOUIT',
                       textAlign: TextAlign.center,
