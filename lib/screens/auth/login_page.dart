@@ -1,10 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/widgets/stateless/input.dart';
-import 'package:you_it/widgets/stateless/signButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import 'package:you_it/widgets/stateless/sign_button.dart';
+import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/route/routes.dart';
+import '../../widgets/stateless/input.dart';
 
 final _firebase = FirebaseAuth.instance;
 
@@ -53,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           Center(
             child: SingleChildScrollView(
               child: Column(
+                ///  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Container(
                     margin: EdgeInsets.only(top: 80, bottom: 50),

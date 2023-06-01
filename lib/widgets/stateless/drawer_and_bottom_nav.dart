@@ -17,6 +17,7 @@ class DrawerAndBottomNav extends StatelessWidget {
     required this.closeDrawer,
     required this.childScreen,
     required this.keyDrawer,
+    required this.isShowAppBar,
   });
   final GlobalKey<SliderDrawerState> keyDrawer;
 
@@ -25,39 +26,42 @@ class DrawerAndBottomNav extends StatelessWidget {
   final Function openDrawer;
   final Function closeDrawer;
   final Widget childScreen;
+  final bool isShowAppBar;
 
   @override
   Widget build(BuildContext context) {
     return SliderDrawer(
       isDraggable: false,
-      appBar: SliderAppBar(
-        appBarHeight: 80,
-        drawerIcon: IconButton(
-          padding: EdgeInsets.only(left: 15, top: 10),
-          icon: isShowDrawer
-              ? Container()
-              : Icon(
-                  Icons.menu,
-                  size: 30,
-                ),
-          onPressed: () {
-            // openDrawer();
+      appBar: isShowAppBar
+          ? SliderAppBar(
+              appBarHeight: 80,
+              drawerIcon: IconButton(
+                padding: EdgeInsets.only(left: 15, top: 10),
+                icon: isShowDrawer
+                    ? Container()
+                    : Icon(
+                        Icons.menu,
+                        size: 30,
+                      ),
+                onPressed: () {
+                  // openDrawer();
 
-            if (!keyDrawer.currentState!.isDrawerOpen) {
-              keyDrawer.currentState!.openSlider();
-              openDrawer();
-            }
-          },
-        ),
-        isTitleCenter: false,
-        title: Padding(
-          padding: const EdgeInsets.only(left: 15, top: 10),
-          child: Text(
-            groupName,
-            style: AppTextStyles.appBarText,
-          ),
-        ),
-      ),
+                  if (!keyDrawer.currentState!.isDrawerOpen) {
+                    keyDrawer.currentState!.openSlider();
+                    openDrawer();
+                  }
+                },
+              ),
+              isTitleCenter: false,
+              title: Padding(
+                padding: const EdgeInsets.only(left: 15, top: 10),
+                child: Text(
+                  groupName,
+                  style: AppTextStyles.appBarText,
+                ),
+              ),
+            )
+          : null,
       slider: AppDrawer(groupName),
       child: GestureDetector(
         onTap: () {

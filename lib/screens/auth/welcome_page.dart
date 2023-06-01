@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/route/routes.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/widgets/stateless/signButton.dart';
+import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:you_it/config/route/routes.dart';
 
 class WelcomePage extends StatelessWidget {
