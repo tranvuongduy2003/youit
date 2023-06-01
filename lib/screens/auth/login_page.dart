@@ -8,6 +8,7 @@ class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final input = GlobalKey<FormState>();
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -49,6 +50,7 @@ class LoginPage extends StatelessWidget {
                       textColor: AppColors.fade,
                       textfieldColor: AppColors.white,
                       handleChange: () => {},
+                      inputKey: input,
                     ),
                     SizedBox(
                       height: 20,
@@ -59,6 +61,7 @@ class LoginPage extends StatelessWidget {
                       textColor: AppColors.fade,
                       textfieldColor: AppColors.white,
                       handleChange: () => {},
+                      inputKey: input,
                     ),
                     SizedBox(
                       height: 20,
