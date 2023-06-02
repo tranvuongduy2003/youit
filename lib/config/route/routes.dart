@@ -22,4 +22,5 @@ class Routes {
   static const String uploadFilePage = 'UploadFilePage';
   static const String generalPage = 'GeneralPage';
   static const String bottomNavBarPage = 'BottomNavBarPage';
+  static const String fillInfoPage = 'FillInfoPage';
 }

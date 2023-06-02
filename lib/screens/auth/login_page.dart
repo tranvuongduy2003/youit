@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/route/routes.dart';
+import '../../widgets/stateful/input_password.dart';
 import '../../widgets/stateless/input.dart';
 
 final _firebase = FirebaseAuth.instance;
@@ -17,6 +18,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formField = GlobalKey<FormState>();
   String _email = '';
   String _password = '';
 
@@ -27,9 +29,11 @@ class _LoginPageState extends State<LoginPage> {
       Navigator.of(context).pushNamed(Routes.homePage);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No user found for that email.')));
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Wrong password provided for that user.')));
       }
     }
   }
@@ -63,58 +67,65 @@ class _LoginPageState extends State<LoginPage> {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,
-                        fontWeight: FontWeight.w800,
-                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Montserrat-SemiBold',
                         color: Colors.white,
                         decoration: TextDecoration.none,
                       ),
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 50),
-                    child: Column(
-                      children: <Widget>[
-                        Input(
-                          label: 'Mail đăng nhập',
-                          hintText: 'Nhập email đăng nhập',
-                          textColor: AppColors.fade,
-                          textfieldColor: AppColors.white,
-                          handleChange: (value) => setState(() {
-                            _email = value;
-                          }),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Input(
-                          label: 'Mật khẩu',
-                          hintText: 'Nhập mật khẩu',
-                          textColor: AppColors.fade,
-                          textfieldColor: AppColors.white,
-                          handleChange: (value) => setState(() {
-                            _password = value;
-                          }),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          padding: EdgeInsets.only(right: 15),
-                          child: RichText(
-                            textAlign: TextAlign.right,
-                            text: TextSpan(
-                              text: 'Quên mật khẩu',
-                              style: TextStyle(
-                                color: AppColors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                              recognizer: TapGestureRecognizer()..onTap = () {},
-                            ),
+                  Form(
+                    key: _formField,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: Column(
+                        children: <Widget>[
+                          Input(
+                            exception: r'\S+@\S+\.\S+',
+                            label: 'Mail đăng nhập',
+                            hintText: 'Nhập email đăng nhập',
+                            textColor: AppColors.fade,
+                            textfieldColor: AppColors.white,
+                            handleChange: (value) => setState(() {
+                              _email = value;
+                            }),
                           ),
-                        )
-                      ],
+                          SizedBox(
+                            height: 20,
+                          ),
+                          InputPassword(
+                            exception:
+                                r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$',
+                            label: 'Mật khẩu',
+                            hintText: 'Nhập mật khẩu',
+                            textColor: AppColors.fade,
+                            textfieldColor: AppColors.white,
+                            handleChange: (value) => setState(() {
+                              _password = value;
+                            }),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.only(right: 15),
+                            child: RichText(
+                              textAlign: TextAlign.right,
+                              text: TextSpan(
+                                text: 'Quên mật khẩu',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {},
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
                   Container(
@@ -138,7 +149,13 @@ class _LoginPageState extends State<LoginPage> {
                           buttonText: 'Đăng nhập',
                           textColor: AppColors.primaryColor,
                           backgroundColor: AppColors.white,
-                          handleOnPress: () => _handleLogin(context),
+                          handleOnPress: () {
+                            if (_formField.currentState!.validate()) {
+                              return _handleLogin(context);
+                            } else {
+                              print('error');
+                            }
+                          },
                         ),
                       ],
                     ),
