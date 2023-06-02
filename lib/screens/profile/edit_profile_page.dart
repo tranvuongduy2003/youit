@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:you_it/config/route/routes.dart';
+import 'package:you_it/widgets/stateless/header_bar.dart';
 
 import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
@@ -113,29 +114,14 @@ class EditProfilePage extends StatelessWidget {
     const description =
         'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
 
-    final appBarTheme = AppBarTheme.of(context);
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: appBarTheme.centerTitle,
-        elevation: appBarTheme.elevation,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: Colors.black,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
+      appBar: HeaderBar(
         title: Text(
           'Thông tin cá nhân',
-          style: appBarTheme.titleTextStyle,
+          style: AppTextStyles.appBarText,
         ),
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(1.0),
-          child: Container(
-            color: AppColors.lineColor,
-            height: 1.0,
-          ),
-        ),
-        backgroundColor: appBarTheme.backgroundColor,
+        handler: () => Navigator.of(context).pop(),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -204,7 +190,7 @@ class EditProfilePage extends StatelessWidget {
                 description,
                 style: AppTextStyles.body3,
                 textAlign: TextAlign.justify,
-              )
+              ),
             ],
           ),
         ),

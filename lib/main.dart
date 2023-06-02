@@ -1,12 +1,20 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+import 'firebase_options.dart';
 
-import './config/route/routes.dart';
+import 'package:flutter/material.dart';
+import 'package:you_it/screens/home/home_page.dart';
+
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
-import 'config/themes/app_text_styles.dart';
+import 'config/route/routes.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,18 +23,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
-        appBarTheme: const AppBarTheme(
-          elevation: 0,
+        appBarTheme: AppBarTheme(
           backgroundColor: AppColors.white,
-          titleTextStyle: AppTextStyles.sectionTitle,
-          iconTheme: IconThemeData(color: AppColors.black),
+          elevation: 0,
           centerTitle: true,
-          toolbarTextStyle: AppTextStyles.appbarButtonTitle,
         ),
       ),
-      initialRoute: Routes.groupPage,
+      home: BottomNavBarPage(),
+      // initialRoute: Routes.bottomNavBarPage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }
