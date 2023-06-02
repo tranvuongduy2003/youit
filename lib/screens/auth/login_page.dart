@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final input = GlobalKey<FormState>();
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -82,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           handleChange: (value) => setState(() {
                             _email = value;
                           }),
+                          inputKey: input,
                         ),
                         SizedBox(
                           height: 20,
@@ -94,6 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                           handleChange: (value) => setState(() {
                             _password = value;
                           }),
+                          inputKey: input,
                         ),
                         SizedBox(
                           height: 20,

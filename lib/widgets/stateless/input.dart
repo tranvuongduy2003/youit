@@ -7,6 +7,7 @@ class Input extends StatelessWidget {
   final Color textColor;
   final Color textfieldColor;
   final Function handleChange;
+  final inputKey = GlobalKey<FormState>();
 
   Input({
     required this.label,
@@ -14,11 +15,13 @@ class Input extends StatelessWidget {
     required this.textColor,
     required this.textfieldColor,
     required this.handleChange,
+    required GlobalKey<FormState> inputKey,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: inputKey,
       child: Column(
         children: <Widget>[
           if (label != null)
@@ -43,8 +46,9 @@ class Input extends StatelessWidget {
               borderRadius: BorderRadius.circular(45),
               color: textfieldColor,
             ),
-            child: TextField(
+            child: TextFormField(
               onChanged: (val) => handleChange(val),
+              obscureText: (hintText == 'Nhập mật khẩu') ? true : false,
               decoration: InputDecoration(
                 hintText: hintText,
                 hintStyle: TextStyle(
@@ -53,6 +57,11 @@ class Input extends StatelessWidget {
                 ),
                 border: InputBorder.none,
               ),
+              validator: (String? val) {
+                return (val == null || val.isEmpty)
+                    ? 'Không được bỏ trống'
+                    : null;
+              },
             ),
           ),
         ],
