@@ -43,22 +43,22 @@ class WelcomePage extends StatelessWidget {
               child: Column(
                 children: <Widget>[
                   SignButton(
-                    buttonText: 'Đăng kí',
+                    buttonText: 'Đăng nhập',
                     textColor: AppColors.white,
                     backgroundColor: AppColors.primaryColor,
                     handleOnPress: () {
-                      Navigator.of(context).pushNamed(Routes.signUpPage);
+                      Navigator.of(context).pushNamed(Routes.logInPage);
                     },
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   SignButton(
-                    buttonText: 'Đăng nhập',
+                    buttonText: 'Đăng kí',
                     textColor: AppColors.primaryColor,
                     backgroundColor: AppColors.white,
                     handleOnPress: () {
-                      Navigator.of(context).pushNamed(Routes.logInPage);
+                      Navigator.of(context).pushNamed(Routes.signUpPage);
                     },
                   ),
                 ],

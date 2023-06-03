@@ -20,7 +20,9 @@ class Routes {
   static const String activityPage = 'ActivityPage';
   static const String postingPage = 'PostingPage';
   static const String uploadFilePage = 'UploadFilePage';
-  static const String generalPage = 'GeneralPage';
   static const String bottomNavBarPage = 'BottomNavBarPage';
+  static const String groupPage = 'GroupPage';
+
   static const String fillInfoPage = 'FillInfoPage';
+  static const String generalPage = 'GeneralPage';
 }

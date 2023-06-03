@@ -41,10 +41,11 @@ class Input extends StatelessWidget {
           TextFormField(
             onChanged: (val) => handleChange(val),
             validator: (value) {
-              if (value!.isEmpty || !RegExp(exception).hasMatch(value)) {
-                return "*Error lorem ipsum";
-              } else {
-                return null;
+              if (value!.isEmpty) {
+                return "Vui lòng nhập đầy đủ";
+              }
+              if (!RegExp(exception).hasMatch(value)) {
+                return "Sai cú pháp";
               }
             },
             decoration: InputDecoration(

@@ -40,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final input = GlobalKey<FormState>();
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -135,26 +136,26 @@ class _LoginPageState extends State<LoginPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         SignButton(
-                          buttonText: 'Đăng kí',
+                          buttonText: 'Đăng nhập',
                           textColor: AppColors.white,
                           backgroundColor: AppColors.primaryColor,
-                          handleOnPress: () {
-                            Navigator.of(context).pushNamed(Routes.signUpPage);
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        SignButton(
-                          buttonText: 'Đăng nhập',
-                          textColor: AppColors.primaryColor,
-                          backgroundColor: AppColors.white,
                           handleOnPress: () {
                             if (_formField.currentState!.validate()) {
                               return _handleLogin(context);
                             } else {
                               print('error');
                             }
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SignButton(
+                          buttonText: 'Đăng kí',
+                          textColor: AppColors.primaryColor,
+                          backgroundColor: AppColors.white,
+                          handleOnPress: () {
+                            Navigator.of(context).pushNamed(Routes.signUpPage);
                           },
                         ),
                       ],
