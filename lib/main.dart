@@ -1,12 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 import 'package:flutter/material.dart';
-import 'package:you_it/screens/group/group_chat_page.dart';
+import 'package:you_it/screens/home/home_page.dart';
 
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
 import 'config/route/routes.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -24,8 +31,8 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      home: GroupChatPage(),
-      initialRoute: Routes.generalPage,
+      home: HomePage(),
+      initialRoute: Routes.welcomePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

@@ -1,110 +1,171 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/widgets/stateless/input.dart';
-import 'package:you_it/widgets/stateless/signButton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginPage extends StatelessWidget {
+import 'package:you_it/widgets/stateless/sign_button.dart';
+import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/config/route/routes.dart';
+import '../../widgets/stateful/input_password.dart';
+import '../../widgets/stateless/input.dart';
+
+final _firebase = FirebaseAuth.instance;
+
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final _formField = GlobalKey<FormState>();
+  String _email = '';
+  String _password = '';
+
+  void _handleLogin(context) async {
+    try {
+      final credential = await _firebase.signInWithEmailAndPassword(
+          email: _email, password: _password);
+      Navigator.of(context).pushNamed(Routes.homePage);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('No user found for that email.')));
+      } else if (e.code == 'wrong-password') {
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Wrong password provided for that user.')));
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final input = GlobalKey<FormState>();
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppColors.primaryColor,
-              AppColors.secondaryColor,
-            ],
-          ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(top: 100), //top: 100, left 50
-              child: Text(
-                'CHÀO MỪNG BẠN \nĐẾN VỚI YOUIT',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.w800,
-                  fontFamily: 'Montserrat',
-                  color: Colors.white,
-                  decoration: TextDecoration.none,
-                ),
+      body: Stack(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppColors.primaryColor,
+                  AppColors.secondaryColor,
+                ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 50),
+          ),
+          Center(
+            child: SingleChildScrollView(
               child: Column(
+                ///  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Input(
-                    label: 'Mail đăng nhập',
-                    hintText: 'xxxxxxxx@gm.uit.edu.vn',
-                    textColor: AppColors.fade,
-                    textfieldColor: AppColors.white,
-                    handleChange: () => {},
+                  Container(
+                    margin: EdgeInsets.only(top: 80, bottom: 50),
+                    child: Text(
+                      'CHÀO MỪNG BẠN \nĐẾN VỚI YOUIT',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: 'Montserrat-SemiBold',
+                        color: Colors.white,
+                        decoration: TextDecoration.none,
+                      ),
+                    ),
                   ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Input(
-                    label: 'Mật khẩu',
-                    hintText: 'Nhập mật khẩu',
-                    textColor: AppColors.fade,
-                    textfieldColor: AppColors.white,
-                    handleChange: () => {},
-                  ),
-                  SizedBox(
-                    height: 20,
+                  Form(
+                    key: _formField,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 50),
+                      child: Column(
+                        children: <Widget>[
+                          Input(
+                            exception: r'\S+@\S+\.\S+',
+                            label: 'Mail đăng nhập',
+                            hintText: 'Nhập email đăng nhập',
+                            textColor: AppColors.fade,
+                            textfieldColor: AppColors.white,
+                            handleChange: (value) => setState(() {
+                              _email = value;
+                            }),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          InputPassword(
+                            exception:
+                                r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$',
+                            label: 'Mật khẩu',
+                            hintText: 'Nhập mật khẩu',
+                            textColor: AppColors.fade,
+                            textfieldColor: AppColors.white,
+                            handleChange: (value) => setState(() {
+                              _password = value;
+                            }),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            width: double.infinity,
+                            padding: EdgeInsets.only(right: 15),
+                            child: RichText(
+                              textAlign: TextAlign.right,
+                              text: TextSpan(
+                                text: 'Quên mật khẩu',
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = () {},
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                   Container(
                     width: double.infinity,
-                    padding: EdgeInsets.only(right: 15),
-                    child: RichText(
-                      textAlign: TextAlign.right,
-                      text: TextSpan(
-                        text: 'Quên mật khẩu',
-                        style: TextStyle(
-                          color: AppColors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
+                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        SignButton(
+                          buttonText: 'Đăng nhập',
+                          textColor: AppColors.white,
+                          backgroundColor: AppColors.primaryColor,
+                          handleOnPress: () {
+                            if (_formField.currentState!.validate()) {
+                              return _handleLogin(context);
+                            } else {
+                              print('error');
+                            }
+                          },
                         ),
-                        recognizer: TapGestureRecognizer()..onTap = () {},
-                      ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        SignButton(
+                          buttonText: 'Đăng kí',
+                          textColor: AppColors.primaryColor,
+                          backgroundColor: AppColors.white,
+                          handleOnPress: () {
+                            Navigator.of(context).pushNamed(Routes.signUpPage);
+                          },
+                        ),
+                      ],
                     ),
-                  )
-                ],
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  SignButton(
-                    buttonText: 'Đăng kí',
-                    textColor: AppColors.white,
-                    backgroundColor: AppColors.primaryColor,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  SignButton(
-                    buttonText: 'Đăng nhập',
-                    textColor: AppColors.primaryColor,
-                    backgroundColor: AppColors.white,
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

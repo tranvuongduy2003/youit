@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
 import 'package:you_it/widgets/stateless/post_form.dart';

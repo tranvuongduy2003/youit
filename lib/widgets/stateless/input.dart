@@ -7,14 +7,15 @@ class Input extends StatelessWidget {
   final Color textColor;
   final Color textfieldColor;
   final Function handleChange;
+  final String exception;
 
-  Input({
-    required this.label,
-    required this.hintText,
-    required this.textColor,
-    required this.textfieldColor,
-    required this.handleChange,
-  });
+  Input(
+      {required this.label,
+      required this.hintText,
+      required this.textColor,
+      required this.textfieldColor,
+      required this.handleChange,
+      required this.exception});
 
   @override
   Widget build(BuildContext context) {
@@ -37,23 +38,37 @@ class Input extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
             ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(45),
-              color: textfieldColor,
-            ),
-            child: TextField(
-              onChanged: (val) => handleChange(val),
-              decoration: InputDecoration(
+          TextFormField(
+            onChanged: (val) => handleChange(val),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Vui lòng nhập đầy đủ";
+              }
+              if (!RegExp(exception).hasMatch(value)) {
+                return "Sai cú pháp";
+              }
+            },
+            decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                filled: true,
+                fillColor: Colors.white,
                 hintText: hintText,
                 hintStyle: TextStyle(
                   color: textColor,
                   fontSize: 16,
                 ),
-                border: InputBorder.none,
-              ),
-            ),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(width: 0, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(45)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 0, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(45),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 0, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(45),
+                )),
           ),
         ],
       ),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/auth/fill_info_page.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
 import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/activity_page.dart';
-import 'package:you_it/screens/group/group_chat_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
@@ -16,6 +17,7 @@ import 'package:you_it/screens/profile/edit_info_page.dart';
 import 'package:you_it/screens/profile/edit_link_page.dart';
 import 'package:you_it/screens/profile/edit_profile_page.dart';
 import 'package:you_it/screens/profile/profile_page.dart';
+import 'package:you_it/screens/group/group_page.dart';
 
 import '../../screens/home/home_page.dart';
 
@@ -24,6 +26,10 @@ import './routes.dart';
 class Router {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.groupPage:
+        {
+          return MaterialPageRoute(builder: (_) => const GroupPage());
+        }
       case Routes.welcomePage:
         {
           return MaterialPageRoute(builder: (_) => const WelcomePage());
@@ -73,10 +79,7 @@ class Router {
           return MaterialPageRoute(
               builder: (_) => const GroupInformationPage());
         }
-      case Routes.groupChatPage:
-        {
-          return MaterialPageRoute(builder: (_) => const GroupChatPage());
-        }
+
       case Routes.memberListPage:
         {
           return MaterialPageRoute(builder: (_) => const MemberListPage());
@@ -97,9 +100,17 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const GeneralPage());
         }
+      case Routes.bottomNavBarPage:
+        {
+          return MaterialPageRoute(builder: (_) => const BottomNavBarPage());
+        }
+      case Routes.fillInfoPage:
+        {
+          return MaterialPageRoute(builder: (_) => const FillInfoPage());
+        }
       default:
         {
-          MaterialPageRoute(
+          return MaterialPageRoute(
             builder: (_) => Scaffold(
               body: Center(
                 child: Text('No route defined for ${settings.name}'),
