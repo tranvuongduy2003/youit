@@ -1,5 +1,4 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter/material.dart';
@@ -32,8 +31,8 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      home: BottomNavBarPage(),
-      // initialRoute: Routes.bottomNavBarPage,
+      home: HomePage(),
+      initialRoute: Routes.welcomePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

@@ -11,16 +11,21 @@ class TextCircleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 45, vertical: 10),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      padding: const EdgeInsets.symmetric(horizontal: 45),
+      child: Column(
         children: [
-          Text(
-            txt,
-            style: AppTextStyles.modalTitle,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                txt,
+                style: AppTextStyles.modalTitle,
+              ),
+              btn,
+            ],
           ),
-          btn
+          const Divider(),
         ],
       ),
     );

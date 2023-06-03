@@ -7,21 +7,19 @@ class Input extends StatelessWidget {
   final Color textColor;
   final Color textfieldColor;
   final Function handleChange;
-  final inputKey = GlobalKey<FormState>();
+  final String exception;
 
-  Input({
-    required this.label,
-    required this.hintText,
-    required this.textColor,
-    required this.textfieldColor,
-    required this.handleChange,
-    required GlobalKey<FormState> inputKey,
-  });
+  Input(
+      {required this.label,
+      required this.hintText,
+      required this.textColor,
+      required this.textfieldColor,
+      required this.handleChange,
+      required this.exception});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: inputKey,
       child: Column(
         children: <Widget>[
           if (label != null)
@@ -40,29 +38,37 @@ class Input extends StatelessWidget {
                 textAlign: TextAlign.start,
               ),
             ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(45),
-              color: textfieldColor,
-            ),
-            child: TextFormField(
-              onChanged: (val) => handleChange(val),
-              obscureText: (hintText == 'Nhập mật khẩu') ? true : false,
-              decoration: InputDecoration(
+          TextFormField(
+            onChanged: (val) => handleChange(val),
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Vui lòng nhập đầy đủ";
+              }
+              if (!RegExp(exception).hasMatch(value)) {
+                return "Sai cú pháp";
+              }
+            },
+            decoration: InputDecoration(
+                contentPadding:
+                    EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                filled: true,
+                fillColor: Colors.white,
                 hintText: hintText,
                 hintStyle: TextStyle(
                   color: textColor,
                   fontSize: 16,
                 ),
-                border: InputBorder.none,
-              ),
-              validator: (String? val) {
-                return (val == null || val.isEmpty)
-                    ? 'Không được bỏ trống'
-                    : null;
-              },
-            ),
+                border: OutlineInputBorder(
+                    borderSide: const BorderSide(width: 0, color: Colors.grey),
+                    borderRadius: BorderRadius.circular(45)),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 0, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(45),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(width: 0, color: Colors.grey),
+                  borderRadius: BorderRadius.circular(45),
+                )),
           ),
         ],
       ),
