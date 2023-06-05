@@ -40,7 +40,7 @@ class AppTextStyles {
   static const mont20 = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
-    color: AppColors.black,
+    color: Colors.black,
     fontSize: 20,
   );
 
@@ -54,7 +54,7 @@ class AppTextStyles {
   static const appBarText = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,
-    color: AppColors.black,
+    color: AppColors.inputValue,
     fontSize: 18,
   );
 

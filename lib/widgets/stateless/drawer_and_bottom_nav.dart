@@ -4,11 +4,6 @@ import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 import 'app_drawer.dart';
 import '../../config/themes/app_text_styles.dart';
 
-// class SliderDrawerStateKey {
-//   static final GlobalKey<SliderDrawerState> keyDrawer =
-//       GlobalKey<SliderDrawerState>();
-// }
-
 class DrawerAndBottomNav extends StatelessWidget {
   DrawerAndBottomNav({
     required this.groupName,
@@ -18,6 +13,7 @@ class DrawerAndBottomNav extends StatelessWidget {
     required this.childScreen,
     required this.keyDrawer,
     required this.isShowAppBar,
+    required this.groupId,
   });
   final GlobalKey<SliderDrawerState> keyDrawer;
 
@@ -27,6 +23,7 @@ class DrawerAndBottomNav extends StatelessWidget {
   final Function closeDrawer;
   final Widget childScreen;
   final bool isShowAppBar;
+  final String groupId;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +59,9 @@ class DrawerAndBottomNav extends StatelessWidget {
               ),
             )
           : null,
-      slider: AppDrawer(groupName),
+      slider: AppDrawer(groupName, groupId),
       child: GestureDetector(
         onTap: () {
-          // closeDrawer();
-
           if (keyDrawer.currentState!.isDrawerOpen) {
             keyDrawer.currentState!.closeSlider();
             closeDrawer();

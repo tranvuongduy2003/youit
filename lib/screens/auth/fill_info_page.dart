@@ -37,7 +37,7 @@ class _FillInfoPageState extends State<FillInfoPage> {
         'khoa': _valueChoose,
         'updatedAt': DateTime.now(),
       });
-      Navigator.of(context).pushNamed(Routes.homePage);
+      Navigator.of(context).pushNamed(Routes.bottomNavBarWithGroupListPage);
     } catch (e) {
       print(e);
     }
