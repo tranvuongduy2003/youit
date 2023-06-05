@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
-import '../../widgets/stateless/input.dart';
-import '../../widgets/stateless/sign_button.dart';
+import '../../config/route/routes.dart';
+
+final _firebaseAuth = FirebaseAuth.instance;
+final _firebaseFireStore = FirebaseFirestore.instance;
 
 class FillInfoPage extends StatefulWidget {
   const FillInfoPage({super.key});
@@ -17,14 +18,30 @@ class FillInfoPage extends StatefulWidget {
 }
 
 class _FillInfoPageState extends State<FillInfoPage> {
-  DateTime dateTime = DateTime.now();
-  String fullName = "";
-  String? valueChoose;
+  DateTime _dateTime = DateTime.now();
+  String? _valueChoose;
   List listItem = [
-    'Công nghệ phần mềm',
-    'Khoa học máy tính',
-    'Hệ thống thông tin'
+    'Công nghệ Phần mềm',
+    'Hệ thống Thông tin',
+    'Kỹ thuật Máy tính',
+    'MMT & Truyền thông',
+    'Khoa học Máy tính',
+    'Khoa học và Kỹ thuật Thông tin'
   ];
+
+  void _handleUpdateInfo(context) async {
+    try {
+      CollectionReference users = _firebaseFireStore.collection('users');
+      await users.doc(_firebaseAuth.currentUser?.uid).update({
+        'dob': _dateTime,
+        'khoa': _valueChoose,
+        'updatedAt': DateTime.now(),
+      });
+      Navigator.of(context).pushNamed(Routes.bottomNavBarWithGroupListPage);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void openCupertino() => showCupertinoModalPopup(
       context: context,
@@ -41,15 +58,16 @@ class _FillInfoPageState extends State<FillInfoPage> {
                   },
                   child: Text('Done')),
               Expanded(
-                  child: CupertinoDatePicker(
-                onDateTimeChanged: (date) {
-                  setState(() {
-                    dateTime = date;
-                  });
-                },
-                mode: CupertinoDatePickerMode.date,
-                initialDateTime: dateTime,
-              ))
+                child: CupertinoDatePicker(
+                  onDateTimeChanged: (date) {
+                    setState(() {
+                      _dateTime = date;
+                    });
+                  },
+                  mode: CupertinoDatePickerMode.date,
+                  initialDateTime: _dateTime,
+                ),
+              )
             ],
           ),
         );
@@ -77,23 +95,25 @@ class _FillInfoPageState extends State<FillInfoPage> {
               ),
             ),
           Container(
-              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(45),
-                color: Colors.white,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(DateFormat('dd-MM-yyyy').format(dateTime)),
-                  IconButton(
-                      onPressed: () {
-                        openCupertino();
-                      },
-                      icon: Icon(Icons.date_range_rounded))
-                ],
-              )),
+            padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(45),
+              color: Colors.white,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(DateFormat('dd-MM-yyyy').format(_dateTime)),
+                IconButton(
+                  onPressed: () {
+                    openCupertino();
+                  },
+                  icon: Icon(Icons.date_range_rounded),
+                )
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -129,10 +149,10 @@ class _FillInfoPageState extends State<FillInfoPage> {
             child: DropdownButton(
               isExpanded: true,
               hint: Text('--Chọn--'),
-              value: valueChoose,
+              value: _valueChoose,
               onChanged: (value) => {
                 setState(() {
-                  valueChoose = value as String?;
+                  _valueChoose = value as String?;
                 })
               },
               items: listItem.map((valueItem) {
@@ -171,7 +191,7 @@ class _FillInfoPageState extends State<FillInfoPage> {
                   Container(
                     margin: EdgeInsets.only(top: 80, bottom: 50),
                     child: Text(
-                      'Điền thông tin\ncá nhân của bạn',
+                      'Đăng kí thành công!\nĐiền thông tin\ncá nhân của bạn',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 30,
@@ -186,19 +206,6 @@ class _FillInfoPageState extends State<FillInfoPage> {
                     padding: EdgeInsets.symmetric(horizontal: 50),
                     child: Column(
                       children: <Widget>[
-                        Input(
-                          exception: r'^[a-z A-Z]+$',
-                          label: 'Họ và tên',
-                          hintText: 'Nhập họ và tên',
-                          textColor: AppColors.fade,
-                          textfieldColor: AppColors.white,
-                          handleChange: (value) => setState(() {
-                            fullName = value;
-                          }),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
                         buildDatePicker(),
                         SizedBox(
                           height: 20,
@@ -213,17 +220,47 @@ class _FillInfoPageState extends State<FillInfoPage> {
                   Container(
                     width: double.infinity,
                     padding: EdgeInsets.symmetric(horizontal: 50, vertical: 50),
-                    child: Column(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        SizedBox(
-                          height: 20,
+                        ElevatedButton(
+                          child: Text('Bỏ qua'),
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
+                              padding: MaterialStatePropertyAll(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 20)),
+                              elevation: MaterialStatePropertyAll(0),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(AppColors.white),
+                              foregroundColor: MaterialStatePropertyAll(
+                                  AppColors.primaryColor)),
+                          onPressed: () =>
+                              Navigator.of(context).pushNamed(Routes.homePage),
                         ),
-                        SignButton(
-                          buttonText: 'Đăng Ký',
-                          textColor: AppColors.primaryColor,
-                          backgroundColor: AppColors.white,
-                          handleOnPress: () => {},
+                        ElevatedButton(
+                          child: Text('Cập nhật'),
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
+                              padding: MaterialStatePropertyAll(
+                                  EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 20)),
+                              elevation: MaterialStatePropertyAll(0),
+                              foregroundColor:
+                                  MaterialStatePropertyAll(AppColors.white),
+                              backgroundColor: MaterialStatePropertyAll(
+                                  AppColors.primaryColor)),
+                          onPressed: () => _handleUpdateInfo(context),
                         ),
                       ],
                     ),
