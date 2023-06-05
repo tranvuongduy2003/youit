@@ -175,7 +175,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                         vertical: 10, horizontal: 30),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.isabelline,
+                        backgroundColor: AppColors.isabelline,
                         minimumSize: Size(350, 48),
                         shape: RoundedRectangleBorder(
                             borderRadius:
@@ -214,7 +214,7 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                         vertical: 10, horizontal: 30),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: AppColors.isabelline,
+                        backgroundColor: AppColors.isabelline,
                         minimumSize: Size(350, 48),
                         shape: RoundedRectangleBorder(
                             borderRadius:

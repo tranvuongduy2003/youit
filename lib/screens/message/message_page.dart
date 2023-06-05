@@ -46,8 +46,6 @@ class _MessagePageState extends State<MessagePage> {
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 20),
                   child: Input(
-                    exception: "",
-                    label: null,
                     hintText: 'Tìm kiếm',
                     textColor: AppColors.fontColor,
                     textfieldColor: Color(0xFFE6E6E6),
