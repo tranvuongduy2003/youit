@@ -15,7 +15,6 @@ class AppColors {
   static const redPigment = Color(0xFFF12424);
   static const isabelline = Color(0xffEDFAFA);
   static const blue = Color(0xFF6880FD);
-
   static const white = Color(0xFFFFFFFF);
   static const inputValue = Color(0xFF070C1E);
   static const pinkRed = Color(0xFFFF9AA2);
@@ -27,7 +26,6 @@ class AppColors {
   static const grey = Color(0xFFE6E6E6);
   static const black = Color(0x00000000);
   static const textBlack = Color(0xFF404040);
-
   static const yellow = Color(0xFFFCFF7B);
   static const groupBlack = Color(0xFF070C1E);
 }

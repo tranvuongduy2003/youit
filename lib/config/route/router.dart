@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/auth/fill_info_page.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
+import 'package:you_it/screens/group/activity_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
@@ -103,7 +107,10 @@ class Router {
           return MaterialPageRoute(
               builder: (_) => const BottomNavBarWithGroupListPage());
         }
-
+      case Routes.fillInfoPage:
+        {
+          return MaterialPageRoute(builder: (_) => const FillInfoPage());
+        }
       default:
         {
           return MaterialPageRoute(

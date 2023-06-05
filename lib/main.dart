@@ -1,4 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:you_it/screens/home/home_page.dart';
+import 'config/route/routes.dart';
+import 'firebase_options.dart';
 
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/helper/helper_function.dart';
@@ -56,7 +59,8 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
         ),
       ),
-      home: _isUserLogged ? BottomNavBarWithGroupListPage() : LoginPage(),
+      home: HomePage(),
+      initialRoute: Routes.welcomePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

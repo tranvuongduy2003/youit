@@ -30,6 +30,9 @@ class _GeneralPageState extends State<GeneralPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(
+              height: 10,
+            ),
             TextCircleButton(
               btn: CircleButton(
                   isImageButton: false,
