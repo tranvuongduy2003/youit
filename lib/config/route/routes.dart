@@ -24,4 +24,6 @@ class Routes {
   static const String bottomNavBarPage = 'BottomNavBarPage';
 
   static const String groupPage = 'GroupPage';
+  static const String bottomNavBarWithGroupListPage =
+      'BottomNavBarWithGroupListPage';
 }

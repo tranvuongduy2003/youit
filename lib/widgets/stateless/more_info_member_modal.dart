@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../screens/message/message_detail_page.dart';
 import '../../screens/profile/profile_page.dart';
+import '../../service/database_service.dart';
 import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/text_circle_button.dart';
 
 class MoreInfoModal extends StatelessWidget {
-  const MoreInfoModal({super.key, required this.avtURL, required this.name});
+  const MoreInfoModal({
+    super.key,
+    required this.avtURL,
+    required this.name,
+  });
   final String avtURL;
   final String name;
+
   @override
   Widget build(BuildContext context) {
     return Container(

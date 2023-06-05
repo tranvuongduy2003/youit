@@ -1,10 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
+
+import 'package:you_it/screens/auth/login_page.dart';
+import 'package:you_it/helper/helper_function.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
+
 import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
-import 'config/route/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +18,31 @@ void main() async {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool _isUserLogged = false;
+
+  @override
+  void initState() {
+    super.initState();
+    getUserLoggedInStatus();
+  }
+
+  getUserLoggedInStatus() async {
+    await HelperFunctions.getUserLoggedInStatus().then((value) {
+      if (value != null) {
+        setState(() {
+          _isUserLogged = value;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +56,7 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
       ),
-      initialRoute: Routes.groupPage,
+      home: _isUserLogged ? BottomNavBarWithGroupListPage() : LoginPage(),
       onGenerateRoute: router.Router.generateRoute,
     );
   }

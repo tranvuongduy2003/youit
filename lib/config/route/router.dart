@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
@@ -16,8 +17,6 @@ import '../../screens/general/genaral_page.dart';
 import '../../screens/group/activity_page.dart';
 
 import '../../screens/group/posting_page.dart';
-import '../../screens/group/group_information.dart';
-import '../../screens/group/member_list_page.dart';
 import '../../screens/group/upload_file_page.dart';
 
 import '../../screens/home/home_page.dart';
@@ -74,24 +73,15 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const ProfilePage());
         }
-      case Routes.groupInformationPage:
-        {
-          return MaterialPageRoute(
-              builder: (_) => const GroupInformationPage());
-        }
 
-      case Routes.memberListPage:
-        {
-          return MaterialPageRoute(builder: (_) => const MemberListPage());
-        }
-      case Routes.activityPage:
-        {
-          return MaterialPageRoute(builder: (_) => const ActivityPage());
-        }
-      case Routes.postingPage:
-        {
-          return MaterialPageRoute(builder: (_) => const PostingPage());
-        }
+      // case Routes.activityPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const ActivityPage());
+      //   }
+      // case Routes.postingPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const PostingPage());
+      //   }
       case Routes.uploadFilePage:
         {
           return MaterialPageRoute(builder: (_) => const UploadFilePage());
@@ -102,7 +92,16 @@ class Router {
         }
       case Routes.bottomNavBarPage:
         {
-          return MaterialPageRoute(builder: (_) => const BottomNavBarPage());
+          return MaterialPageRoute(
+              builder: (_) => const BottomNavBarPage(
+                    groupId: '',
+                    groupName: '',
+                  ));
+        }
+      case Routes.bottomNavBarWithGroupListPage:
+        {
+          return MaterialPageRoute(
+              builder: (_) => const BottomNavBarWithGroupListPage());
         }
 
       default:

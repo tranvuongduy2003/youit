@@ -14,8 +14,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  String _email = 'hoanganh2@gmail.com';
+  String _email = 'hoanganh4@gmail.com';
   String _password = '123456';
+  String _userName = 'hoanganh4';
 
   void _handleSignUp() async {
     try {
@@ -25,7 +26,8 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       print(credential.user);
       if (credential != null) {
-        await DatabaseService(uid: credential.user!.uid).updateUserData(_email);
+        await DatabaseService(uid: credential.user!.uid)
+            .updateUserData(_email, _userName);
         print('hi');
       }
     } on FirebaseAuthException catch (e) {
