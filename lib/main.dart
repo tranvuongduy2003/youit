@@ -60,7 +60,7 @@ class _MyAppState extends State<MyApp> {
         ),
       ),
       home: HomePage(),
-      initialRoute: Routes.welcomePage,
+      initialRoute: Routes.editProfilePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }

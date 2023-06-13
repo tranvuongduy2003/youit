@@ -1,10 +1,4 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-
 import '../../config/themes/app_colors.dart';
 
 class InputPassword extends StatefulWidget {
@@ -32,6 +26,7 @@ class InputPassword extends StatefulWidget {
 }
 
 class _InputPasswordState extends State<InputPassword> {
+  bool passToggle = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,17 +61,16 @@ class _InputPasswordState extends State<InputPassword> {
                   return 'Mật khẩu nhập lại không chính xác';
                 }
               },
-              obscureText: widget.passToggle,
+              obscureText: passToggle,
               decoration: InputDecoration(
                   suffixIcon: InkWell(
                     onTap: () {
                       setState(() {
-                        widget.passToggle = !widget.passToggle;
+                        passToggle = !passToggle;
                       });
                     },
-                    child: Icon(widget.passToggle
-                        ? Icons.visibility
-                        : Icons.visibility_off),
+                    child: Icon(
+                        passToggle ? Icons.visibility : Icons.visibility_off),
                   ),
                   contentPadding:
                       EdgeInsets.symmetric(horizontal: 25, vertical: 20),
