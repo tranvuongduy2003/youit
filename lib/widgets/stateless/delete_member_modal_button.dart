@@ -1,11 +1,43 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/route/routes.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
+import '../../service/database_service.dart';
 import '../../widgets/stateless/circle_button.dart';
 
-class DeleteMemberModal extends StatelessWidget {
-  const DeleteMemberModal({super.key});
+class DeleteMemberModal extends StatefulWidget {
+  const DeleteMemberModal(
+      {super.key,
+      required this.groupId,
+      required this.groupName,
+      required this.userDeleteId,
+      required this.userDeleteName});
+
+  final String userDeleteId;
+  final String userDeleteName;
+  final String groupId;
+  final String groupName;
+
+  @override
+  State<DeleteMemberModal> createState() => _DeleteMemberModalState();
+}
+
+class _DeleteMemberModalState extends State<DeleteMemberModal> {
+  bool _isLoading = false;
+  Future deleteMember(String userIdDelete, String userNameDelete,
+      String groupId, String groupName) async {
+    setState(() {
+      _isLoading = true;
+    });
+    await DatabaseService(uid: userIdDelete)
+        .outGroup(userNameDelete, groupId, groupName)
+        .then((value) => Navigator.of(context)
+            .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage));
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +74,19 @@ class DeleteMemberModal extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    CircleButton(
-                        imageAsset: 'assets/images/out_group.png',
-                        buttonColor: AppColors.pinkRed,
-                        onPressed: () {},
-                        size: 60),
+                    _isLoading
+                        ? Center(child: CircularProgressIndicator())
+                        : CircleButton(
+                            imageAsset: 'assets/images/out_group.png',
+                            buttonColor: AppColors.pinkRed,
+                            onPressed: () {
+                              deleteMember(
+                                  widget.userDeleteId,
+                                  widget.userDeleteName,
+                                  widget.groupId,
+                                  widget.groupName);
+                            },
+                            size: 60),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 10),
                       child: Text(

@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:you_it/helper/helper_function.dart';
 
+import '../../config/route/routes.dart';
 import '../../screens/bottom_bar/bottom_nav_bar_page.dart';
 import '../../screens/group/activity_page.dart';
 import '../../screens/group/group_chat_page.dart';
@@ -9,8 +12,12 @@ import '../../config/themes/app_colors.dart';
 
 class AppDrawer extends StatefulWidget {
   final String groupName;
+  final String groupId;
 
-  const AppDrawer(this.groupName);
+  const AppDrawer(
+    this.groupName,
+    this.groupId,
+  );
 
   @override
   State<AppDrawer> createState() => _AppDrawerState();
@@ -68,7 +75,12 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNavBarPage(
-                          currentWidget: GroupChatPage(),
+                          groupId: widget.groupId,
+                          groupName: widget.groupName,
+                          currentWidget: GroupChatPage(
+                            groupId: widget.groupId,
+                            groupName: widget.groupName,
+                          ),
                         ),
                       ),
                     );
@@ -84,9 +96,14 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNavBarPage(
-                          currentWidget: ActivityPage(),
+                          groupId: widget.groupId,
+                          groupName: widget.groupName,
+                          currentWidget: ActivityPage(
+                            groupId: widget.groupId,
+                          ),
                         ),
                       ),
+                      //  Routes.bottomNavBarPage,
                     );
                   },
                 ),
@@ -100,6 +117,8 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNavBarPage(
+                          groupId: widget.groupId,
+                          groupName: widget.groupName,
                           currentWidget: UploadFilePage(),
                         ),
                       ),
@@ -116,11 +135,42 @@ class _AppDrawerState extends State<AppDrawer> {
                       context,
                       MaterialPageRoute(
                         builder: (context) => BottomNavBarPage(
-                          currentWidget: GroupInformationPage(),
+                          groupId: widget.groupId,
+                          groupName: widget.groupName,
+                          currentWidget: GroupInformationPage(
+                            groupId: widget.groupId,
+                          ),
                         ),
                       ),
                     );
                   },
+                ),
+                Button(
+                  Container(
+                    child: Image.asset(
+                      'assets/images/users.png',
+                      color: Colors.white,
+                    ),
+                    height: 18,
+                  ),
+                  'Danh sách nhóm',
+                  () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      Routes.bottomNavBarWithGroupListPage,
+                    );
+                  },
+                ),
+                TextButton(
+                  onPressed: () {
+                    FirebaseAuth.instance.signOut();
+                    HelperFunctions.saveUserLoggedInStatus(false);
+                    HelperFunctions.saveUserNameSF('');
+                    HelperFunctions.saveUserEmailSF('');
+                    Navigator.of(context).pushNamedAndRemoveUntil(
+                        Routes.logInPage, (route) => false);
+                  },
+                  child: Text('Log Out'),
                 ),
               ],
             ),

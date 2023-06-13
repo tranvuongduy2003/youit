@@ -1,11 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
+import '../../service/database_service.dart';
+import 'circle_button.dart';
 
-class PostForm extends StatelessWidget {
-  const PostForm({super.key});
+class PostForm extends StatefulWidget {
+  const PostForm(
+      {super.key,
+      required this.groupId,
+      required this.contentController,
+      required this.topicController});
 
+  final String groupId;
+  final TextEditingController topicController;
+  final TextEditingController contentController;
+
+  @override
+  State<PostForm> createState() => _PostFormState();
+}
+
+class _PostFormState extends State<PostForm> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,6 +38,7 @@ class PostForm extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextField(
+            controller: widget.topicController,
             style: AppTextStyles.postingInput,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
@@ -52,6 +69,7 @@ class PostForm extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: TextField(
+            controller: widget.contentController,
             style: AppTextStyles.postingInput,
             decoration: InputDecoration(
                 border: OutlineInputBorder(

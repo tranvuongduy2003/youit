@@ -1,17 +1,24 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
-import '../../screens/group/group_chat_page.dart';
 import '../../screens/home/home_page.dart';
 import '../../screens/message/message_page.dart';
 import '../../screens/profile/profile_page.dart';
 import '../../widgets/stateless/drawer_and_bottom_nav.dart';
 
 class BottomNavBarPage extends StatefulWidget {
-  const BottomNavBarPage({this.currentWidget = const GroupChatPage()});
+  const BottomNavBarPage({
+    this.currentWidget = const GroupPage(),
+    required this.groupId,
+    required this.groupName,
+  });
 
   final Widget currentWidget;
+  final String groupId;
+  final String groupName;
 
   @override
   State<BottomNavBarPage> createState() => _BottomNavBarPageState();
@@ -22,6 +29,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   bool _isShowAppBar = true;
   bool _isShowDrawer = false;
   bool _showDrawerAndBottomNav = false;
+
   final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
   void _openDrawer() {
     setState(() {
@@ -39,33 +47,30 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
 
   @override
   Widget build(BuildContext context) {
-    //  final args =
-    //     ModalRoute.of(context)?.settings.arguments as Map<String, Widget>;
-    //  print(args);
-    //  final wid = args['activity'];
     final List<Widget?> widgetOptions = [
       HomePage(),
       MessagePage(),
       widget.currentWidget,
       ProfilePage(),
       Center(
-        child: Text('afiwjfw'),
+        child: Text('Day la man hinh Setting'),
       ),
     ];
+
     return Scaffold(
       body: DrawerAndBottomNav(
+        groupId: widget.groupId,
+        groupName: widget.groupName,
         openDrawer: _openDrawer,
         closeDrawer: _closeDrawer,
-        groupName: 'Nhóm UIT',
         isShowDrawer: _isShowDrawer,
         keyDrawer: keyDrawer,
         isShowAppBar: _isShowAppBar,
         childScreen: Scaffold(
-          //  extendBody: selectedIndex == 2 ? true : false,
           body: widgetOptions[selectedIndex],
         ),
       ),
-      extendBody: selectedIndex == 2 ? true : false,
+      extendBody: false, //selectedIndex == 2 ? true : false,
       bottomNavigationBar: _showDrawerAndBottomNav
           ? ClipRRect(
               borderRadius: BorderRadius.only(
