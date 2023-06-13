@@ -18,6 +18,8 @@ class _MemberListPageState extends State<MemberListPage> {
   String avtURL =
       'https://media.istockphoto.com/id/1387522045/vi/anh/m%C3%A8o-x%C3%A1m-l%E1%BB%9Bn-v%C3%A0-nghi%C3%AAm-t%C3%BAc.jpg?s=612x612&w=0&k=20&c=xoWOttW9yoWSWk-ju-CwdDeygkyrCVClytGobWE4aZA=';
   String name = 'Nhat Zi';
+  String role = 'monitor';
+  int slMember = 5;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +45,31 @@ class _MemberListPageState extends State<MemberListPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 26,
-                      backgroundImage: NetworkImage(avtURL),
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        name,
-                        style: AppTextStyles.unSeenMessage,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CircleAvatar(
+                          radius: 26,
+                          backgroundImage: NetworkImage(avtURL),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            name,
+                            style: AppTextStyles.unSeenMessage,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        if (role == 'monitor')
+                          Icon(
+                            Icons.star,
+                            color: Colors.blue,
+                          )
+                        else
+                          Container(),
+                      ],
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,7 +120,7 @@ class _MemberListPageState extends State<MemberListPage> {
               ),
             );
           },
-          itemCount: 9,
+          itemCount: slMember,
         ),
       ),
     );

@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:intl/intl.dart';
-
-import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/input.dart';
 import '../../widgets/stateless/sign_button.dart';
