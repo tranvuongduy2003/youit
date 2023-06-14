@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       home: HomePage(),
-      initialRoute: Routes.editProfilePage,
+      initialRoute: Routes.welcomePage,
       onGenerateRoute: router.Router.generateRoute,
     );
   }
