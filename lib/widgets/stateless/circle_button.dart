@@ -12,7 +12,7 @@ class CircleButton extends StatelessWidget {
   });
   final String imageAsset;
   final Color buttonColor;
-  final Function onPressed;
+  final VoidCallback? onPressed;
   final bool isImageButton;
   final Icon icon;
   final double size;
@@ -24,9 +24,7 @@ class CircleButton extends StatelessWidget {
       elevation: 2,
       child: InkWell(
         borderRadius: BorderRadius.circular(50),
-        onTap: () {
-          onPressed();
-        },
+        onTap: onPressed,
         child: Ink(
           height: size,
           width: size,

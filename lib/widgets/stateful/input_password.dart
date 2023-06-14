@@ -8,8 +8,8 @@ class InputPassword extends StatefulWidget {
   final Color textfieldColor;
   final Function handleChange;
   final String exception;
-
-  bool isNotConfirmed;
+  bool passToggle = true;
+  bool isConfirmed;
   InputPassword({
     super.key,
     required this.label,
@@ -18,7 +18,7 @@ class InputPassword extends StatefulWidget {
     required this.textfieldColor,
     required this.handleChange,
     required this.exception,
-    this.isNotConfirmed = true,
+    this.isConfirmed = true,
   });
 
   @override
@@ -52,15 +52,13 @@ class _InputPasswordState extends State<InputPassword> {
               onChanged: (val) => widget.handleChange(val),
               validator: (value) {
                 if (value!.isEmpty) {
-                  return "Vui lòng nhập đầy đủ";
+                  return 'Vui lòng nhập đầy đủ';
                 }
-                if (!RegExp(widget.exception).hasMatch(value!)) {
-                  return "Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt (!,#,%,&,@)";
+                if (!RegExp(widget.exception).hasMatch(value)) {
+                  return 'Mật khẩu phải chứa ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, chữ số và ký tự đặc biệt (!,#,%,&,@)';
                 }
-                if (widget.isNotConfirmed == false) {
+                if (widget.isConfirmed == false) {
                   return 'Mật khẩu nhập lại không chính xác';
-                } else {
-                  return null;
                 }
               },
               obscureText: passToggle,
