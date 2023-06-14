@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/config/route/routes.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
@@ -45,6 +46,20 @@ class _GeneralPageState extends State<GeneralPage> {
                   onPressed: () {},
                   size: 60),
               txt: 'Chế độ',
+            ),
+            TextCircleButton(
+              btn: CircleButton(
+                  isImageButton: false,
+                  icon: Icon(
+                    Icons.key_sharp,
+                    size: 33,
+                  ),
+                  buttonColor: AppColors.yellow,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(Routes.changePasswordPage);
+                  },
+                  size: 60),
+              txt: 'Đổi mật khẩu',
             ),
             TextCircleButton(
               btn: CircleButton(

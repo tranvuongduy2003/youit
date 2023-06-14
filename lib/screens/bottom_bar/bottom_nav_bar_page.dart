@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
@@ -52,9 +53,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       MessagePage(),
       widget.currentWidget,
       ProfilePage(),
-      Center(
-        child: Text('Day la man hinh Setting'),
-      ),
+      GeneralPage(),
     ];
 
     return Scaffold(

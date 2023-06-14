@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
@@ -22,9 +23,7 @@ class _BottomNavBarWithGroupListPageState
     MessagePage(),
     GroupPage(),
     ProfilePage(),
-    Center(
-      child: Text('Day la man hinh Setting'),
-    ),
+    GeneralPage(),
   ];
   @override
   Widget build(BuildContext context) {

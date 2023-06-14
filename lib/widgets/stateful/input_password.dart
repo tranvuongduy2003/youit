@@ -10,16 +10,17 @@ class InputPassword extends StatefulWidget {
   final String exception;
   bool passToggle = true;
   bool isConfirmed;
-  InputPassword({
-    super.key,
-    required this.label,
-    required this.hintText,
-    required this.textColor,
-    required this.textfieldColor,
-    required this.handleChange,
-    required this.exception,
-    this.isConfirmed = true,
-  });
+  Color labelColor;
+  InputPassword(
+      {super.key,
+      required this.label,
+      required this.hintText,
+      required this.textColor,
+      required this.textfieldColor,
+      required this.handleChange,
+      required this.exception,
+      this.isConfirmed = true,
+      this.labelColor = Colors.white});
 
   @override
   State<InputPassword> createState() => _InputPasswordState();
@@ -43,7 +44,7 @@ class _InputPasswordState extends State<InputPassword> {
                 style: TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
-                  color: AppColors.white,
+                  color: widget.labelColor,
                 ),
                 textAlign: TextAlign.start,
               ),

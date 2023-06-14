@@ -260,7 +260,9 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: AppColors.isabelline,
-                                minimumSize: Size(350, 48),
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.8,
+                                    48),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
@@ -303,7 +305,9 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: AppColors.isabelline,
-                                minimumSize: Size(350, 48),
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.8,
+                                    48),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
@@ -319,7 +323,8 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    width: 275,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 10),
                                     child: Text(
@@ -352,7 +357,9 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                 primary: AppColors.isabelline,
-                                minimumSize: Size(350, 48),
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.8,
+                                    48),
                                 shape: RoundedRectangleBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(20))),
