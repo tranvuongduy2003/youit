@@ -10,6 +10,9 @@ class DatabaseService {
   final CollectionReference groupsCollection =
       FirebaseFirestore.instance.collection('groups');
 
+  final CollectionReference chatsCollection =
+      FirebaseFirestore.instance.collection('chats');
+
   Future updateUserData(String email, String userName) async {
     return await usersCollection.doc(uid).set({
       'userName': userName,
@@ -18,6 +21,10 @@ class DatabaseService {
       'profilePic': '',
       'uid': uid,
     });
+  }
+
+  Future setUserOnlineStatus(bool onlineStatus) async {
+    return await usersCollection.doc(uid).update({'isOnline': onlineStatus});
   }
 
   Future gettingUserData(String email) async {
@@ -89,9 +96,90 @@ class DatabaseService {
     return groupsCollection.snapshots();
   }
 
-  Future sendMessage(
+  Future sendGroupMessage(
       String groupId, Map<String, dynamic> chatMessageData) async {
-    groupsCollection.doc(groupId).collection('messages').add(chatMessageData);
+    await groupsCollection
+        .doc(groupId)
+        .collection('messages')
+        .add(chatMessageData);
+  }
+
+  Future sendUserMessage(
+      String chatId, Map<String, dynamic> chatMessageData) async {
+    await chatsCollection
+        .doc(chatId)
+        .collection('messages')
+        .add(chatMessageData);
+
+    String text = chatMessageData['text'];
+    await chatsCollection.doc(chatId).update({
+      'lastMessage': text,
+      'lastMessageTime': DateTime.now(),
+      'lastSenderId': chatMessageData['senderId'],
+    });
+  }
+
+  Future<bool> isChatRoomAvaiable(String destinationUserId) async {
+    final chatRoom = await chatsCollection
+        .where('participants', arrayContains: [uid, destinationUserId]).get();
+    return chatRoom.docs.isNotEmpty;
+  }
+
+  Future<String> startChat(String destinationUserId) async {
+    try {
+      QuerySnapshot querySnapshot = await chatsCollection
+          .where(
+            'participants.$uid',
+            isEqualTo: true,
+          )
+          .where(
+            'participants.$destinationUserId',
+            isEqualTo: true,
+          )
+          .get();
+      print(querySnapshot.docs);
+      if (querySnapshot.docs.isNotEmpty) {
+        //chat room exist, create chat room
+
+        return querySnapshot.docs.first.id;
+      } else {
+        //chat room doesn't exist, join chat room
+        DocumentReference chatDocumentReference = chatsCollection.doc();
+        await chatDocumentReference.set({
+          'participants': {
+            uid: true,
+            destinationUserId: true,
+          },
+          'chatId': chatDocumentReference.id,
+          'lastMessage': '',
+          'timestamp': FieldValue.serverTimestamp(),
+        });
+        await usersCollection.doc(uid).update({
+          'chats': FieldValue.arrayUnion([chatDocumentReference.id]),
+        });
+
+        return chatDocumentReference.id;
+      }
+    } catch (e) {
+      print(e.toString());
+      return e.toString();
+    }
+  }
+
+  Future createChatRoom(String destinationUserId) async {
+    await chatsCollection.doc().set({
+      'participants': [uid, destinationUserId],
+    });
+  }
+
+  Future<String> getChatId(String destinationUserId) async {
+    final chatQuerySnapshot = await chatsCollection
+        .where('participants', arrayContains: [uid, destinationUserId]).get();
+    if (chatQuerySnapshot.docs.isNotEmpty) {
+      return chatQuerySnapshot.docs.first.id;
+    } else {
+      return '';
+    }
   }
 
   Future createGroup(String userName, String id, String groupName) async {

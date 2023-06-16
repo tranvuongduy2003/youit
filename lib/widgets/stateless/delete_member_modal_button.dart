@@ -32,8 +32,7 @@ class _DeleteMemberModalState extends State<DeleteMemberModal> {
     });
     await DatabaseService(uid: userIdDelete)
         .outGroup(userNameDelete, groupId, groupName)
-        .then((value) => Navigator.of(context)
-            .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage));
+        .then((value) => Navigator.of(context).pop());
     setState(() {
       _isLoading = false;
     });

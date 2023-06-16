@@ -44,6 +44,12 @@ class _SignUpPageState extends State<SignUpPage> {
             'dob': null,
             'khoa': null,
             'createdAt': DateTime.now(),
+            'session': -1,
+            'address': 'Không có địa điểm nào để hiển thị',
+            'githubLink': 'Không có link github nào để hiển thị',
+            'gitlabLink': 'Không có link gitlab nào để hiển thị',
+            'linkedin': 'Không có linkedin nào để hiển thị',
+            'description': 'Không có mô tả nào để hiển thị',
           });
         }
         Navigator.of(context).pushNamed(Routes.fillInfoPage);

@@ -49,10 +49,10 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const SignUpPage());
         }
-      case Routes.messageDetailPage:
-        {
-          return MaterialPageRoute(builder: (_) => const MessageDetailPage());
-        }
+      // case Routes.messageDetailPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const MessageDetailPage());
+      //   }
       case Routes.messagePage:
         {
           return MaterialPageRoute(builder: (_) => const MessagePage());
@@ -69,14 +69,14 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const EditLinkPage());
         }
-      case Routes.editProfilePage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditProfilePage());
-        }
-      case Routes.profilePage:
-        {
-          return MaterialPageRoute(builder: (_) => const ProfilePage());
-        }
+      // case Routes.editProfilePage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditProfilePage());
+      //   }
+      // case Routes.profilePage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const ProfilePage());
+      //   }
 
       // case Routes.activityPage:
       //   {
@@ -94,14 +94,14 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const GeneralPage());
         }
-      case Routes.bottomNavBarPage:
-        {
-          return MaterialPageRoute(
-              builder: (_) => const BottomNavBarPage(
-                    groupId: '',
-                    groupName: '',
-                  ));
-        }
+      // case Routes.bottomNavBarPage:
+      //   {
+      //     return MaterialPageRoute(
+      //         builder: (_) => const BottomNavBarPage(
+      //               groupId: '',
+      //               groupName: '',
+      //             ));
+      //   }
       case Routes.bottomNavBarWithGroupListPage:
         {
           return MaterialPageRoute(
