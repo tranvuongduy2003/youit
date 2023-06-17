@@ -1,3 +1,6 @@
+import 'dart:core';
+import 'dart:core';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -197,98 +200,100 @@ class _EditInfoPageState extends State<EditInfoPage> {
         key: _formField,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-          child: Column(
-            children: [
-              TextFormField(
-                initialValue: fullName,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Tên',
-                  labelStyle: AppTextStyles.labelTextField,
-                  errorBorder: UnderlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  initialValue: fullName,
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Tên',
+                    labelStyle: AppTextStyles.labelTextField,
+                    errorBorder: UnderlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  ),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Vui lòng nhập đầy đủ';
+                    }
+                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                      return 'Sai cú pháp';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    fullName = value;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Vui lòng nhập đầy đủ';
-                  }
-                  if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    return 'Sai cú pháp';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  fullName = value;
-                },
-              ),
-              DropdownButtonFormField(
-                isExpanded: true,
-                hint: Text(
-                  '--Chọn--',
-                  style: AppTextStyles.body,
+                DropdownButtonFormField(
+                  isExpanded: true,
+                  hint: Text(
+                    '--Chọn--',
+                    style: AppTextStyles.body,
+                  ),
+                  value: department,
+                  decoration: InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Khoa',
+                    labelStyle: AppTextStyles.labelTextField,
+                    errorBorder: UnderlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  ),
+                  onChanged: (value) => {
+                    setState(() {
+                      department = value as String;
+                    })
+                  },
+                  items: listItem.map((valueItem) {
+                    return DropdownMenuItem(
+                      value: valueItem,
+                      child: Text(valueItem),
+                    );
+                  }).toList(),
                 ),
-                value: department,
-                decoration: InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Khoa',
-                  labelStyle: AppTextStyles.labelTextField,
-                  errorBorder: UnderlineInputBorder(),
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                TextFormField(
+                  initialValue:
+                      int.parse(session) == -1 ? '' : session.toString(),
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Khoá',
+                    labelStyle: AppTextStyles.labelTextField,
+                    contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  ),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Vui lòng nhập đầy đủ';
+                    }
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return 'Chỉ nhập số';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    session = value;
+                  },
                 ),
-                onChanged: (value) => {
-                  setState(() {
-                    department = value as String;
-                  })
-                },
-                items: listItem.map((valueItem) {
-                  return DropdownMenuItem(
-                    value: valueItem,
-                    child: Text(valueItem),
-                  );
-                }).toList(),
-              ),
-              TextFormField(
-                initialValue:
-                    int.parse(session) == -1 ? '' : session.toString(),
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Khoá',
-                  labelStyle: AppTextStyles.labelTextField,
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
+                TextFormField(
+                  initialValue: widget.address,
+                  decoration: const InputDecoration(
+                    border: UnderlineInputBorder(),
+                    labelText: 'Nơi ở',
+                    labelStyle: AppTextStyles.labelTextField,
+                    contentPadding: EdgeInsets.symmetric(vertical: 20),
+                  ),
+                  validator: (value) {
+                    if (value == null) {
+                      return 'Vui lòng nhập đầy đủ';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    address = value;
+                  },
                 ),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Vui lòng nhập đầy đủ';
-                  }
-                  if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                    return 'Chỉ nhập số';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  session = value;
-                },
-              ),
-              TextFormField(
-                initialValue: widget.address,
-                decoration: const InputDecoration(
-                  border: UnderlineInputBorder(),
-                  labelText: 'Nơi ở',
-                  labelStyle: AppTextStyles.labelTextField,
-                  contentPadding: EdgeInsets.symmetric(vertical: 20),
-                ),
-                validator: (value) {
-                  if (value == null) {
-                    return 'Vui lòng nhập đầy đủ';
-                  }
-                  return null;
-                },
-                onChanged: (value) {
-                  address = value;
-                },
-              ),
-              buildDatePicker(),
-            ],
+                buildDatePicker(),
+              ],
+            ),
           ),
         ),
       ),

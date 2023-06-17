@@ -79,6 +79,21 @@ class _GeneralPageState extends State<GeneralPage> {
                     btn: CircleButton(
                         isImageButton: false,
                         icon: Icon(
+                          Icons.key_sharp,
+                          size: 33,
+                        ),
+                        buttonColor: AppColors.yellow,
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushNamed(Routes.changePasswordPage);
+                        },
+                        size: 60),
+                    txt: 'Đổi mật khẩu',
+                  ),
+                  TextCircleButton(
+                    btn: CircleButton(
+                        isImageButton: false,
+                        icon: Icon(
                           Icons.logout,
                           size: 33,
                         ),

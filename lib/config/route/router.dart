@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/fill_info_page.dart';
+import 'package:you_it/screens/auth/forgot_password_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+import 'package:you_it/screens/general/chang_password.dart';
 import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/activity_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
@@ -110,6 +112,14 @@ class Router {
       case Routes.fillInfoPage:
         {
           return MaterialPageRoute(builder: (_) => const FillInfoPage());
+        }
+      case Routes.forgotPasswordPage:
+        {
+          return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
+        }
+      case Routes.changePasswordPage:
+        {
+          return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
         }
       default:
         {

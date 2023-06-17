@@ -6,6 +6,8 @@ class Routes {
   static const String welcomePage = 'WelcomePage';
   static const String logInPage = 'LogInPage';
   static const String signUpPage = 'SignUpPage';
+  static const String fillInfoPage = 'FillInfoPage';
+  static const String forgotPasswordPage = 'ForgotPasswordPage';
 
   static const String profilePage = 'ProfilePage';
   static const String editProfilePage = 'EditProfilePage';
@@ -26,6 +28,6 @@ class Routes {
   static const String bottomNavBarWithGroupListPage =
       'BottomNavBarWithGroupListPage';
 
-  static const String fillInfoPage = 'FillInfoPage';
   static const String generalPage = 'GeneralPage';
+  static const String changePasswordPage = 'ChangePasswordPage';
 }

@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:you_it/service/database_service.dart';
 
 import 'package:you_it/widgets/stateless/sign_button.dart';
@@ -56,7 +55,27 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final input = GlobalKey<FormState>();
     return _isLoading
-        ? Center(child: CircularProgressIndicator())
+        ? Stack(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      AppColors.primaryColor,
+                      AppColors.secondaryColor,
+                    ],
+                  ),
+                ),
+              ),
+              Center(
+                child: CircularProgressIndicator(
+                  color: Colors.blue,
+                ),
+              )
+            ],
+          )
         : Scaffold(
             body: Stack(
               children: <Widget>[
@@ -137,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                       recognizer: TapGestureRecognizer()
-                                        ..onTap = () {},
+                                        ..onTap = () => Navigator.of(context)
+                                            .pushNamed(
+                                                Routes.forgotPasswordPage),
                                     ),
                                   ),
                                 )
