@@ -300,49 +300,44 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                           ),
                         ),
                         Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 10, horizontal: 30),
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                primary: AppColors.isabelline,
-                                minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.8,
-                                    48),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(20))),
-                              ),
-                              onPressed: () => openDialog(
-                                  context,
-                                  'Mô tả',
-                                  snapshot.data!['description'],
-                                  widget.groupId),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.6,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child: Text(
-                                      snapshot.data!['description'],
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: AppTextStyles.body,
-                                    ),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10, horizontal: 30),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: AppColors.isabelline,
+                              minimumSize: Size(
+                                  MediaQuery.of(context).size.width * 0.8, 48),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                            ),
+                            onPressed: () => openDialog(context, 'Mô tả',
+                                snapshot.data!['description'], widget.groupId),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.6,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Text(
+                                    snapshot.data!['description'],
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: AppTextStyles.body,
                                   ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 10),
-                                    child:
-                                        Image.asset('assets/images/edit.png'),
-                                  )
-                                ],
-                              ),
-                            )),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  child: Image.asset('assets/images/edit.png'),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                         Container(
                           alignment: Alignment.centerLeft,
                           padding: EdgeInsets.only(top: 10, left: 40),

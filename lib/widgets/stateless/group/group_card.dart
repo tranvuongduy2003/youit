@@ -113,6 +113,7 @@ class _GroupCardState extends State<GroupCard> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (ctx) => BottomNavBarPage(
+                            selectedIndexDrawer: 0,
                             groupName: widget.groupName,
                             groupId: widget.groupId,
                             currentWidget: GroupChatPage(

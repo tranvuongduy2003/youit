@@ -2,8 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:you_it/helper/helper_function.dart';
-import 'package:you_it/screens/auth/forgot_password_page.dart';
 import 'package:you_it/service/database_service.dart';
 
 import 'package:you_it/widgets/stateless/sign_button.dart';
@@ -34,12 +32,8 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final credential = await _firebase.signInWithEmailAndPassword(
           email: _email, password: _password);
-      QuerySnapshot snapshot =
-          await DatabaseService(uid: _firebase.currentUser!.uid)
-              .gettingUserData(_email);
 
-      //saving value to SF
-      await HelperFunctions.saveUserLoggedInStatus(true);
+      DatabaseService(uid: credential.user!.uid).setUserOnlineStatus(true);
 
       Navigator.of(context)
           .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage);

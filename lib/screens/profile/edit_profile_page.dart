@@ -1,6 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:you_it/config/route/routes.dart';
+import 'package:you_it/screens/profile/edit_description_page.dart';
+import 'package:you_it/screens/profile/edit_info_page.dart';
+import 'package:you_it/screens/profile/edit_link_page.dart';
 import 'package:you_it/widgets/stateless/header_bar.dart';
 
 import '../../config/themes/app_text_styles.dart';
@@ -9,7 +14,10 @@ import '../../config/themes/app_colors.dart';
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({
     Key? key,
-  }) : super(key: key);
+    required this.userId,
+  });
+
+  final String userId;
 
   Widget buildTitle(String title) {
     return Text(
@@ -30,14 +38,21 @@ class EditProfilePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             buildTitle('Liên kết'),
-            buildTextButton(() => Navigator.of(context).pushNamed(
-                  Routes.editLinkPage,
-                )),
+            buildTextButton(
+              () => Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: ((context) => EditLinkPage(
+                      githubLink: linkgh,
+                      gitlabLink: linkgh,
+                      linkedin: linkedin)),
+                ),
+              ),
+            ),
           ],
         ),
-        buildLinkRow('Github', linkgh),
-        buildLinkRow('Gitlab', linkgl),
-        buildLinkRow('Linkedin', linkedin),
+        buildLinkRow('Github', linkgh.isEmpty ? 'Chưa cập nhật' : linkgh),
+        buildLinkRow('Gitlab', linkgl.isEmpty ? 'Chưa cập nhật' : linkgl),
+        buildLinkRow('Linkedin', linkedin.isEmpty ? 'Chưa cập nhật' : linkedin),
       ],
     );
   }
@@ -103,17 +118,6 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const name = 'Nguyễn Hoàng Anh';
-    const department = 'Công nghệ phần mềm';
-    const seesion = 16;
-    const address = 'Bình Dương';
-    DateTime birthDay = DateTime(2003, 8, 18);
-    const linkGitHub = 'github.com/nguyenhoanganh1808';
-    const linkGitLab = 'gitlab.com/21521830';
-    const linkedin = 'linkedin.com/in/nguyenhoanganh';
-    const description =
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.';
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: HeaderBar(
@@ -123,78 +127,123 @@ class EditProfilePage extends StatelessWidget {
         ),
         handler: () => Navigator.of(context).pop(),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            children: [
-              const SizedBox(height: 10),
-              const Center(
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    'https://i.pinimg.com/564x/95/28/c9/9528c96c953ef26053bfa83b0eda9fdb.jpg',
-                  ),
-                  radius: 40,
+      body: StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection('users')
+              .doc(userId)
+              .snapshots(),
+          builder: (ctx, futureSnapshot) {
+            if (futureSnapshot.connectionState == ConnectionState.waiting) {
+              return Center(child: CircularProgressIndicator());
+            }
+            var data = futureSnapshot.data!;
+            return SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    const Center(
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          'https://i.pinimg.com/564x/95/28/c9/9528c96c953ef26053bfa83b0eda9fdb.jpg',
+                        ),
+                        radius: 40,
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width * 0.5, 27),
+                        backgroundColor: AppColors.lightperiwinkle,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: const Text(
+                        'Đổi ảnh đại diện',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                    //const SizedBox(height: 0),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        buildTitle('Thông tin cá nhân'),
+                        buildTextButton(
+                          () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => EditInfoPage(
+                                address: data['address'],
+                                birthday: (data['dob'] as Timestamp).toDate(),
+                                department: data['khoa'],
+                                fullName: data['userName'],
+                                session: data['session'],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    buildInformationRow('Tên', data['userName']),
+                    buildInformationRow('Khoa', data['khoa']),
+                    buildInformationRow(
+                        'Khoá',
+                        data['session'] == -1
+                            ? 'Chưa cập nhật'
+                            : 'K${data['session']}'),
+                    buildInformationRow(
+                      'Nơi ở',
+                      data['address'].toString().isEmpty
+                          ? 'Chưa cập nhật'
+                          : data['address'],
+                    ),
+                    buildInformationRow(
+                        'Ngày sinh',
+                        DateFormat('dd - MM - yyyy')
+                            .format((data['dob'] as Timestamp).toDate())),
+                    const SizedBox(height: 3),
+                    const Divider(),
+                    buildLinkInformationRow(context, data['githubLink'],
+                        data['gitlabLink'], data['linkedin']),
+                    const SizedBox(height: 3),
+                    const Divider(),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        buildTitle('Mô tả'),
+                        buildTextButton(
+                          () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (ctx) => EditDescriptionPage(
+                                  description: data['description']),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        data['description'].toString().isEmpty
+                            ? 'Chưa cập nhật'
+                            : data['description'],
+                        style: AppTextStyles.body3,
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  minimumSize:
-                      Size(MediaQuery.of(context).size.width * 0.5, 27),
-                  backgroundColor: AppColors.lightperiwinkle,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                ),
-                child: const Text(
-                  'Đổi ảnh đại diện',
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                    fontSize: 14,
-                  ),
-                ),
-              ),
-              //const SizedBox(height: 0),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildTitle('Thông tin cá nhân'),
-                  buildTextButton(() =>
-                      Navigator.of(context).pushNamed(Routes.editInfoPage)),
-                ],
-              ),
-              buildInformationRow('Tên', name),
-              buildInformationRow('Khoa', department),
-              buildInformationRow('Khoá', 'K$seesion'),
-              buildInformationRow('Nơi ở', address),
-              buildInformationRow(
-                  'Ngày sinh', DateFormat('dd - MM - yyyy').format(birthDay)),
-              const SizedBox(height: 3),
-              const Divider(),
-              buildLinkInformationRow(
-                  context, linkGitHub, linkGitLab, linkedin),
-              const SizedBox(height: 3),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildTitle('Mô tả'),
-                  buildTextButton(() => Navigator.of(context)
-                      .pushNamed(Routes.editDescriptionPage)),
-                ],
-              ),
-              const Text(
-                description,
-                style: AppTextStyles.body3,
-                textAlign: TextAlign.justify,
-              ),
-            ],
-          ),
-        ),
-      ),
+            );
+          }),
     );
   }
 }

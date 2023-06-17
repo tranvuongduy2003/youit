@@ -54,6 +54,7 @@ class _InputState extends State<Input> {
               if (!RegExp(widget.exception).hasMatch(value)) {
                 return 'Sai cú pháp';
               }
+              return null;
             },
             decoration: InputDecoration(
                 contentPadding:
