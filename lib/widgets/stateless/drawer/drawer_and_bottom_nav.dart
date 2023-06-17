@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
 import 'app_drawer.dart';
-import '../../config/themes/app_text_styles.dart';
+import '../../../config/themes/app_text_styles.dart';
 
 class DrawerAndBottomNav extends StatelessWidget {
   DrawerAndBottomNav({
@@ -14,6 +14,7 @@ class DrawerAndBottomNav extends StatelessWidget {
     required this.keyDrawer,
     required this.isShowAppBar,
     required this.groupId,
+    required this.selectedIndexDrawer,
   });
   final GlobalKey<SliderDrawerState> keyDrawer;
 
@@ -24,6 +25,7 @@ class DrawerAndBottomNav extends StatelessWidget {
   final Widget childScreen;
   final bool isShowAppBar;
   final String groupId;
+  final int selectedIndexDrawer;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +61,7 @@ class DrawerAndBottomNav extends StatelessWidget {
               ),
             )
           : null,
-      slider: AppDrawer(groupName, groupId),
+      slider: AppDrawer(groupName, groupId, selectedIndexDrawer),
       child: GestureDetector(
         onTap: () {
           if (keyDrawer.currentState!.isDrawerOpen) {

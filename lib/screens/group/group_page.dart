@@ -18,9 +18,10 @@ class GroupPage extends StatefulWidget {
 class _GroupPageState extends State<GroupPage>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
-  int selectedIndex = 0;
-
-  String userName = '';
+  int _selectedIndex = 0;
+  String _searchGroupName = '';
+  final _searchController = TextEditingController();
+  bool isUserSearch = false;
 
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _GroupPageState extends State<GroupPage>
     _tabController = TabController(length: 2, vsync: this);
     _tabController.addListener(() {
       setState(() {
-        selectedIndex = _tabController.index;
+        _selectedIndex = _tabController.index;
       });
     });
   }
@@ -45,19 +46,17 @@ class _GroupPageState extends State<GroupPage>
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .get(),
+      future: FirebaseFirestore.instance.collection('users').doc(userId).get(),
       builder: (ctx, futureSnapshot) {
         if (futureSnapshot.connectionState == ConnectionState.waiting) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
+        final userName = futureSnapshot.data!['userName'];
         return DefaultTabController(
           length: 2,
-          initialIndex: selectedIndex,
+          initialIndex: _selectedIndex,
           child: Container(
             margin: EdgeInsets.only(top: 30),
             child: Column(
@@ -83,12 +82,26 @@ class _GroupPageState extends State<GroupPage>
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
-                            onChanged: (value) {},
+                            onSubmitted: (value) {
+                              setState(() {
+                                _searchGroupName = value;
+                              });
+                            },
+                            controller: _searchController,
+                            textInputAction: TextInputAction.search,
                             decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.search,
-                                size: 20,
-                                color: Colors.black,
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  Icons.search,
+                                  //   size: 20,
+                                  color: Colors.black,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _searchGroupName = _searchController.text;
+                                  });
+                                },
+                                //   color: Colors.black,
                               ),
                               hintText: 'Tìm kiếm...',
                               hintStyle: AppTextStyles.body,
@@ -124,7 +137,7 @@ class _GroupPageState extends State<GroupPage>
                   ),
                 ),
                 Material(
-                  color: selectedIndex == 0
+                  color: _selectedIndex == 0
                       ? AppColors.blue.withOpacity(0.36)
                       : AppColors.primaryColor.withOpacity(0.36),
                   child: TabBar(
@@ -132,20 +145,20 @@ class _GroupPageState extends State<GroupPage>
 
                     indicator: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                        topLeft: selectedIndex == 1
+                        topLeft: _selectedIndex == 1
                             ? Radius.circular(30)
                             : Radius.zero,
-                        bottomLeft: selectedIndex == 1
+                        bottomLeft: _selectedIndex == 1
                             ? Radius.circular(30)
                             : Radius.zero,
-                        bottomRight: selectedIndex == 0
+                        bottomRight: _selectedIndex == 0
                             ? Radius.circular(30)
                             : Radius.zero,
-                        topRight: selectedIndex == 0
+                        topRight: _selectedIndex == 0
                             ? Radius.circular(30)
                             : Radius.zero,
                       ),
-                      color: selectedIndex == 0
+                      color: _selectedIndex == 0
                           ? AppColors.primaryColor
                           : AppColors.blue,
                     ),
@@ -160,7 +173,7 @@ class _GroupPageState extends State<GroupPage>
                               fontFamily: 'Montserrat',
                               fontSize: 18,
                               fontWeight: FontWeight.w600,
-                              color: selectedIndex == 0
+                              color: _selectedIndex == 0
                                   ? AppColors.redPigment
                                   : AppColors.primaryColor,
                             ),
@@ -174,7 +187,7 @@ class _GroupPageState extends State<GroupPage>
                             fontFamily: 'Montserrat',
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: selectedIndex == 1
+                            color: _selectedIndex == 1
                                 ? Color(0xFF051C40)
                                 : AppColors.blue,
                           ),
@@ -198,28 +211,38 @@ class _GroupPageState extends State<GroupPage>
                       );
                     }
                     if (!snapshot.hasData) {
-                      return Text('No Groups');
+                      return Text('No Groups Found');
                     }
                     return Expanded(
                       child: ListView.builder(
                         itemBuilder: (ctx, index) {
                           var data = snapshot.data!.docs[index];
+
                           List<dynamic> membersList = data['members'];
                           bool isJoin = membersList.any((element) {
                             return element
                                 .toString()
                                 .contains('${userId}_$userName');
                           });
-                          return selectedIndex == 1 && !isJoin
-                              ? Container()
-                              : GroupCard(
-                                  chatMembersNum: membersList.length,
-                                  admin: data['admin'],
-                                  userName: userName,
-                                  isJoinGroup: isJoin,
-                                  groupId: data['groupId'],
-                                  groupName: data['groupName'],
-                                );
+
+                          if (_searchGroupName.isEmpty ||
+                              (data['groupName']
+                                  .toString()
+                                  .toLowerCase()
+                                  .contains(_searchGroupName.toLowerCase()))) {
+                            if (_selectedIndex == 0 ||
+                                _selectedIndex == 1 && isJoin) {
+                              return GroupCard(
+                                chatMembersNum: membersList.length,
+                                admin: data['admin'],
+                                userName: userName,
+                                isJoinGroup: isJoin,
+                                groupId: data['groupId'],
+                                groupName: data['groupName'],
+                              );
+                            }
+                          }
+                          return Container();
                         },
                         itemCount: snapshot.data!.docs.length,
                       ),

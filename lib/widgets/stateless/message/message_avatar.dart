@@ -3,8 +3,9 @@ import 'package:you_it/config/themes/app_colors.dart';
 
 class MessageAvatar extends StatelessWidget {
   final String imageUrl;
+  final bool isOnline;
 
-  MessageAvatar({required this.imageUrl});
+  MessageAvatar({required this.imageUrl, required this.isOnline});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class MessageAvatar extends StatelessWidget {
           right: 0,
           child: Container(
             decoration: BoxDecoration(
-              color: AppColors.lightGreen,
+              color: isOnline ? Colors.green : Colors.grey,
               shape: BoxShape.circle,
             ),
           ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/fill_info_page.dart';
+import 'package:you_it/screens/auth/forgot_password_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+import 'package:you_it/screens/general/chang_password.dart';
 import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/activity_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
@@ -49,34 +51,34 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const SignUpPage());
         }
-      case Routes.messageDetailPage:
-        {
-          return MaterialPageRoute(builder: (_) => const MessageDetailPage());
-        }
+      // case Routes.messageDetailPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const MessageDetailPage());
+      //   }
       case Routes.messagePage:
         {
           return MaterialPageRoute(builder: (_) => const MessagePage());
         }
-      case Routes.editDescriptionPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditDescriptionPage());
-        }
-      case Routes.editInfoPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditInfoPage());
-        }
-      case Routes.editLinkPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditLinkPage());
-        }
-      case Routes.editProfilePage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditProfilePage());
-        }
-      case Routes.profilePage:
-        {
-          return MaterialPageRoute(builder: (_) => const ProfilePage());
-        }
+      // case Routes.editDescriptionPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditDescriptionPage());
+      //   }
+      // case Routes.editInfoPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditInfoPage());
+      //   }
+      // case Routes.editLinkPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditLinkPage());
+      //   }
+      // case Routes.editProfilePage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditProfilePage());
+      //   }
+      // case Routes.profilePage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const ProfilePage());
+      //   }
 
       // case Routes.activityPage:
       //   {
@@ -94,14 +96,14 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const GeneralPage());
         }
-      case Routes.bottomNavBarPage:
-        {
-          return MaterialPageRoute(
-              builder: (_) => const BottomNavBarPage(
-                    groupId: '',
-                    groupName: '',
-                  ));
-        }
+      // case Routes.bottomNavBarPage:
+      //   {
+      //     return MaterialPageRoute(
+      //         builder: (_) => const BottomNavBarPage(
+      //               groupId: '',
+      //               groupName: '',
+      //             ));
+      //   }
       case Routes.bottomNavBarWithGroupListPage:
         {
           return MaterialPageRoute(
@@ -110,6 +112,14 @@ class Router {
       case Routes.fillInfoPage:
         {
           return MaterialPageRoute(builder: (_) => const FillInfoPage());
+        }
+      case Routes.forgotPasswordPage:
+        {
+          return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
+        }
+      case Routes.changePasswordPage:
+        {
+          return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
         }
       default:
         {

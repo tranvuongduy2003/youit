@@ -1,32 +1,77 @@
+import 'dart:core';
+import 'dart:core';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:you_it/service/database_service.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
 
 class EditInfoPage extends StatefulWidget {
-  const EditInfoPage({Key? key}) : super(key: key);
+  const EditInfoPage({
+    Key? key,
+    required this.address,
+    required this.birthday,
+    required this.department,
+    required this.fullName,
+    required this.session,
+  }) : super(key: key);
+
+  final String fullName;
+  final String department;
+  final int session;
+  final String address;
+  final DateTime birthday;
 
   @override
   State<EditInfoPage> createState() => _EditInfoPageState();
 }
 
 class _EditInfoPageState extends State<EditInfoPage> {
-  String name = '';
+  bool _isLoading = false;
   String? department;
+  String fullName = '';
   String session = '';
-  String address = 'Bình Dương';
+  String address = '';
+
   DateTime birthDay = DateTime.now();
   String? valueChoose;
-  List listItem = [
-    'Công nghệ phần mềm',
-    'Khoa học máy tính',
-    'Hệ thống thông tin'
+  final List<String> listItem = [
+    'Công nghệ Phần mềm',
+    'Hệ thống Thông tin',
+    'Kỹ thuật Máy tính',
+    'MMT & Truyền thông',
+    'Khoa học Máy tính',
+    'Khoa học và Kỹ thuật Thông tin'
   ];
 
   final _formField = GlobalKey<FormState>();
   bool isEnable = false;
+
+  void submitForm(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
+    if (_formField.currentState!.validate()) {
+      try {
+        await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
+            .updateUserInfoData(fullName, department as String,
+                int.parse(session), address, birthDay);
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+      } catch (e) {
+        print(e);
+      }
+    }
+    setState(() {
+      _isLoading = false;
+    });
+  }
 
   void openCupertino() => showCupertinoModalPopup(
       context: context,
@@ -38,10 +83,11 @@ class _EditInfoPageState extends State<EditInfoPage> {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('Done')),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('Done'),
+              ),
               Expanded(
                   child: CupertinoDatePicker(
                 onDateTimeChanged: (date) {
@@ -62,7 +108,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
     return Container(
       child: Column(
         children: <Widget>[
-          if (label != null)
+          if (label.isNotEmpty)
             Container(
               width: double.infinity,
               margin: EdgeInsets.only(top: 20),
@@ -79,12 +125,15 @@ class _EditInfoPageState extends State<EditInfoPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(DateFormat('dd-MM-yyyy').format(birthDay)),
+                Text(
+                  DateFormat('dd-MM-yyyy').format(birthDay),
+                ),
                 IconButton(
-                    onPressed: () {
-                      openCupertino();
-                    },
-                    icon: Icon(Icons.date_range_rounded))
+                  onPressed: () {
+                    openCupertino();
+                  },
+                  icon: Icon(Icons.date_range_rounded),
+                ),
               ],
             ),
           ),
@@ -96,6 +145,11 @@ class _EditInfoPageState extends State<EditInfoPage> {
   @override
   void initState() {
     super.initState();
+    birthDay = widget.birthday;
+    fullName = widget.fullName;
+    department = widget.department;
+    session = widget.session.toString();
+    address = widget.address;
   }
 
   @override
@@ -119,15 +173,18 @@ class _EditInfoPageState extends State<EditInfoPage> {
           TextButton(
             onPressed: () {
               if (_formField.currentState!.validate()) {
-                return Navigator.of(context).pop();
+                print('hi');
+                submitForm(context);
               } else {
                 print('error');
               }
             },
-            child: const Text(
-              'Lưu',
-              style: AppTextStyles.appbarButtonTitle,
-            ),
+            child: _isLoading
+                ? const CircularProgressIndicator()
+                : const Text(
+                    'Lưu',
+                    style: AppTextStyles.appbarButtonTitle,
+                  ),
           ),
         ],
         bottom: PreferredSize(
@@ -141,12 +198,13 @@ class _EditInfoPageState extends State<EditInfoPage> {
       ),
       body: Form(
         key: _formField,
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 TextFormField(
+                  initialValue: fullName,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Tên',
@@ -154,18 +212,17 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     errorBorder: UnderlineInputBorder(),
                     contentPadding: EdgeInsets.symmetric(vertical: 20),
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      name = value;
-                    });
-                  },
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Vui lòng nhập đầy đủ";
+                    if (value == null) {
+                      return 'Vui lòng nhập đầy đủ';
                     }
                     if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return "Sai cú pháp";
+                      return 'Sai cú pháp';
                     }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    fullName = value;
                   },
                 ),
                 DropdownButtonFormField(
@@ -189,10 +246,14 @@ class _EditInfoPageState extends State<EditInfoPage> {
                   },
                   items: listItem.map((valueItem) {
                     return DropdownMenuItem(
-                        value: valueItem, child: Text(valueItem));
+                      value: valueItem,
+                      child: Text(valueItem),
+                    );
                   }).toList(),
                 ),
                 TextFormField(
+                  initialValue:
+                      int.parse(session) == -1 ? '' : session.toString(),
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Khoá',
@@ -200,20 +261,20 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     contentPadding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return "Vui lòng nhập đầy đủ";
+                    if (value == null) {
+                      return 'Vui lòng nhập đầy đủ';
                     }
-                    if (!RegExp(r'^[0-9]$').hasMatch(value)) {
-                      return "Chỉ nhập số";
+                    if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
+                      return 'Chỉ nhập số';
                     }
+                    return null;
                   },
                   onChanged: (value) {
-                    setState(() {
-                      session = value;
-                    });
+                    session = value;
                   },
                 ),
                 TextFormField(
+                  initialValue: widget.address,
                   decoration: const InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Nơi ở',
@@ -221,17 +282,16 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     contentPadding: EdgeInsets.symmetric(vertical: 20),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null) {
                       return 'Vui lòng nhập đầy đủ';
                     }
+                    return null;
                   },
                   onChanged: (value) {
-                    setState(() {
-                      address = value;
-                    });
+                    address = value;
                   },
                 ),
-                buildDatePicker()
+                buildDatePicker(),
               ],
             ),
           ),
