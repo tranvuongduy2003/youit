@@ -14,7 +14,7 @@ class EditInfoPage extends StatefulWidget {
 
 class _EditInfoPageState extends State<EditInfoPage> {
   String name = '';
-  String? department;
+  String department = 'Khoa học máy tính';
   String session = '';
   String address = 'Bình Dương';
   DateTime birthDay = DateTime.now();
@@ -174,7 +174,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     '--Chọn--',
                     style: AppTextStyles.body,
                   ),
-                  value: department,
+                  value: (department != '') ? department : null,
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Khoa',
