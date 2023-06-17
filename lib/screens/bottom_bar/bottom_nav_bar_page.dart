@@ -1,24 +1,28 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../screens/home/home_page.dart';
 import '../../screens/message/message_page.dart';
 import '../../screens/profile/profile_page.dart';
-import '../../widgets/stateless/drawer_and_bottom_nav.dart';
+import '../../widgets/stateless/drawer/drawer_and_bottom_nav.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({
     this.currentWidget = const GroupPage(),
     required this.groupId,
     required this.groupName,
+    required this.selectedIndexDrawer,
   });
 
   final Widget currentWidget;
   final String groupId;
   final String groupName;
+  final int selectedIndexDrawer;
 
   @override
   State<BottomNavBarPage> createState() => _BottomNavBarPageState();
@@ -51,14 +55,13 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       HomePage(),
       MessagePage(),
       widget.currentWidget,
-      ProfilePage(),
-      Center(
-        child: Text('Day la man hinh Setting'),
-      ),
+      ProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
+      GeneralPage(),
     ];
 
     return Scaffold(
       body: DrawerAndBottomNav(
+        selectedIndexDrawer: widget.selectedIndexDrawer,
         groupId: widget.groupId,
         groupName: widget.groupName,
         openDrawer: _openDrawer,

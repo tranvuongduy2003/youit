@@ -2,14 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
-import 'package:you_it/helper/helper_function.dart';
-import '../../widgets/stateless/message_tile.dart';
 
-import '../../widgets/stateless/new_message.dart';
+import '../../widgets/stateless/message/message_tile.dart';
+
+import '../../widgets/stateless/message/new_message.dart';
 import '../../config/themes/app_colors.dart';
-import '../home/home_page.dart';
-import '../message/message_page.dart';
-import '../profile/profile_page.dart';
 
 class GroupChatPage extends StatefulWidget {
   const GroupChatPage({
@@ -65,10 +62,11 @@ class MessageWidget extends StatelessWidget {
                   .collection('groups')
                   .doc(groupId)
                   .collection('messages')
-                  .orderBy('time', descending: true)
+                  .limit(30)
+                  .orderBy('createAt', descending: true)
                   .snapshots(),
               builder: (ctx, snapshot) {
-                var userName = futureSnapshot.data!['userName'];
+                var userId = FirebaseAuth.instance.currentUser!.uid;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                     child: CircularProgressIndicator(),
@@ -89,10 +87,14 @@ class MessageWidget extends StatelessWidget {
                                 itemBuilder: (ctx, index) {
                                   bool isMe = false;
 
-                                  if (chatDocs[index]['sender'] == userName) {
+                                  if (chatDocs[index]['senderId'] == userId) {
                                     isMe = true;
                                   }
                                   return MessageTile(
+                                      isLast: index == 0,
+                                      messageTime: (chatDocs[index]['createAt']
+                                              as Timestamp)
+                                          .toDate(),
                                       isMe: isMe,
                                       message: chatDocs[index]['message'],
                                       sender: chatDocs[index]['sender']);

@@ -35,6 +35,7 @@ class _FillInfoPageState extends State<FillInfoPage> {
       await users.doc(_firebaseAuth.currentUser?.uid).update({
         'dob': _dateTime,
         'khoa': _valueChoose,
+        'isOnline': true,
         'updatedAt': DateTime.now(),
       });
       Navigator.of(context).pushNamed(Routes.bottomNavBarWithGroupListPage);

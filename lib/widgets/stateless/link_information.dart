@@ -48,9 +48,11 @@ class LinkInformation extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         buildTitle('Liên kết'),
-        buildLinkRow('Github', linkGithub),
-        buildLinkRow('Gitlab', linkGitlab),
-        buildLinkRow('Linkedin', linkedin),
+        buildLinkRow(
+            'Github', linkGithub.isEmpty ? 'Chưa cập nhật' : linkGithub),
+        buildLinkRow(
+            'Gitlab', linkGitlab.isEmpty ? 'Chưa cập nhật' : linkGitlab),
+        buildLinkRow('Linkedin', linkedin.isEmpty ? 'Chưa cập nhật' : linkedin),
       ],
     );
   }

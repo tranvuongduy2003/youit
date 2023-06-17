@@ -59,7 +59,7 @@ class PersonalInformation extends StatelessWidget {
               buildRowIconText(
                   Icons.school,
                   Text(
-                    'K$session',
+                    session != -1 ? 'K$session' : 'Chưa cập nhật',
                     style: AppTextStyles.heading,
                   )),
               Row(
@@ -71,23 +71,27 @@ class PersonalInformation extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Đến từ ',
-                      style: AppTextStyles.heading,
-                      children: [
-                        TextSpan(
-                            text: address,
-                            style: const TextStyle(fontWeight: FontWeight.w600))
-                      ],
+                  if (address.isEmpty)
+                    Text('Chưa cập nhật', style: AppTextStyles.heading),
+                  if (address.isNotEmpty)
+                    RichText(
+                      text: TextSpan(
+                        text: 'Đến từ ',
+                        style: AppTextStyles.heading,
+                        children: [
+                          TextSpan(
+                              text: address,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w600))
+                        ],
+                      ),
                     ),
-                  ),
                 ],
               ),
               buildRowIconText(
                 Icons.cake,
                 Text(
-                  DateFormat('dd - MM - yyyy').format(DateTime(2003)),
+                  DateFormat('dd - MM - yyyy').format(birthDay),
                   style: AppTextStyles.heading,
                 ),
               ),

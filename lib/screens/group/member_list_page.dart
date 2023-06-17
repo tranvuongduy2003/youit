@@ -48,9 +48,9 @@ class _MemberListPageState extends State<MemberListPage> {
           }
 
           List<dynamic> members = snapshot.data!['members'];
-          String admin = snapshot.data!['admin'];
-          if (FirebaseAuth.instance.currentUser!.uid ==
-              getId(snapshot.data!['admin'])) {
+          String adminId = getId(snapshot.data!['admin']);
+          String userId = FirebaseAuth.instance.currentUser!.uid;
+          if (userId == adminId) {
             userIsAdmin = true;
           }
 
@@ -88,7 +88,7 @@ class _MemberListPageState extends State<MemberListPage> {
                                 width: 8,
                               ),
                               Container(
-                                //width: MediaQuery.of(context).size.width * 0.4,
+                                width: MediaQuery.of(context).size.width * 0.3,
                                 //  alignment: Alignment.centerLeft,
                                 child: Text(
                                   getName(members[index]),
@@ -98,69 +98,71 @@ class _MemberListPageState extends State<MemberListPage> {
                                 ),
                               ),
                               SizedBox(
-                                width: 8,
+                                width: 5,
                               ),
-                              if (members[index] == admin)
+                              if (getId(members[index]) == adminId)
                                 Icon(Icons.star_outline),
                             ],
                           ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: userIsAdmin
-                                    ? CircleButton(
-                                        buttonColor: AppColors.pinkRed,
-                                        onPressed: () {
-                                          showModalBottomSheet(
-                                              isScrollControlled: true,
-                                              backgroundColor:
-                                                  Colors.transparent,
-                                              context: context,
-                                              builder: (context) {
-                                                return DeleteMemberModal(
-                                                  groupId: widget.groupId,
-                                                  groupName: snapshot
-                                                      .data!['groupName'],
-                                                  userDeleteId:
-                                                      getId(members[index]),
-                                                  userDeleteName:
-                                                      getName(members[index]),
-                                                );
-                                              });
-                                        },
-                                        size: 40,
-                                        isImageButton: false,
-                                        icon: Icon(Icons.close),
-                                      )
-                                    : null,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5),
-                                child: CircleButton(
-                                  buttonColor: Color(0xff92A8F6),
-                                  onPressed: () {
-                                    showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        context: context,
-                                        builder: (context) {
-                                          return MoreInfoModal(
-                                            avtURL: avtURL,
-                                            name: getName(members[index]),
-                                          );
-                                        });
-                                  },
-                                  size: 40,
-                                  isImageButton: false,
-                                  icon: Icon(Icons.more_vert),
+                          if (userId != getId(members[index]))
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: userIsAdmin
+                                      ? CircleButton(
+                                          buttonColor: AppColors.pinkRed,
+                                          onPressed: () {
+                                            showModalBottomSheet(
+                                                isScrollControlled: true,
+                                                backgroundColor:
+                                                    Colors.transparent,
+                                                context: context,
+                                                builder: (context) {
+                                                  return DeleteMemberModal(
+                                                    groupId: widget.groupId,
+                                                    groupName: snapshot
+                                                        .data!['groupName'],
+                                                    userDeleteId:
+                                                        getId(members[index]),
+                                                    userDeleteName:
+                                                        getName(members[index]),
+                                                  );
+                                                });
+                                          },
+                                          size: 40,
+                                          isImageButton: false,
+                                          icon: Icon(Icons.close),
+                                        )
+                                      : null,
                                 ),
-                              ),
-                            ],
-                          )
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: CircleButton(
+                                    buttonColor: Color(0xff92A8F6),
+                                    onPressed: () {
+                                      showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          context: context,
+                                          builder: (context) {
+                                            return MoreInfoModal(
+                                              destinationUserId:
+                                                  getId(members[index]),
+                                              avtURL: avtURL,
+                                            );
+                                          });
+                                    },
+                                    size: 40,
+                                    isImageButton: false,
+                                    icon: Icon(Icons.more_vert),
+                                  ),
+                                ),
+                              ],
+                            )
                         ],
                       ),
                     ),
