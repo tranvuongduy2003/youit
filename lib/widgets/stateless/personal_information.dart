@@ -71,9 +71,9 @@ class PersonalInformation extends StatelessWidget {
                   const SizedBox(
                     width: 10,
                   ),
-                  if (address == 'Không có địa điểm nào để hiển thị')
-                    Text(address, style: AppTextStyles.heading),
-                  if (address != 'Không có địa điểm nào để hiển thị')
+                  if (address.isEmpty)
+                    Text('Chưa cập nhật', style: AppTextStyles.heading),
+                  if (address.isNotEmpty)
                     RichText(
                       text: TextSpan(
                         text: 'Đến từ ',

@@ -57,18 +57,18 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const MessagePage());
         }
-      case Routes.editDescriptionPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditDescriptionPage());
-        }
-      case Routes.editInfoPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditInfoPage());
-        }
-      case Routes.editLinkPage:
-        {
-          return MaterialPageRoute(builder: (_) => const EditLinkPage());
-        }
+      // case Routes.editDescriptionPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditDescriptionPage());
+      //   }
+      // case Routes.editInfoPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditInfoPage());
+      //   }
+      // case Routes.editLinkPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const EditLinkPage());
+      //   }
       // case Routes.editProfilePage:
       //   {
       //     return MaterialPageRoute(builder: (_) => const EditProfilePage());

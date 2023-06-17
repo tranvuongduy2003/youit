@@ -25,7 +25,7 @@ class Description extends StatelessWidget {
         children: [
           buildTitle('Mô tả'),
           Text(
-            description,
+            description.isEmpty ? 'Chưa cập nhật' : description,
             style: AppTextStyles.body,
             textAlign: TextAlign.justify,
           ),

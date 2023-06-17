@@ -23,6 +23,21 @@ class DatabaseService {
     });
   }
 
+  Future updateDescription(String description) async {
+    return await usersCollection.doc(uid).update({
+      'description': description,
+    });
+  }
+
+  Future updateUserLinkData(
+      String githubLink, String gitlabLink, String linkedin) async {
+    return await usersCollection.doc(uid).update({
+      'githubLink': githubLink,
+      'gitlabLink': gitlabLink,
+      'linkedin': linkedin,
+    });
+  }
+
   Future setUserOnlineStatus(bool onlineStatus) async {
     return await usersCollection.doc(uid).update({'isOnline': onlineStatus});
   }
@@ -102,6 +117,17 @@ class DatabaseService {
         .doc(groupId)
         .collection('messages')
         .add(chatMessageData);
+  }
+
+  Future updateUserInfoData(String fullName, String department, int session,
+      String address, DateTime birthDay) async {
+    return await usersCollection.doc(uid).update({
+      'userName': fullName,
+      'khoa': department,
+      'session': session,
+      'address': address,
+      'dob': birthDay,
+    });
   }
 
   Future sendUserMessage(

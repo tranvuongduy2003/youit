@@ -62,9 +62,11 @@ class ProfilePage extends StatelessWidget {
     String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
     likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
-    return FutureBuilder(
-        future:
-            FirebaseFirestore.instance.collection('users').doc(userId).get(),
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('users')
+            .doc(userId)
+            .snapshots(),
         builder: (ctx, futureSnapshot) {
           if (futureSnapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -73,6 +75,7 @@ class ProfilePage extends StatelessWidget {
           if (userId == FirebaseAuth.instance.currentUser!.uid) {
             isMe = true;
           }
+          print(data);
           return Scaffold(
             backgroundColor: AppColors.white,
             appBar: HeaderBar(

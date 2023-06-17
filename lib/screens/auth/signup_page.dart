@@ -36,21 +36,23 @@ class _SignUpPageState extends State<SignUpPage> {
             email: _email, password: _password);
         if (credential.user != null) {
           CollectionReference users = _firebaseFireStore.collection('users');
-          await users.doc(credential.user?.uid).set({
-            'userName': _fullName,
-            'email': _email,
-            'avatar': null,
-            'groups': [],
-            'dob': null,
-            'khoa': null,
-            'createdAt': DateTime.now(),
-            'session': -1,
-            'address': 'Không có địa điểm nào để hiển thị',
-            'githubLink': 'Không có link github nào để hiển thị',
-            'gitlabLink': 'Không có link gitlab nào để hiển thị',
-            'linkedin': 'Không có linkedin nào để hiển thị',
-            'description': 'Không có mô tả nào để hiển thị',
-          });
+          await users.doc(credential.user?.uid).set(
+            {
+              'userName': _fullName,
+              'email': _email,
+              'avatar': null,
+              'groups': [],
+              'dob': null,
+              'khoa': null,
+              'createdAt': DateTime.now(),
+              'session': -1,
+              'address': '',
+              'githubLink': '',
+              'gitlabLink': '',
+              'linkedin': '',
+              'description': '',
+            },
+          );
         }
         Navigator.of(context).pushNamed(Routes.fillInfoPage);
       }

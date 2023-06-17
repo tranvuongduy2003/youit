@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/home/home_page.dart';
+import 'package:you_it/service/database_service.dart';
 import 'config/route/routes.dart';
 import 'firebase_options.dart';
 
@@ -30,10 +31,21 @@ class MyApp extends StatefulWidget {
   State<MyApp> createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    if (state == AppLifecycleState.resumed) {
+      DatabaseService(uid: userId).setUserOnlineStatus(true);
+    } else {
+      DatabaseService(uid: userId).setUserOnlineStatus(false);
+    }
   }
 
   @override
