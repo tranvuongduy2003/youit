@@ -5,13 +5,14 @@ class SignButton extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
   final VoidCallback handleOnPress;
+  final bool loading;
 
-  SignButton({
-    required this.buttonText,
-    required this.textColor,
-    required this.backgroundColor,
-    required this.handleOnPress,
-  });
+  SignButton(
+      {required this.buttonText,
+      required this.textColor,
+      required this.backgroundColor,
+      required this.handleOnPress,
+      this.loading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +30,26 @@ class SignButton extends StatelessWidget {
         ),
         child: Container(
           padding: EdgeInsets.symmetric(vertical: 20),
-          child: Text(
-            buttonText,
-            style: TextStyle(
-              color: textColor,
-              fontSize: 20,
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w600,
-            ),
-            textAlign: TextAlign.center,
-          ),
+          child: loading
+              ? Container(
+                  width: 24,
+                  height: 24,
+                  padding: const EdgeInsets.all(2.0),
+                  child: const CircularProgressIndicator(
+                    color: Colors.white,
+                    strokeWidth: 3,
+                  ),
+                )
+              : Text(
+                  buttonText,
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 20,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
         ),
       ),
     );
