@@ -57,10 +57,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int likeNumber = 200000;
+    // int likeNumber = 200000;
     bool isMe = false;
-    String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
-    likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
+    // String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
+    // likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -94,38 +94,46 @@ class ProfilePage extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircleAvatar(
                         maxRadius: 40,
                         backgroundColor: AppColors.primaryColor,
                       ),
+                      SizedBox(
+                        width: 40,
+                      ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               data['userName'],
-                              style: AppTextStyles.sectionTitle,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: 'Số lượt thích: ',
-                                style: AppTextStyles.body3,
-                                children: [
-                                  TextSpan(
-                                    text: likeNumberFormat,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.fontColor,
+                                fontSize: 18,
                               ),
                             ),
+                            // const SizedBox(
+                            //   height: 8,
+                            // ),
+                            // RichText(
+                            //   text: TextSpan(
+                            //     text: 'Số lượt thích: ',
+                            //     style: AppTextStyles.body3,
+                            //     children: [
+                            //       TextSpan(
+                            //         text: likeNumberFormat,
+                            //         style: const TextStyle(
+                            //             fontWeight: FontWeight.w600),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -138,10 +146,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                   const Divider(),
                   PersonalInformation(
-                      department: data['khoa'],
+                      department: data['khoa'] ?? 'Chưa cập nhật',
                       address: data['address'],
-                      birthDay: (data['dob'] as Timestamp).toDate(),
-                      session: data['session']),
+                      birthDay: data['dob'] == null
+                          ? DateTime(1)
+                          : (data['dob'] as Timestamp).toDate(),
+                      session: data['session'] ?? -1),
                   const SizedBox(
                     height: 3,
                   ),

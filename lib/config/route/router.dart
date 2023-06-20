@@ -7,6 +7,7 @@ import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
+import 'package:you_it/screens/group/add_member_page.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
@@ -111,6 +112,10 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const FillInfoPage());
         }
+      // case Routes.addMemberPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const AddMemberPage());
+      //   }
       default:
         {
           return MaterialPageRoute(

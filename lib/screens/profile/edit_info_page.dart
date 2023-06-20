@@ -142,7 +142,11 @@ class _EditInfoPageState extends State<EditInfoPage> {
   @override
   void initState() {
     super.initState();
-    birthDay = widget.birthday;
+    if (widget.birthday == DateTime(1)) {
+      birthDay = DateTime.now();
+    } else {
+      birthDay = widget.birthday;
+    }
     fullName = widget.fullName;
     department = widget.department;
     session = widget.session.toString();
@@ -212,9 +216,9 @@ class _EditInfoPageState extends State<EditInfoPage> {
                   if (value == null) {
                     return 'Vui lòng nhập đầy đủ';
                   }
-                  if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                    return 'Sai cú pháp';
-                  }
+                  // if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                  //   return 'Sai cú pháp';
+                  // }
                   return null;
                 },
                 onChanged: (value) {
@@ -227,7 +231,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
                   '--Chọn--',
                   style: AppTextStyles.body,
                 ),
-                value: department,
+                value: department!.isEmpty ? null : department,
                 decoration: InputDecoration(
                   border: UnderlineInputBorder(),
                   labelText: 'Khoa',

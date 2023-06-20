@@ -91,7 +91,9 @@ class PersonalInformation extends StatelessWidget {
               buildRowIconText(
                 Icons.cake,
                 Text(
-                  DateFormat('dd - MM - yyyy').format(birthDay),
+                  birthDay == DateTime(1)
+                      ? 'Chưa cập nhật'
+                      : DateFormat('dd - MM - yyyy').format(birthDay),
                   style: AppTextStyles.heading,
                 ),
               ),

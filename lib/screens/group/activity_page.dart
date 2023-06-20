@@ -20,7 +20,7 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends State<ActivityPage> {
-  bool isAdmin = false;
+  bool currentUserIsAdmin = false;
 
   String getId(String res) {
     return res.substring(0, res.indexOf('_'));
@@ -39,11 +39,11 @@ class _ActivityPageState extends State<ActivityPage> {
           }
           if (getId(futureSnapshot.data!['admin']) ==
               FirebaseAuth.instance.currentUser!.uid) {
-            isAdmin = true;
+            currentUserIsAdmin = true;
           }
           print(getId(futureSnapshot.data!['admin']));
           print(FirebaseAuth.instance.currentUser!.uid);
-          print(isAdmin);
+          print(currentUserIsAdmin);
           return Scaffold(
             body: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -63,7 +63,7 @@ class _ActivityPageState extends State<ActivityPage> {
                     floatingActionButton: snapshot.data!.docs.isNotEmpty
                         ? CircleButton(
                             buttonColor: AppColors.jordyBlue.withOpacity(0.36),
-                            onPressed: isAdmin
+                            onPressed: currentUserIsAdmin
                                 ? () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -105,7 +105,7 @@ class _ActivityPageState extends State<ActivityPage> {
                                 CircleButton(
                                   buttonColor:
                                       AppColors.jordyBlue.withOpacity(0.36),
-                                  onPressed: isAdmin
+                                  onPressed: currentUserIsAdmin
                                       ? () {
                                           Navigator.push(
                                             context,
@@ -201,7 +201,6 @@ class _ActivityPageState extends State<ActivityPage> {
                                           ),
                                         ),
                                         Container(
-                                          height: 124,
                                           width: double.infinity,
                                           margin: EdgeInsets.only(
                                             left: 20,

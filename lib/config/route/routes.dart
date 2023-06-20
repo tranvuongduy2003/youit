@@ -28,4 +28,5 @@ class Routes {
 
   static const String fillInfoPage = 'FillInfoPage';
   static const String generalPage = 'GeneralPage';
+  static const String addMemberPage = 'AddMemberPage';
 }
