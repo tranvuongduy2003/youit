@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
@@ -61,26 +60,20 @@ class _GroupPageState extends State<GroupPage>
             margin: EdgeInsets.only(top: 30),
             child: Column(
               children: <Widget>[
+                // SEARCH BAR
                 Container(
-                  height: 80,
-                  //width: double.infinity,
+                  padding: EdgeInsets.all(10),
                   color: AppColors.white,
                   child: Row(
                     children: <Widget>[
                       Expanded(
                         child: Container(
                           height: 50,
-                          // width: MediaQuery.of(context).size.width * 0.7,
-                          margin: EdgeInsets.only(
-                            left: 20,
-                            right: 10,
-                          ),
                           alignment: Alignment.center,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(45),
                             color: AppColors.grey.withOpacity(1),
                           ),
-                          padding: EdgeInsets.symmetric(horizontal: 20),
                           child: TextField(
                             onSubmitted: (value) {
                               setState(() {
@@ -90,10 +83,11 @@ class _GroupPageState extends State<GroupPage>
                             controller: _searchController,
                             textInputAction: TextInputAction.search,
                             decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
                               suffixIcon: IconButton(
                                 icon: Icon(
                                   Icons.search,
-                                  //   size: 20,
                                   color: Colors.black,
                                 ),
                                 onPressed: () {
@@ -110,32 +104,30 @@ class _GroupPageState extends State<GroupPage>
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          right: 12,
-                        ),
-                        child: CircleButton(
-                          buttonColor: AppColors.jordyBlue.withOpacity(0.36),
-                          onPressed: () {
-                            showDialog(
-                              context: context,
-                              barrierDismissible: false,
-                              builder: (BuildContext context) {
-                                return GroupForm(
-                                  userId: userId,
-                                  userName: futureSnapshot.data!['userName'],
-                                );
-                              },
-                            );
-                          },
-                          icon: Icon(Icons.add),
-                          size: 50,
-                          isImageButton: false,
-                        ),
+                      SizedBox(width: 10),
+                      CircleButton(
+                        buttonColor: AppColors.jordyBlue.withOpacity(0.36),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (BuildContext context) {
+                              return GroupForm(
+                                userId: userId,
+                                userName: futureSnapshot.data!['userName'],
+                              );
+                            },
+                          );
+                        },
+                        icon: Icon(Icons.add),
+                        size: 50,
+                        isImageButton: false,
                       ),
                     ],
                   ),
                 ),
+
+                // TAB BAR
                 Material(
                   color: _selectedIndex == 0
                       ? AppColors.blue.withOpacity(0.36)
@@ -171,8 +163,10 @@ class _GroupPageState extends State<GroupPage>
                             'Tất cả các nhóm',
                             style: TextStyle(
                               fontFamily: 'Montserrat',
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
+                              fontSize: 16,
+                              fontWeight: _selectedIndex == 0
+                                  ? FontWeight.w600
+                                  : FontWeight.w500,
                               color: _selectedIndex == 0
                                   ? AppColors.redPigment
                                   : AppColors.primaryColor,
@@ -185,8 +179,10 @@ class _GroupPageState extends State<GroupPage>
                           'Nhóm của bạn',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 16,
+                            fontWeight: _selectedIndex == 1
+                                ? FontWeight.w600
+                                : FontWeight.w500,
                             color: _selectedIndex == 1
                                 ? Color(0xFF051C40)
                                 : AppColors.blue,
@@ -196,6 +192,8 @@ class _GroupPageState extends State<GroupPage>
                     ],
                   ),
                 ),
+
+                // GROUP LIST
                 StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('groups')

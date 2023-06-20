@@ -13,6 +13,9 @@ class DatabaseService {
   final CollectionReference chatsCollection =
       FirebaseFirestore.instance.collection('chats');
 
+  final CollectionReference documentsCollection =
+      FirebaseFirestore.instance.collection('documents');
+
   Future updateUserData(String email, String userName) async {
     return await usersCollection.doc(uid).set({
       'userName': userName,
@@ -117,6 +120,16 @@ class DatabaseService {
         .doc(groupId)
         .collection('messages')
         .add(chatMessageData);
+  }
+
+  Future saveDocuments(String groupId, String documentUrl, String senderId,
+      String senderName) async {
+    await documentsCollection.add({
+      'groupId': groupId,
+      'documentUrl': documentUrl,
+      'senderId': senderId,
+      'senderName': senderName,
+    });
   }
 
   Future updateUserInfoData(String fullName, String department, int session,

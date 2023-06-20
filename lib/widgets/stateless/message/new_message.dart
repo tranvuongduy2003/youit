@@ -41,7 +41,6 @@ class _NewMessageState extends State<NewMessage> {
           .doc(user.uid)
           .get();
       if (widget.isOneOnOneChat) {
-        print(widget.chatId);
         DatabaseService(uid: user.uid).sendUserMessage(widget.chatId, {
           'text': _enteredMessage.trim(),
           'sender': userData['userName'],
@@ -52,6 +51,14 @@ class _NewMessageState extends State<NewMessage> {
           'createAt': DateTime.now(),
         });
       } else {
+        if (_imageUrl != null) {
+          DatabaseService(uid: user.uid).saveDocuments(
+              widget.groupId, _imageUrl!, user.uid, userData['userName']);
+        }
+        if (_fileUrl != null) {
+          DatabaseService(uid: user.uid).saveDocuments(
+              widget.groupId, _fileUrl!, user.uid, userData['userName']);
+        }
         DatabaseService(uid: user.uid).sendGroupMessage(widget.groupId, {
           'message': _enteredMessage.trim(),
           'sender': userData['userName'],

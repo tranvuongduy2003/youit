@@ -81,7 +81,6 @@ class MessageWidget extends StatelessWidget {
                 }
 
                 final chatDocs = snapshot.data!.docs;
-                print(chatDocs[0].data());
 
                 return Container(
                   padding: EdgeInsets.symmetric(horizontal: 8),
