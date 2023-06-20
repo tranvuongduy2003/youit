@@ -122,14 +122,8 @@ class DatabaseService {
         .add(chatMessageData);
   }
 
-  Future saveDocuments(String groupId, String documentUrl, String senderId,
-      String senderName) async {
-    await documentsCollection.add({
-      'groupId': groupId,
-      'documentUrl': documentUrl,
-      'senderId': senderId,
-      'senderName': senderName,
-    });
+  Future saveDocuments(Map<String, dynamic> documentData) async {
+    await documentsCollection.add(documentData);
   }
 
   Future updateUserInfoData(String fullName, String department, int session,

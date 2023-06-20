@@ -52,12 +52,22 @@ class _NewMessageState extends State<NewMessage> {
         });
       } else {
         if (_imageUrl != null) {
-          DatabaseService(uid: user.uid).saveDocuments(
-              widget.groupId, _imageUrl!, user.uid, userData['userName']);
+          DatabaseService(uid: user.uid).saveDocuments({
+            'groupId': widget.groupId,
+            'documentUrl': _imageUrl!,
+            'senderId': user.uid,
+            'senderName': userData['userName'],
+            'createdAt': DateTime.now(),
+          });
         }
         if (_fileUrl != null) {
-          DatabaseService(uid: user.uid).saveDocuments(
-              widget.groupId, _fileUrl!, user.uid, userData['userName']);
+          DatabaseService(uid: user.uid).saveDocuments({
+            'groupId': widget.groupId,
+            'documentUrl': _fileUrl!,
+            'senderId': user.uid,
+            'senderName': userData['userName'],
+            'createdAt': DateTime.now(),
+          });
         }
         DatabaseService(uid: user.uid).sendGroupMessage(widget.groupId, {
           'message': _enteredMessage.trim(),
