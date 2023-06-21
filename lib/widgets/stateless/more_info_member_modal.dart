@@ -9,22 +9,31 @@ import '../../service/database_service.dart';
 import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/text_circle_button.dart';
 
-class MoreInfoModal extends StatelessWidget {
+class MoreInfoModal extends StatefulWidget {
   const MoreInfoModal({
     super.key,
     required this.avtURL,
     required this.destinationUserId,
+    required this.currentUserIsAdmin,
+    required this.groupId,
   });
   final String avtURL;
-
+  final bool currentUserIsAdmin;
   final String destinationUserId;
+  final String groupId;
 
   @override
+  State<MoreInfoModal> createState() => _MoreInfoModalState();
+}
+
+class _MoreInfoModalState extends State<MoreInfoModal> {
+  @override
   Widget build(BuildContext context) {
+    bool _isLoading = false;
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('users')
-            .doc(destinationUserId)
+            .doc(widget.destinationUserId)
             .get(),
         builder: (ctx, futureSnapshot) {
           if (futureSnapshot.connectionState == ConnectionState.waiting) {
@@ -57,7 +66,7 @@ class MoreInfoModal extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: CircleAvatar(
                             radius: 40,
-                            backgroundImage: NetworkImage(avtURL),
+                            backgroundImage: NetworkImage(widget.avtURL),
                           ),
                         ),
                         Expanded(
@@ -78,46 +87,84 @@ class MoreInfoModal extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => ProfilePage(
-                                        userId: destinationUserId,
+                                        userId: widget.destinationUserId,
                                       )));
                         },
                         size: 60),
                     txt: 'Xem thông tin',
                   ),
-                  TextCircleButton(
-                    btn: CircleButton(
-                        isImageButton: false,
-                        icon: Icon(
-                          Icons.chat_outlined,
-                          size: 33,
-                        ),
-                        buttonColor: Color(0xff92F696),
-                        onPressed: () async {
-                          try {
-                            final currentUserId =
-                                FirebaseAuth.instance.currentUser!.uid;
+                  _isLoading
+                      ? CircularProgressIndicator()
+                      : TextCircleButton(
+                          btn: CircleButton(
+                              isImageButton: false,
+                              icon: Icon(
+                                Icons.chat_outlined,
+                                size: 33,
+                              ),
+                              buttonColor: Color(0xff92F696),
+                              onPressed: () async {
+                                try {
+                                  final currentUserId =
+                                      FirebaseAuth.instance.currentUser!.uid;
 
-                            DatabaseService(uid: currentUserId)
-                                .startChat(destinationUserId)
-                                .then(
-                              (chatId) {
-                                print(chatId);
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (ctx) => MessageDetailPage(
-                                        chatId: chatId,
-                                        destinationUserId: destinationUserId),
-                                  ),
-                                );
+                                  DatabaseService(uid: currentUserId)
+                                      .startChat(widget.destinationUserId)
+                                      .then(
+                                    (chatId) {
+                                      print(chatId);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (ctx) => MessageDetailPage(
+                                              chatId: chatId,
+                                              destinationUserId:
+                                                  widget.destinationUserId),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                } catch (e) {
+                                  print(e);
+                                }
                               },
-                            );
-                          } catch (e) {
-                            print(e);
-                          }
-                        },
-                        size: 60),
-                    txt: 'Trò chuyện',
-                  )
+                              size: 60),
+                          txt: 'Trò chuyện',
+                        ),
+                  if (widget.currentUserIsAdmin)
+                    TextCircleButton(
+                      btn: CircleButton(
+                          isImageButton: false,
+                          icon: Icon(
+                            Icons.star,
+                            size: 33,
+                          ),
+                          buttonColor: Color(0xffFCFF7B),
+                          onPressed: () async {
+                            setState(() {
+                              _isLoading = true;
+                            });
+                            try {
+                              final currentUserId =
+                                  FirebaseAuth.instance.currentUser!.uid;
+
+                              await DatabaseService(uid: currentUserId)
+                                  .appointedAsAdmin(
+                                      widget.groupId,
+                                      widget.destinationUserId,
+                                      futureSnapshot.data!.data()!['userName']);
+                              if (context.mounted) {
+                                Navigator.pop(context);
+                              }
+                            } catch (e) {
+                              print(e);
+                            }
+                            setState(() {
+                              _isLoading = false;
+                            });
+                          },
+                          size: 60),
+                      txt: 'Chỉ định làm Admin',
+                    )
                 ],
               ),
             ),

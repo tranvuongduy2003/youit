@@ -33,7 +33,6 @@ class _MemberListPageState extends State<MemberListPage> {
 
   String avtURL =
       'https://media.istockphoto.com/id/1387522045/vi/anh/m%C3%A8o-x%C3%A1m-l%E1%BB%9Bn-v%C3%A0-nghi%C3%AAm-t%C3%BAc.jpg?s=612x612&w=0&k=20&c=xoWOttW9yoWSWk-ju-CwdDeygkyrCVClytGobWE4aZA=';
-  bool userIsAdmin = false;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +45,13 @@ class _MemberListPageState extends State<MemberListPage> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           }
+          if (snapshot.hasError) {
+            print(snapshot.error);
+          }
 
           List<dynamic> members = snapshot.data!['members'];
-          String adminId = getId(snapshot.data!['admin']);
-          String userId = FirebaseAuth.instance.currentUser!.uid;
-          if (userId == adminId) {
-            userIsAdmin = true;
-          }
+          String currentUserId = FirebaseAuth.instance.currentUser!.uid;
+          print(members.length);
 
           return Scaffold(
             appBar: HeaderBar(
@@ -72,7 +71,9 @@ class _MemberListPageState extends State<MemberListPage> {
                       height: 65,
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       decoration: BoxDecoration(
-                          color: Color(0xffF4F087),
+                          color: currentUserId == getId(members[index])
+                              ? Color(0xffF4F087).withOpacity(0.36)
+                              : null,
                           borderRadius: BorderRadius.all(Radius.circular(30))),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,44 +98,53 @@ class _MemberListPageState extends State<MemberListPage> {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              if (getId(members[index]) == adminId)
-                                Icon(Icons.star_outline),
+                              if (getId(members[index]) ==
+                                  getId(snapshot.data!['admin']))
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.red,
+                                  size: 30,
+                                ),
                             ],
                           ),
-                          if (userId != getId(members[index]))
+                          if (currentUserId != getId(members[index]))
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
                                   padding:
                                       const EdgeInsets.symmetric(horizontal: 5),
-                                  child: userIsAdmin
+                                  child: currentUserId ==
+                                          getId(snapshot.data!['admin'])
                                       ? CircleButton(
                                           buttonColor: AppColors.pinkRed,
                                           onPressed: () {
                                             showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (context) {
-                                                  return DeleteMemberModal(
-                                                    groupId: widget.groupId,
-                                                    groupName: snapshot
-                                                        .data!['groupName'],
-                                                    userDeleteId:
-                                                        getId(members[index]),
-                                                    userDeleteName:
-                                                        getName(members[index]),
-                                                  );
-                                                });
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              context: context,
+                                              builder: (context) {
+                                                return DeleteMemberModal(
+                                                  groupId: widget.groupId,
+                                                  groupName: snapshot
+                                                      .data!['groupName'],
+                                                  userDeleteId: getId(
+                                                      members[index]
+                                                          .toString()),
+                                                  userDeleteName: getName(
+                                                      members[index]
+                                                          .toString()),
+                                                );
+                                              },
+                                            );
                                           },
                                           size: 40,
                                           isImageButton: false,
-                                          icon: Icon(Icons.close),
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 20,
+                                          ),
                                         )
                                       : null,
                                 ),
@@ -150,15 +160,24 @@ class _MemberListPageState extends State<MemberListPage> {
                                           context: context,
                                           builder: (context) {
                                             return MoreInfoModal(
+                                              groupId: widget.groupId,
                                               destinationUserId:
                                                   getId(members[index]),
                                               avtURL: avtURL,
+                                              currentUserIsAdmin:
+                                                  currentUserId ==
+                                                      getId(snapshot
+                                                          .data!['admin']
+                                                          .toString()),
                                             );
                                           });
                                     },
                                     size: 40,
                                     isImageButton: false,
-                                    icon: Icon(Icons.more_vert),
+                                    icon: Icon(
+                                      Icons.more_vert,
+                                      size: 20,
+                                    ),
                                   ),
                                 ),
                               ],

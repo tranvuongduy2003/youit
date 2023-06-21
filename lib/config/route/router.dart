@@ -5,8 +5,19 @@ import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
+<<<<<<< HEAD
+import 'package:you_it/screens/group/add_member_page.dart';
+import 'package:you_it/screens/message/message_detail_page.dart';
+import 'package:you_it/screens/message/message_page.dart';
+import 'package:you_it/screens/profile/edit_description_page.dart';
+import 'package:you_it/screens/profile/edit_info_page.dart';
+import 'package:you_it/screens/profile/edit_link_page.dart';
+import 'package:you_it/screens/profile/edit_profile_page.dart';
+import 'package:you_it/screens/profile/profile_page.dart';
+=======
 import 'package:you_it/screens/general/chang_password.dart';
 import 'package:you_it/screens/general/genaral_page.dart';
+>>>>>>> c3470de8b2419caf4a9d6872abdbdf914091e675
 import 'package:you_it/screens/group/group_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 
@@ -106,6 +117,10 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
         }
+      // case Routes.addMemberPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const AddMemberPage());
+      //   }
       default:
         {
           return MaterialPageRoute(

@@ -70,13 +70,17 @@ class _AppDrawerState extends State<AppDrawer> {
                       vertical: 40,
                       horizontal: 30,
                     ),
-                    child: Text(
-                      widget.groupName,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 150),
+                      child: Text(
+                        widget.groupName,
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          color: AppColors.white,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
+                        ),
                       ),
                     ),
                   ),

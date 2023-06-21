@@ -31,45 +31,48 @@ class MessageDetailPage extends StatelessWidget {
         }
 
         final data = snapshot.data!.data()! as Map<String, dynamic>;
-        return Scaffold(
-          appBar: HeaderBar(
-            title: Column(
+        return GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Scaffold(
+            appBar: HeaderBar(
+              title: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      CircleAvatar(
+                        radius: 20,
+                        backgroundImage:
+                            NetworkImage("https://picsum.photos/200"),
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        data['userName'],
+                        style: AppTextStyles.appBarText,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    data['isOnline'] ? 'Online' : 'Offline',
+                    style: AppTextStyles.labelTextField,
+                  )
+                ],
+              ),
+              handler: () => Navigator.of(context).pop(),
+            ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage:
-                          NetworkImage("https://picsum.photos/200"),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      data['userName'],
-                      style: AppTextStyles.appBarText,
-                    ),
-                  ],
-                ),
-                Text(
-                  data['isOnline'] ? 'Online' : 'Offline',
-                  style: AppTextStyles.labelTextField,
+                Messages(chatId: chatId),
+                NewMessage(
+                  isOneOnOneChat: true,
+                  chatId: chatId,
                 )
               ],
             ),
-            handler: () => Navigator.of(context).pop(),
-          ),
-          body: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Messages(chatId: chatId),
-              NewMessage(
-                isOneOnOneChat: true,
-                chatId: chatId,
-              )
-            ],
           ),
         );
       },

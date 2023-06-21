@@ -73,7 +73,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Container(
                     margin: EdgeInsets.only(top: 80, bottom: 50),
                     child: Text(
-                      'We will send to your email a password reset link',
+                      'Chúng tôi sẽ gửi link đổi lại mật khẩu vào email của bạn',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,
