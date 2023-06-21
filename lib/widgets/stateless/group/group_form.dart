@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
 import 'package:you_it/widgets/stateless/show_snackbar.dart';
 
@@ -96,10 +95,24 @@ class _GroupFormState extends State<GroupForm> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      titlePadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      actionsPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(56),
+        borderRadius: BorderRadius.circular(20),
       ),
+      title: Text(
+        'Tên nhóm',
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      content: enterName(context),
       actions: [
         Column(
           children: <Widget>[
@@ -127,7 +140,7 @@ class _GroupFormState extends State<GroupForm> {
               'Tạo nhóm',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 22,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black.withOpacity(0.8),
               ),
@@ -150,7 +163,7 @@ class _GroupFormState extends State<GroupForm> {
               'Hủy',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 22,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black.withOpacity(0.8),
               ),
@@ -158,58 +171,39 @@ class _GroupFormState extends State<GroupForm> {
           ],
         ),
       ],
-      actionsPadding: EdgeInsets.symmetric(vertical: 10),
       actionsAlignment: MainAxisAlignment.spaceAround,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Text(
-              'Tên nhóm',
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          enterName(context),
-        ],
-      ),
     );
   }
 
-  Widget enterName(context) => Container(
-        margin: EdgeInsets.only(top: 10),
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: 50,
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: AppColors.white,
-          border: Border.all(
-            color: AppColors.black.withOpacity(0.11),
-            width: 0.5,
-          ),
+  Widget enterName(context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: AppColors.white,
+        border: Border.all(
+          color: AppColors.black.withOpacity(0.11),
+          width: 0.5,
         ),
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintStyle: TextStyle(
-              color: AppColors.black.withOpacity(0.5),
-              fontSize: 19,
-            ),
-            hintText: 'Nhập tên nhóm...',
-            border: InputBorder.none,
+      ),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintStyle: TextStyle(
+            color: AppColors.black.withOpacity(0.5),
+            fontSize: 18,
           ),
-          style: TextStyle(
-            color: AppColors.black.withOpacity(1),
-            fontSize: 19,
-          ),
+          hintText: 'Nhập tên nhóm...',
+          border: InputBorder.none,
         ),
-      );
+        style: TextStyle(
+          color: AppColors.black.withOpacity(1),
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
 }
