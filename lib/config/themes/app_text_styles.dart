@@ -9,6 +9,21 @@ class AppTextStyles {
     fontSize: 28,
   );
 
+  static const emailSearch = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.startDust,
+    fontSize: 14,
+    fontStyle: FontStyle.italic,
+  );
+
+  static const mont23_600 = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.inputValue,
+    fontSize: 23,
+  );
+
   static const modalTitle = TextStyle(
     fontFamily: 'Montserrat',
     fontWeight: FontWeight.w600,

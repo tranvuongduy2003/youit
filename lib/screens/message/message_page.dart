@@ -22,14 +22,6 @@ class _MessagePageState extends State<MessagePage> {
   String _searchText = '';
   @override
   Widget build(BuildContext context) {
-    final headerBar = HeaderBar(
-      title: Text(
-        'Trò chuyện',
-        style: AppTextStyles.appBarText,
-      ),
-      handler: () => Navigator.of(context).pop(),
-    );
-
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: HeaderBar(
@@ -38,130 +30,139 @@ class _MessagePageState extends State<MessagePage> {
           style: AppTextStyles.appBarText,
         ),
         handler: () => Navigator.of(context).pop(),
+        isShowIconButton: false,
       ),
       body: StreamBuilder(
-          stream: FirebaseFirestore.instance
-              .collection('chats')
-              .orderBy('lastMessageTime', descending: true)
-              .snapshots(),
-          builder: (context, chatssnapshot) {
-            if (chatssnapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
-            }
+        stream: FirebaseFirestore.instance
+            .collection('chats')
+            .orderBy('lastMessageTime', descending: true)
+            .snapshots(),
+        builder: (context, chatssnapshot) {
+          if (chatssnapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
 
-            if (chatssnapshot.hasError) {
-              print(chatssnapshot.error);
-            }
+          if (chatssnapshot.hasError) {
+            print(chatssnapshot.error);
+          }
 
-            if (chatssnapshot.hasData) {
-              return Column(
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      Container(
-                        height: 50,
-                        // width: MediaQuery.of(context).size.width * 0.7,
-                        margin: EdgeInsets.only(
-                          left: 20,
-                          right: 10,
-                          top: 10,
-                        ),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(45),
-                          color: AppColors.grey.withOpacity(1),
-                        ),
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        child: TextField(
-                          onSubmitted: (value) {
-                            setState(() {
-                              _searchText = value;
-                            });
-                          },
-                          controller: _searchController,
-                          textInputAction: TextInputAction.search,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: Icon(
-                                Icons.search,
-                                //   size: 20,
-                                color: Colors.black,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _searchText = _searchController.text;
-                                });
-                              },
-                              //   color: Colors.black,
+          if (chatssnapshot.hasData) {
+            return Column(
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      height: 50,
+                      // width: MediaQuery.of(context).size.width * 0.7,
+                      margin: EdgeInsets.only(
+                        left: 20,
+                        right: 10,
+                        top: 10,
+                      ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(45),
+                        color: AppColors.grey.withOpacity(1),
+                      ),
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: TextField(
+                        onSubmitted: (value) {
+                          setState(() {
+                            _searchText = value;
+                          });
+                        },
+                        controller: _searchController,
+                        textInputAction: TextInputAction.search,
+                        decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              //   size: 20,
+                              color: Colors.black,
                             ),
-                            hintText: 'Tìm kiếm...',
-                            hintStyle: AppTextStyles.body,
-                            border: InputBorder.none,
+                            onPressed: () {
+                              setState(() {
+                                _searchText = _searchController.text;
+                              });
+                            },
+                            //   color: Colors.black,
                           ),
+                          hintText: 'Tìm kiếm...',
+                          hintStyle: AppTextStyles.body,
+                          border: InputBorder.none,
                         ),
                       ),
-                      Divider(),
-                    ],
+                    ),
+                    Divider(),
+                  ],
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: chatssnapshot.data!.size,
+                    itemBuilder: (ctx, index) {
+                      final data = chatssnapshot.data!.docs;
+
+                      final participantsData =
+                          data[index]['participants'] as Map<String, dynamic>;
+
+                      if (participantsData.keys.contains(currentUserId)) {
+                        //tim id cua user dang nhan
+                        final String otherUserId =
+                            participantsData.keys.singleWhere(
+                          (userId) => userId != currentUserId,
+                        );
+
+                        return FutureBuilder(
+                          future: FirebaseFirestore.instance
+                              .collection('users')
+                              .doc(otherUserId)
+                              .get(),
+                          builder: (context, usersnapshot) {
+                            if (usersnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return Container();
+                            }
+                            if (usersnapshot.hasError) {}
+                            if (!usersnapshot.hasData) {
+                              return Container();
+                            }
+
+                            final String otherUserName =
+                                usersnapshot.data!['userName'];
+
+                            if (_searchText.isEmpty ||
+                                otherUserName
+                                    .toLowerCase()
+                                    .contains(_searchText.toLowerCase())) {
+                              //return tat ca doan chat
+                              return MessageUser(
+                                isMe: data[index]['lastSenderId'] ==
+                                    currentUserId,
+                                isOnline: usersnapshot.data!['isOnline'],
+                                userId: otherUserId,
+                                chatId: data[index]['chatId'],
+                                lastMessage: data[index]['lastMessage'],
+                                userName: otherUserName,
+                                lastMessageTime: data[index]['lastMessageTime'],
+                              );
+                            }
+
+                            return SizedBox.shrink();
+                          },
+                        );
+                      }
+                      return SizedBox.shrink();
+                    },
                   ),
-                  Expanded(
-                    child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: chatssnapshot.data!.size,
-                        itemBuilder: (ctx, index) {
-                          final data = chatssnapshot.data!.docs;
-
-                          final participantsData = data[index]['participants']
-                              as Map<String, dynamic>;
-
-                          if (participantsData.keys.contains(currentUserId)) {
-                            //tim id cua user dang nhan
-                            final String otherUserId =
-                                participantsData.keys.singleWhere(
-                              (userId) => userId != currentUserId,
-                            );
-
-                            return FutureBuilder(
-                                future: FirebaseFirestore.instance
-                                    .collection('users')
-                                    .doc(otherUserId)
-                                    .get(),
-                                builder: (context, usersnapshot) {
-                                  if (usersnapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Container();
-                                  }
-
-                                  final String otherUserName =
-                                      usersnapshot.data!['userName'];
-
-                                  if (_searchText.isEmpty ||
-                                      otherUserName.toLowerCase().contains(
-                                          _searchText.toLowerCase())) {
-                                    //return tat ca doan chat
-                                    return MessageUser(
-                                      isMe: data[index]['lastSenderId'] ==
-                                          currentUserId,
-                                      isOnline: usersnapshot.data!['isOnline'],
-                                      userId: otherUserId,
-                                      chatId: data[index]['chatId'],
-                                      lastMessage: data[index]['lastMessage'],
-                                      userName: otherUserName,
-                                      lastMessageTime: data[index]
-                                          ['lastMessageTime'],
-                                    );
-                                  }
-
-                                  return SizedBox.shrink();
-                                });
-                          }
-                        }),
-                  )
-                ],
-              );
-            }
-            return Container();
-          }),
+                )
+              ],
+            );
+          }
+          return Container();
+        },
+      ),
     );
   }
 }
