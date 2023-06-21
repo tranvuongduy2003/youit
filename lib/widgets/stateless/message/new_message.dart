@@ -8,6 +8,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/network/client.dart';
 import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/show_snackbar.dart';
 
@@ -15,12 +16,14 @@ class NewMessage extends StatefulWidget {
   const NewMessage({
     super.key,
     this.groupId = '',
+    this.groupName = '',
     this.isOneOnOneChat = false,
     this.chatId = '',
   });
 
   final String chatId;
   final String groupId;
+  final String groupName;
   final bool isOneOnOneChat;
 
   @override
@@ -78,6 +81,14 @@ class _NewMessageState extends State<NewMessage> {
           'senderId': user.uid,
           'createAt': DateTime.now(),
         });
+        Client().sendMessageToGroup(notification: {
+          'title': '$widget.groupName',
+          'body': _fileUrl != null
+              ? 'Đã gửi một file.'
+              : _imageUrl != null
+                  ? 'Đã gửi một ảnh.'
+                  : _enteredMessage.trim()
+        }, groupId: widget.groupId);
       }
       setState(() {
         _messageController.clear();
