@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:you_it/network/client.dart';
 import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
-import 'package:you_it/widgets/stateless/post_form.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../widgets/stateless/header_bar.dart';
 
 class PostingPage extends StatefulWidget {
-  const PostingPage({super.key, required this.groupId});
+  const PostingPage(
+      {super.key, required this.groupId, required this.groupName});
 
   final String groupId;
+  final String groupName;
 
   @override
   State<PostingPage> createState() => _PostingPageState();
@@ -29,6 +31,12 @@ class _PostingPageState extends State<PostingPage> {
     await DatabaseService(uid: FirebaseAuth.instance.currentUser!.uid)
         .postingTopic(topic, content, widget.groupId, userName)
         .then((value) => Navigator.of(context).pop());
+
+    Client().sendMessageToGroup(
+      title: 'Thông báo: ${topic} (${widget.groupName})',
+      body: content,
+      groupId: widget.groupId,
+    );
 
     setState(() {
       _isLoading = false;

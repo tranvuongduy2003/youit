@@ -132,6 +132,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                             groupName: widget.groupName,
                                             currentWidget: ActivityPage(
                                               groupId: widget.groupId,
+                                              groupName: widget.groupName,
                                             ),
                                           ),
                                         ),
