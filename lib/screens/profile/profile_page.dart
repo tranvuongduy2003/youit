@@ -8,11 +8,13 @@ import 'package:you_it/widgets/stateless/header_bar.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
 
+import '../../service/database_service.dart';
 import '../../widgets/stateless/description.dart';
 import '../../widgets/stateless/link_information.dart';
 
 import '../../screens/profile/edit_profile_page.dart';
 import '../../widgets/stateless/personal_information.dart';
+import '../message/message_detail_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key, required this.userId});
@@ -22,17 +24,35 @@ class ProfilePage extends StatelessWidget {
   Widget buildButton(BuildContext context, String title, bool isMe) {
     return ElevatedButton(
       onPressed: () {
-        isMe
-            ? Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) {
-                    return EditProfilePage(
-                      userId: userId,
-                    );
-                  },
-                ),
-              )
-            : Navigator.of(context).pushNamed(Routes.activityPage);
+        if (isMe) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) {
+                return EditProfilePage(
+                  userId: userId,
+                );
+              },
+            ),
+          );
+        } else {
+          try {
+            final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+
+            DatabaseService(uid: currentUserId).startChat(userId).then(
+              (chatId) {
+                print(chatId);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => MessageDetailPage(
+                        chatId: chatId, destinationUserId: userId),
+                  ),
+                );
+              },
+            );
+          } catch (e) {
+            print(e);
+          }
+        }
       },
       style: ElevatedButton.styleFrom(
           backgroundColor:
@@ -57,10 +77,10 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int likeNumber = 200000;
+    // int likeNumber = 200000;
     bool isMe = false;
-    String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
-    likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
+    // String likeNumberFormat = NumberFormat.decimalPattern().format(likeNumber);
+    // likeNumberFormat = likeNumberFormat.replaceAll(',', '.');
 
     return StreamBuilder(
         stream: FirebaseFirestore.instance
@@ -94,38 +114,46 @@ class ProfilePage extends StatelessWidget {
                     height: 10,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const CircleAvatar(
                         maxRadius: 40,
                         backgroundColor: AppColors.primaryColor,
                       ),
+                      SizedBox(
+                        width: 40,
+                      ),
                       Container(
-                        padding: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //  mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Text(
                               data['userName'],
-                              style: AppTextStyles.sectionTitle,
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: 'Số lượt thích: ',
-                                style: AppTextStyles.body3,
-                                children: [
-                                  TextSpan(
-                                    text: likeNumberFormat,
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ],
+                              style: TextStyle(
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.fontColor,
+                                fontSize: 18,
                               ),
                             ),
+                            // const SizedBox(
+                            //   height: 8,
+                            // ),
+                            // RichText(
+                            //   text: TextSpan(
+                            //     text: 'Số lượt thích: ',
+                            //     style: AppTextStyles.body3,
+                            //     children: [
+                            //       TextSpan(
+                            //         text: likeNumberFormat,
+                            //         style: const TextStyle(
+                            //             fontWeight: FontWeight.w600),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),
@@ -138,10 +166,12 @@ class ProfilePage extends StatelessWidget {
                   ),
                   const Divider(),
                   PersonalInformation(
-                      department: (data['khoa'] == null) ? '' : data['khoa'],
+                      department: data['khoa'] ?? 'Chưa cập nhật',
                       address: data['address'],
-                      birthDay: (data['dob'] as Timestamp).toDate(),
-                      session: data['session']),
+                      birthDay: data['dob'] == null
+                          ? DateTime(1)
+                          : (data['dob'] as Timestamp).toDate(),
+                      session: data['session'] ?? -1),
                   const SizedBox(
                     height: 3,
                   ),

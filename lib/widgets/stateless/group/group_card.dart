@@ -54,10 +54,10 @@ class _GroupCardState extends State<GroupCard> {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         shape: RoundedRectangleBorder(),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           leading: CircleAvatar(
             radius: 30,
             child: Text(
@@ -70,12 +70,16 @@ class _GroupCardState extends State<GroupCard> {
               ),
             ),
           ),
-          title: Text(
-            widget.groupName,
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w600,
-              fontSize: 30,
+          title: Container(
+            constraints: BoxConstraints(maxWidth: 100),
+            child: Text(
+              widget.groupName,
+              style: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w600,
+                fontSize: 25,
+              ),
             ),
           ),
           subtitle: Row(
@@ -114,7 +118,7 @@ class _GroupCardState extends State<GroupCard> {
                         MaterialPageRoute(
                           builder: (ctx) => BottomNavBarPage(
                             selectedIndexDrawer: 0,
-                            groupName: widget.groupName,
+                            //  groupName: widget.groupName,
                             groupId: widget.groupId,
                             currentWidget: GroupChatPage(
                               groupId: widget.groupId,
@@ -129,8 +133,8 @@ class _GroupCardState extends State<GroupCard> {
                     elevation: MaterialStateProperty.all(0),
                     backgroundColor: MaterialStateProperty.all(
                       widget.isJoinGroup
-                          ? AppColors.lightBlue.withOpacity(1)
-                          : AppColors.primaryColor.withOpacity(1),
+                          ? AppColors.lightBlue
+                          : AppColors.primaryColor,
                     ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
@@ -138,7 +142,7 @@ class _GroupCardState extends State<GroupCard> {
                       ),
                     ),
                     padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(vertical: 15, horizontal: 23),
+                      EdgeInsets.symmetric(vertical: 12, horizontal: 20),
                     ),
                   ),
                 ),

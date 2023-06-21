@@ -73,13 +73,17 @@ class _AppDrawerState extends State<AppDrawer> {
                       vertical: 40,
                       horizontal: 30,
                     ),
-                    child: Text(
-                      widget.groupName,
-                      style: TextStyle(
-                        color: AppColors.white,
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 24,
+                    child: Container(
+                      constraints: BoxConstraints(maxWidth: 150),
+                      child: Text(
+                        widget.groupName,
+                        style: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          color: AppColors.white,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 24,
+                        ),
                       ),
                     ),
                   ),
@@ -111,7 +115,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 0,
                                             groupId: widget.groupId,
-                                            groupName: widget.groupName,
+                                            // groupName: widget.groupName,
                                             currentWidget: GroupChatPage(
                                               groupId: widget.groupId,
                                               groupName: widget.groupName,
@@ -128,7 +132,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 1,
                                             groupId: widget.groupId,
-                                            groupName: widget.groupName,
+                                            // groupName: widget.groupName,
                                             currentWidget: ActivityPage(
                                               groupId: widget.groupId,
                                             ),
@@ -145,7 +149,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 2,
                                             groupId: widget.groupId,
-                                            groupName: widget.groupName,
+                                            //    groupName: widget.groupName,
                                             currentWidget: UploadFilePage(),
                                           ),
                                         ),
@@ -159,7 +163,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 3,
                                             groupId: widget.groupId,
-                                            groupName: widget.groupName,
+                                            //    groupName: widget.groupName,
                                             currentWidget: GroupInformationPage(
                                               groupId: widget.groupId,
                                             ),

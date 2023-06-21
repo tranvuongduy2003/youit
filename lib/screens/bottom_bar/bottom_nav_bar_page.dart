@@ -15,13 +15,12 @@ class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({
     this.currentWidget = const GroupPage(),
     required this.groupId,
-    required this.groupName,
     required this.selectedIndexDrawer,
   });
 
   final Widget currentWidget;
   final String groupId;
-  final String groupName;
+
   final int selectedIndexDrawer;
 
   @override
@@ -63,7 +62,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       body: DrawerAndBottomNav(
         selectedIndexDrawer: widget.selectedIndexDrawer,
         groupId: widget.groupId,
-        groupName: widget.groupName,
         openDrawer: _openDrawer,
         closeDrawer: _closeDrawer,
         isShowDrawer: _isShowDrawer,

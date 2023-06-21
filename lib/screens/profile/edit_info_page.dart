@@ -145,7 +145,11 @@ class _EditInfoPageState extends State<EditInfoPage> {
   @override
   void initState() {
     super.initState();
-    birthDay = widget.birthday;
+    if (widget.birthday == DateTime(1)) {
+      birthDay = DateTime.now();
+    } else {
+      birthDay = widget.birthday;
+    }
     fullName = widget.fullName;
     department = widget.department;
     session = widget.session.toString();
