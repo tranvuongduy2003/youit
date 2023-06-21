@@ -231,7 +231,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     '--Chọn--',
                     style: AppTextStyles.body,
                   ),
-                  value: department,
+                  value: (department == '') ? null : department,
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Khoa',

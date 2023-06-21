@@ -138,7 +138,7 @@ class ProfilePage extends StatelessWidget {
                   ),
                   const Divider(),
                   PersonalInformation(
-                      department: data['khoa'],
+                      department: (data['khoa'] == null) ? '' : data['khoa'],
                       address: data['address'],
                       birthDay: (data['dob'] as Timestamp).toDate(),
                       session: data['session']),

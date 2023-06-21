@@ -183,7 +183,8 @@ class EditProfilePage extends StatelessWidget {
                               builder: (ctx) => EditInfoPage(
                                 address: data['address'],
                                 birthday: (data['dob'] as Timestamp).toDate(),
-                                department: data['khoa'],
+                                department:
+                                    (data['khoa'] == null) ? '' : data['khoa'],
                                 fullName: data['userName'],
                                 session: data['session'],
                               ),
@@ -193,7 +194,8 @@ class EditProfilePage extends StatelessWidget {
                       ],
                     ),
                     buildInformationRow('Tên', data['userName']),
-                    buildInformationRow('Khoa', data['khoa']),
+                    buildInformationRow(
+                        'Khoa', (data['khoa'] == null) ? '' : data['khoa']),
                     buildInformationRow(
                         'Khoá',
                         data['session'] == -1
