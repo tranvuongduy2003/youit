@@ -80,14 +80,14 @@ class _GeneralPageState extends State<GeneralPage> {
                         isImageButton: false,
                         icon: Icon(
                           Icons.key_sharp,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: AppColors.yellow,
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(Routes.changePasswordPage);
                         },
-                        size: 60),
+                        size: 50),
                     txt: 'Đổi mật khẩu',
                   ),
                   TextCircleButton(
