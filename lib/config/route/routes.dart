@@ -30,4 +30,5 @@ class Routes {
 
   static const String generalPage = 'GeneralPage';
   static const String changePasswordPage = 'ChangePasswordPage';
+  static const String addMemberPage = 'AddMemberPage';
 }

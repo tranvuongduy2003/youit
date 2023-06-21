@@ -5,10 +5,8 @@ import 'package:you_it/screens/group/posting_page.dart';
 import 'package:you_it/service/database_service.dart';
 
 import '../../config/themes/app_text_styles.dart';
-import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../widgets/stateless/circle_button.dart';
-import '../../widgets/stateless/post_form.dart';
 
 class ActivityPage extends StatefulWidget {
   const ActivityPage({super.key, required this.groupId});
@@ -20,7 +18,7 @@ class ActivityPage extends StatefulWidget {
 }
 
 class _ActivityPageState extends State<ActivityPage> {
-  bool isAdmin = false;
+  bool currentUserIsAdmin = false;
 
   String getId(String res) {
     return res.substring(0, res.indexOf('_'));
@@ -39,11 +37,11 @@ class _ActivityPageState extends State<ActivityPage> {
           }
           if (getId(futureSnapshot.data!['admin']) ==
               FirebaseAuth.instance.currentUser!.uid) {
-            isAdmin = true;
+            currentUserIsAdmin = true;
           }
           print(getId(futureSnapshot.data!['admin']));
           print(FirebaseAuth.instance.currentUser!.uid);
-          print(isAdmin);
+          print(currentUserIsAdmin);
           return Scaffold(
             body: StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -60,10 +58,11 @@ class _ActivityPageState extends State<ActivityPage> {
                   return Scaffold(
                     floatingActionButtonLocation:
                         FloatingActionButtonLocation.centerFloat,
-                    floatingActionButton: snapshot.data!.docs.isNotEmpty
+                    floatingActionButton: snapshot.data!.docs.isNotEmpty &&
+                            currentUserIsAdmin
                         ? CircleButton(
                             buttonColor: AppColors.jordyBlue.withOpacity(0.36),
-                            onPressed: isAdmin
+                            onPressed: currentUserIsAdmin
                                 ? () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -102,23 +101,26 @@ class _ActivityPageState extends State<ActivityPage> {
                                 SizedBox(
                                   height: 40,
                                 ),
-                                CircleButton(
-                                  buttonColor:
-                                      AppColors.jordyBlue.withOpacity(0.36),
-                                  onPressed: isAdmin
-                                      ? () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) => PostingPage(
-                                                  groupId: widget.groupId),
-                                            ),
-                                          );
-                                        }
-                                      : null,
-                                  isImageButton: false,
-                                  icon: Icon(Icons.add),
-                                ),
+                                if (currentUserIsAdmin)
+                                  CircleButton(
+                                    buttonColor:
+                                        AppColors.jordyBlue.withOpacity(0.36),
+                                    onPressed: currentUserIsAdmin
+                                        ? () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PostingPage(
+                                                        groupId:
+                                                            widget.groupId),
+                                              ),
+                                            );
+                                          }
+                                        : null,
+                                    isImageButton: false,
+                                    icon: Icon(Icons.add),
+                                  ),
                               ],
                             ),
                           )
@@ -169,6 +171,8 @@ class _ActivityPageState extends State<ActivityPage> {
                                                     topic: data['topic'],
                                                     content: data['content'],
                                                     postId: data['postId'],
+                                                    currentUserIsAdmin:
+                                                        currentUserIsAdmin,
                                                   );
                                                 });
                                           },
@@ -201,7 +205,6 @@ class _ActivityPageState extends State<ActivityPage> {
                                           ),
                                         ),
                                         Container(
-                                          height: 124,
                                           width: double.infinity,
                                           margin: EdgeInsets.only(
                                             left: 20,
@@ -246,16 +249,19 @@ class _ActivityPageState extends State<ActivityPage> {
 }
 
 class _BuildDialog extends StatefulWidget {
-  const _BuildDialog(
-      {required this.groupId,
-      required this.topic,
-      required this.content,
-      required this.postId});
+  const _BuildDialog({
+    required this.groupId,
+    required this.topic,
+    required this.content,
+    required this.postId,
+    required this.currentUserIsAdmin,
+  });
 
   final String groupId;
   final String topic;
   final String content;
   final String postId;
+  final bool currentUserIsAdmin;
 
   @override
   State<_BuildDialog> createState() => _BuildDialogState();
@@ -356,50 +362,53 @@ class _BuildDialogState extends State<_BuildDialog> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Expanded(
-                  child: Column(
-                    children: [
-                      _isLoading
-                          ? CircularProgressIndicator()
-                          : CircleButton(
-                              buttonColor: Color(0xFFF41B1B).withOpacity(0.36),
-                              onPressed: () {
-                                setState(() {
-                                  _isLoading = true;
-                                });
-                                DatabaseService(
-                                        uid: FirebaseAuth
-                                            .instance.currentUser!.uid)
-                                    .deleteTopic(widget.groupId, widget.postId)
-                                    .then((value) {
+                if (widget.currentUserIsAdmin)
+                  Expanded(
+                    child: Column(
+                      children: [
+                        _isLoading
+                            ? CircularProgressIndicator()
+                            : CircleButton(
+                                buttonColor:
+                                    Color(0xFFF41B1B).withOpacity(0.36),
+                                onPressed: () {
                                   setState(() {
-                                    _isLoading = false;
+                                    _isLoading = true;
                                   });
-                                  Navigator.pop(context);
-                                });
-                              },
-                              isImageButton: false,
-                              icon: Icon(
-                                Icons.close,
-                                color: Color(0xFFF41B1B),
+                                  DatabaseService(
+                                          uid: FirebaseAuth
+                                              .instance.currentUser!.uid)
+                                      .deleteTopic(
+                                          widget.groupId, widget.postId)
+                                      .then((value) {
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+                                    Navigator.pop(context);
+                                  });
+                                },
+                                isImageButton: false,
+                                icon: Icon(
+                                  Icons.close,
+                                  color: Color(0xFFF41B1B),
+                                ),
                               ),
+                        Container(
+                          padding: EdgeInsets.only(top: 10),
+                          //width: 119,
+                          child: Text(
+                            'Xóa bài viết',
+                            style: TextStyle(
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFFFF0000),
+                              fontSize: 20,
                             ),
-                      Container(
-                        padding: EdgeInsets.only(top: 10),
-                        //width: 119,
-                        child: Text(
-                          'Xóa bài viết',
-                          style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontWeight: FontWeight.w600,
-                            color: Color(0xFFFF0000),
-                            fontSize: 20,
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
                 Expanded(
                   child: Column(
                     children: [

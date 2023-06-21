@@ -61,7 +61,7 @@ class _GroupCardState extends State<GroupCard> {
           ),
         ),
         child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           leading: CircleAvatar(
             radius: 30,
             child: Text(
@@ -74,12 +74,16 @@ class _GroupCardState extends State<GroupCard> {
               ),
             ),
           ),
-          title: Text(
-            widget.groupName,
-            style: TextStyle(
-              fontFamily: 'Montserrat',
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
+          title: Container(
+            constraints: BoxConstraints(maxWidth: 100),
+            child: Text(
+              widget.groupName,
+              style: TextStyle(
+                overflow: TextOverflow.ellipsis,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w600,
+                fontSize: 25,
+              ),
             ),
           ),
           subtitle: Container(
@@ -136,8 +140,8 @@ class _GroupCardState extends State<GroupCard> {
                     elevation: MaterialStateProperty.all(0),
                     backgroundColor: MaterialStateProperty.all(
                       widget.isJoinGroup
-                          ? AppColors.lightBlue.withOpacity(1)
-                          : AppColors.primaryColor.withOpacity(1),
+                          ? AppColors.lightBlue
+                          : AppColors.primaryColor,
                     ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(

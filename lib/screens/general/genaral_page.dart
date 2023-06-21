@@ -68,11 +68,11 @@ class _GeneralPageState extends State<GeneralPage> {
                         icon: Icon(
                           Icons.sunny,
                           color: Colors.white,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: Colors.white,
                         onPressed: () {},
-                        size: 60),
+                        size: 50),
                     txt: 'Chế độ',
                   ),
                   TextCircleButton(
@@ -80,14 +80,14 @@ class _GeneralPageState extends State<GeneralPage> {
                         isImageButton: false,
                         icon: Icon(
                           Icons.key_sharp,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: AppColors.yellow,
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(Routes.changePasswordPage);
                         },
-                        size: 60),
+                        size: 50),
                     txt: 'Đổi mật khẩu',
                   ),
                   TextCircleButton(
@@ -95,13 +95,13 @@ class _GeneralPageState extends State<GeneralPage> {
                         isImageButton: false,
                         icon: Icon(
                           Icons.logout,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: AppColors.pinkRed,
                         onPressed: () {
                           signOut(context);
                         },
-                        size: 60),
+                        size: 50),
                     txt: 'Đăng xuất',
                   ),
                 ],

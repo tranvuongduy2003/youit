@@ -81,6 +81,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           return WelcomePage();
         },
       ),
+      // home: WelcomePage(),
       //initialRoute: Routes.welcomePage,
       onGenerateRoute: router.Router.generateRoute,
     );

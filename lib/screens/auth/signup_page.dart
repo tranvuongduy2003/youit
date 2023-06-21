@@ -45,15 +45,16 @@ class _SignUpPageState extends State<SignUpPage> {
               'email': _email,
               'avatar': null,
               'groups': [],
-              'dob': null,
               'khoa': null,
               'createdAt': DateTime.now(),
-              'session': -1,
+              'session': null,
               'address': '',
               'githubLink': '',
               'gitlabLink': '',
               'linkedin': '',
               'description': '',
+              'dob': null,
+              'isOnline': true,
             },
           );
         }
