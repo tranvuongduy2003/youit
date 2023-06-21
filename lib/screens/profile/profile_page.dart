@@ -8,11 +8,13 @@ import 'package:you_it/widgets/stateless/header_bar.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
 
+import '../../service/database_service.dart';
 import '../../widgets/stateless/description.dart';
 import '../../widgets/stateless/link_information.dart';
 
 import '../../screens/profile/edit_profile_page.dart';
 import '../../widgets/stateless/personal_information.dart';
+import '../message/message_detail_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key, required this.userId});
@@ -22,17 +24,35 @@ class ProfilePage extends StatelessWidget {
   Widget buildButton(BuildContext context, String title, bool isMe) {
     return ElevatedButton(
       onPressed: () {
-        isMe
-            ? Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (_) {
-                    return EditProfilePage(
-                      userId: userId,
-                    );
-                  },
-                ),
-              )
-            : Navigator.of(context).pushNamed(Routes.activityPage);
+        if (isMe) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) {
+                return EditProfilePage(
+                  userId: userId,
+                );
+              },
+            ),
+          );
+        } else {
+          try {
+            final currentUserId = FirebaseAuth.instance.currentUser!.uid;
+
+            DatabaseService(uid: currentUserId).startChat(userId).then(
+              (chatId) {
+                print(chatId);
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (ctx) => MessageDetailPage(
+                        chatId: chatId, destinationUserId: userId),
+                  ),
+                );
+              },
+            );
+          } catch (e) {
+            print(e);
+          }
+        }
       },
       style: ElevatedButton.styleFrom(
           backgroundColor:
