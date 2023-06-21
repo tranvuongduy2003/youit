@@ -44,26 +44,33 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
             builder: (ctx) {
               return AlertDialog(
                 title: Text(
-                  'Lỗi',
+                  'Thông báo',
                   style: AppTextStyles.mont20,
                 ),
-                content: Text('Bạn đang là quản trị viên'),
+                content: Text(
+                  'Quản trị viên không thể rời nhóm. Vui lòng chỉ định một quản trị viên mới.',
+                  style: AppTextStyles.seenMessageTitle,
+                ),
                 actions: [
                   TextButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text('OK'))
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(
+                      'OK',
+                      style: AppTextStyles.mont20,
+                    ),
+                  )
                 ],
               );
             });
+      } else {
+        Navigator.of(context)
+            .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage);
       }
 
       setState(() {
         _isLoadingScreen = false;
       });
     });
-
-    Navigator.of(context)
-        .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage);
   }
 
   Future<void> openDialog(
