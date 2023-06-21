@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
 
@@ -22,6 +23,21 @@ class GroupChatPage extends StatefulWidget {
 
 class _GroupChatPageState extends State<GroupChatPage> {
   final GlobalKey<SliderDrawerState> keyDrawer = GlobalKey<SliderDrawerState>();
+
+  void setupPushNotifications() async {
+    final fcm = FirebaseMessaging.instance;
+
+    await fcm.requestPermission();
+
+    fcm.subscribeToTopic(widget.groupId);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    setupPushNotifications();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +164,7 @@ class MessageWidget extends StatelessWidget {
                                 itemCount: chatDocs.length,
                               ),
                             ),
-                      NewMessage(groupId: groupId),
+                      NewMessage(groupId: groupId, groupName: groupName),
                     ],
                   ),
                 );
