@@ -34,6 +34,9 @@ class _LoginPageState extends State<LoginPage> {
           email: _email, password: _password);
 
       DatabaseService(uid: credential.user!.uid).setUserOnlineStatus(true);
+      setState(() {
+        _isLoading = false;
+      });
 
       Navigator.of(context)
           .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage);
@@ -45,10 +48,10 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Wrong password provided for that user.')));
       }
+      setState(() {
+        _isLoading = false;
+      });
     }
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
