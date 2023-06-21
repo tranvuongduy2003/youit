@@ -5,7 +5,13 @@ import helmet from "helmet";
 import { ErrorException } from "../error-handler/error-exception";
 import { errorHandler } from "../error-handler/error-handler";
 
-admin.initializeApp();
+import firebaseAdminSdk from "../firebase-adminsdk.json";
+const serviceAccount = firebaseAdminSdk as admin.ServiceAccount;
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: `https://${firebaseAdminSdk.project_id}.firebaseio.com`,
+});
 
 const app = express();
 
@@ -16,17 +22,17 @@ app.use(express.json());
 app.use(errorHandler);
 
 app.post("/send-group-message", async (req: Request, res: Response) => {
-  const { notification, topic } = req.body;
-
-  console.log(req.body);
+  const { title, body, topic } = req.body;
 
   const message = {
-    notification: notification,
-    topic: topic,
+    notification: {
+      title: title,
+      body: body,
+    },
   };
 
   try {
-    const response = await admin.messaging().send(message);
+    const response = await admin.messaging().sendToTopic(topic, message);
     console.log("Successfully sent message:", response);
   } catch (error) {
     throw new ErrorException("400", error);

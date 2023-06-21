@@ -81,14 +81,14 @@ class _NewMessageState extends State<NewMessage> {
           'senderId': user.uid,
           'createAt': DateTime.now(),
         });
-        Client().sendMessageToGroup(notification: {
-          'title': '$widget.groupName',
-          'body': _fileUrl != null
-              ? 'Đã gửi một file.'
-              : _imageUrl != null
-                  ? 'Đã gửi một ảnh.'
-                  : _enteredMessage.trim()
-        }, groupId: widget.groupId);
+        Client().sendMessageToGroup(
+            title: widget.groupName,
+            body: _fileUrl != null
+                ? 'Đã gửi một file.'
+                : _imageUrl != null
+                    ? 'Đã gửi một ảnh.'
+                    : _enteredMessage.trim(),
+            groupId: widget.groupId);
       }
       setState(() {
         _messageController.clear();
