@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:you_it/service/database_service.dart';
-
-import 'package:you_it/widgets/stateless/sign_button.dart';
-import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/route/routes.dart';
+import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/service/database_service.dart';
+import 'package:you_it/widgets/stateless/sign_button.dart';
+
 import '../../widgets/stateful/input_password.dart';
 import '../../widgets/stateless/input.dart';
 
@@ -177,6 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               SignButton(
+                                loading: _isLoading,
                                 buttonText: 'Đăng nhập',
                                 textColor: AppColors.white,
                                 backgroundColor: AppColors.primaryColor,

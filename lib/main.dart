@@ -1,26 +1,26 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:you_it/screens/auth/welcome_page.dart';
-import 'package:you_it/screens/home/home_page.dart';
-import 'package:you_it/service/database_service.dart';
-import 'config/route/routes.dart';
-import 'firebase_options.dart';
-
-import 'package:you_it/screens/auth/login_page.dart';
-
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
-
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:you_it/screens/auth/welcome_page.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
+import 'package:you_it/service/database_service.dart';
 
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
+import 'firebase_options.dart';
+
+class TestClass {
+  static void callback(String id, int status, int progress) {}
+}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FlutterDownloader.initialize(debug: true, ignoreSsl: true);
+  FlutterDownloader.registerCallback(TestClass.callback);
   runApp(MyApp());
 }
 

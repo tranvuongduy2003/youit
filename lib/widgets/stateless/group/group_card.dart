@@ -54,8 +54,12 @@ class _GroupCardState extends State<GroupCard> {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
-        shape: RoundedRectangleBorder(),
+        margin: EdgeInsets.fromLTRB(5, 0, 5, 10),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
         child: ListTile(
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           leading: CircleAvatar(
@@ -82,18 +86,21 @@ class _GroupCardState extends State<GroupCard> {
               ),
             ),
           ),
-          subtitle: Row(
-            children: [
-              Icon(Icons.person_outline),
-              Text(
-                'Có ${widget.chatMembersNum} thành viên',
-                style: TextStyle(
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 16,
+          subtitle: Container(
+            margin: EdgeInsets.only(top: 5),
+            child: Row(
+              children: [
+                Icon(Icons.person_outline),
+                Text(
+                  'Có ${widget.chatMembersNum} thành viên',
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           trailing: isLoading
               ? CircularProgressIndicator()
@@ -103,7 +110,7 @@ class _GroupCardState extends State<GroupCard> {
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.w600,
-                      fontSize: 15,
+                      fontSize: 14,
                       color: widget.isJoinGroup
                           ? Color(0xFF051C40)
                           : Color(0xFFF12424),
@@ -118,7 +125,7 @@ class _GroupCardState extends State<GroupCard> {
                         MaterialPageRoute(
                           builder: (ctx) => BottomNavBarPage(
                             selectedIndexDrawer: 0,
-                            //  groupName: widget.groupName,
+                            groupName: widget.groupName,
                             groupId: widget.groupId,
                             currentWidget: GroupChatPage(
                               groupId: widget.groupId,
@@ -142,7 +149,7 @@ class _GroupCardState extends State<GroupCard> {
                       ),
                     ),
                     padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                      EdgeInsets.symmetric(vertical: 14, horizontal: 16),
                     ),
                   ),
                 ),

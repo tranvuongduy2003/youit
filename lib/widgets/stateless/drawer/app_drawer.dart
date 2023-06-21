@@ -1,15 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:you_it/service/database_service.dart';
 
 import '../../../config/route/routes.dart';
+import '../../../config/themes/app_colors.dart';
 import '../../../screens/bottom_bar/bottom_nav_bar_page.dart';
 import '../../../screens/group/activity_page.dart';
 import '../../../screens/group/group_chat_page.dart';
 import '../../../screens/group/group_information.dart';
 import '../../../screens/group/upload_file_page.dart';
-import '../../../config/themes/app_colors.dart';
 
 class AppDrawer extends StatefulWidget {
   final String groupName;
@@ -115,7 +112,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 0,
                                             groupId: widget.groupId,
-                                            // groupName: widget.groupName,
+                                            groupName: widget.groupName,
                                             currentWidget: GroupChatPage(
                                               groupId: widget.groupId,
                                               groupName: widget.groupName,
@@ -132,7 +129,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 1,
                                             groupId: widget.groupId,
-                                            // groupName: widget.groupName,
+                                            groupName: widget.groupName,
                                             currentWidget: ActivityPage(
                                               groupId: widget.groupId,
                                             ),
@@ -149,8 +146,9 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 2,
                                             groupId: widget.groupId,
-                                            //    groupName: widget.groupName,
-                                            currentWidget: UploadFilePage(),
+                                            groupName: widget.groupName,
+                                            currentWidget: UploadFilePage(
+                                                groupId: widget.groupId),
                                           ),
                                         ),
                                       );
@@ -163,7 +161,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                               BottomNavBarPage(
                                             selectedIndexDrawer: 3,
                                             groupId: widget.groupId,
-                                            //    groupName: widget.groupName,
+                                            groupName: widget.groupName,
                                             currentWidget: GroupInformationPage(
                                               groupId: widget.groupId,
                                             ),
