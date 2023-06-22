@@ -43,7 +43,6 @@ class _EditDescriptionPageState extends State<EditDescriptionPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     description = widget.description;
   }

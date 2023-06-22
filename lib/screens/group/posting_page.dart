@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
-import 'package:you_it/widgets/stateless/post_form.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';

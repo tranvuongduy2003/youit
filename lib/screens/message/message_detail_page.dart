@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/widgets/stateless/header_bar.dart';
@@ -44,7 +43,7 @@ class MessageDetailPage extends StatelessWidget {
                       CircleAvatar(
                         radius: 20,
                         backgroundImage:
-                            NetworkImage("https://picsum.photos/200"),
+                            NetworkImage('https://picsum.photos/200'),
                       ),
                       SizedBox(
                         width: 10,

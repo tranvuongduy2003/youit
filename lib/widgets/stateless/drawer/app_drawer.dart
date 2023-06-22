@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:you_it/service/database_service.dart';
 
 import '../../../config/route/routes.dart';
 import '../../../screens/bottom_bar/bottom_nav_bar_page.dart';

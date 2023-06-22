@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateful/input_password.dart';
 import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -74,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final input = GlobalKey<FormState>();
+    //final input = GlobalKey<FormState>();
     return Scaffold(
       body: Stack(
         children: <Widget>[

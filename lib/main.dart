@@ -1,18 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:you_it/screens/auth/welcome_page.dart';
-import 'package:you_it/screens/home/home_page.dart';
-import 'package:you_it/service/database_service.dart';
-import 'config/route/routes.dart';
-import 'firebase_options.dart';
-
-import 'package:you_it/screens/auth/login_page.dart';
-
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
-
-import 'firebase_options.dart';
 import 'package:flutter/material.dart';
+import 'package:you_it/service/database_service.dart';
+import 'firebase_options.dart';
 
+import 'package:you_it/screens/auth/welcome_page.dart';
+import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
 import './config/route/router.dart' as router;
 import './config/themes/app_colors.dart';
 

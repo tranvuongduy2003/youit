@@ -1,29 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/fill_info_page.dart';
 import 'package:you_it/screens/auth/forgot_password_page.dart';
-import 'package:you_it/screens/bottom_bar/bottom_nav_bar_page.dart';
+
 import 'package:you_it/screens/general/chang_password.dart';
 import 'package:you_it/screens/general/genaral_page.dart';
-import 'package:you_it/screens/group/activity_page.dart';
+
 import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
-import 'package:you_it/screens/group/add_member_page.dart';
-import 'package:you_it/screens/message/message_detail_page.dart';
+
 import 'package:you_it/screens/message/message_page.dart';
-import 'package:you_it/screens/profile/edit_description_page.dart';
-import 'package:you_it/screens/profile/edit_info_page.dart';
-import 'package:you_it/screens/profile/edit_link_page.dart';
-import 'package:you_it/screens/profile/edit_profile_page.dart';
-import 'package:you_it/screens/profile/profile_page.dart';
+
 import 'package:you_it/screens/group/group_page.dart';
 
-import '../../screens/bottom_bar/bottom_nav_bar_page.dart';
-import '../../screens/general/genaral_page.dart';
-import '../../screens/group/activity_page.dart';
-
-import '../../screens/group/posting_page.dart';
 import '../../screens/group/upload_file_page.dart';
 
 import '../../screens/home/home_page.dart';

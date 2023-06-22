@@ -1,10 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
-import '../../service/database_service.dart';
-import 'circle_button.dart';
 
 class PostForm extends StatefulWidget {
   const PostForm(

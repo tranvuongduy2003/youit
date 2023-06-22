@@ -61,7 +61,7 @@ class _EditLinkPageState extends State<EditLinkPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appBarTheme = AppBarTheme.of(context);
+    //  final appBarTheme = AppBarTheme.of(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,

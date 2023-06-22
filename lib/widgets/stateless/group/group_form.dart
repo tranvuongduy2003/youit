@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
 import 'package:you_it/widgets/stateless/show_snackbar.dart';
 

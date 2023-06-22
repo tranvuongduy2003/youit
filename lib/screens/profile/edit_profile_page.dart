@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:you_it/config/route/routes.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
 import 'package:you_it/screens/profile/edit_info_page.dart';
 import 'package:you_it/screens/profile/edit_link_page.dart';
