@@ -43,7 +43,7 @@ class EditProfilePage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: ((context) => EditLinkPage(
                       githubLink: linkgh,
-                      gitlabLink: linkgh,
+                      gitlabLink: linkgl,
                       linkedin: linkedin)),
                 ),
               ),

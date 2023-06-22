@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:you_it/service/database_service.dart';
+import 'package:you_it/widgets/stateless/show_snackbar.dart';
 
 import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:you_it/config/themes/app_colors.dart';
@@ -51,7 +52,12 @@ class _LoginPageState extends State<LoginPage> {
       setState(() {
         _isLoading = false;
       });
+    } catch (e) {
+      ShowSnackbar().showSnackBar(context, Colors.red, e);
     }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override

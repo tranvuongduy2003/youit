@@ -220,9 +220,9 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     if (value == null) {
                       return 'Vui lòng nhập đầy đủ';
                     }
-                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return 'Sai cú pháp';
-                    }
+                    // if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                    //   return 'Sai cú pháp';
+                    // }
                     return null;
                   },
                   onChanged: (value) {

@@ -119,7 +119,9 @@ class _EditLinkPageState extends State<EditLinkPage> {
                     return null;
                   },
                   onChanged: (value) {
-                    github = value;
+                    setState(() {
+                      github = value;
+                    });
                   },
                 ),
                 TextFormField(
@@ -137,7 +139,9 @@ class _EditLinkPageState extends State<EditLinkPage> {
                     return null;
                   },
                   onChanged: (value) {
-                    gitlab = value;
+                    setState(() {
+                      gitlab = value;
+                    });
                   },
                 ),
                 TextFormField(
