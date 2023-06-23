@@ -40,11 +40,16 @@ class MessageDetailPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage:
-                            NetworkImage('https://picsum.photos/200'),
-                      ),
+                      data['avatar'] != null && data['avatar'] != ''
+                          ? CircleAvatar(
+                              radius: 20,
+                              backgroundImage: NetworkImage(data['avatar']),
+                              backgroundColor: Colors.black12,
+                            )
+                          : CircleAvatar(
+                              radius: 20,
+                              backgroundColor: Colors.black12,
+                            ),
                       SizedBox(
                         width: 10,
                       ),

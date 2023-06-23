@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
@@ -17,6 +16,7 @@ class MessageUser extends StatelessWidget {
     required this.isOnline,
     required this.userId,
     required this.isMe,
+    required this.userAvatar,
   });
 
   final String chatId;
@@ -25,11 +25,11 @@ class MessageUser extends StatelessWidget {
   final Timestamp lastMessageTime;
   final bool isOnline;
   final String userId;
+  final String userAvatar;
   final bool isMe;
 
   @override
   Widget build(BuildContext context) {
-    // bool hasSeen = false;
     DateTime lastMessTime = lastMessageTime.toDate();
     return InkWell(
       onTap: () async {
@@ -48,7 +48,7 @@ class MessageUser extends StatelessWidget {
           children: <Widget>[
             MessageAvatar(
               isOnline: isOnline,
-              imageUrl: 'https://picsum.photos/50',
+              imageUrl: userAvatar,
             ),
             SizedBox(
               width: 20,
