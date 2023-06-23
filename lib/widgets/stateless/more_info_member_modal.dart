@@ -29,7 +29,7 @@ class MoreInfoModal extends StatefulWidget {
 class _MoreInfoModalState extends State<MoreInfoModal> {
   @override
   Widget build(BuildContext context) {
-    bool _isLoading = false;
+    bool isLoading = false;
     return FutureBuilder(
         future: FirebaseFirestore.instance
             .collection('users')
@@ -93,7 +93,7 @@ class _MoreInfoModalState extends State<MoreInfoModal> {
                         size: 60),
                     txt: 'Xem thông tin',
                   ),
-                  _isLoading
+                  isLoading
                       ? CircularProgressIndicator()
                       : TextCircleButton(
                           btn: CircleButton(
@@ -141,7 +141,7 @@ class _MoreInfoModalState extends State<MoreInfoModal> {
                           buttonColor: Color(0xffFCFF7B),
                           onPressed: () async {
                             setState(() {
-                              _isLoading = true;
+                              isLoading = true;
                             });
                             try {
                               final currentUserId =
@@ -159,7 +159,7 @@ class _MoreInfoModalState extends State<MoreInfoModal> {
                               print(e);
                             }
                             setState(() {
-                              _isLoading = false;
+                              isLoading = false;
                             });
                           },
                           size: 60),

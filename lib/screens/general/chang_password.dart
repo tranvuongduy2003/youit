@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:you_it/config/route/routes.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/widgets/stateful/input_password.dart';

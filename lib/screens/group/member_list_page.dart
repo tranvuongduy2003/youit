@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
-import '../../service/database_service.dart';
 import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/header_bar.dart';
 import '../../widgets/stateless/more_info_member_modal.dart';

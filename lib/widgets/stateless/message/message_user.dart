@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/screens/message/message_detail_page.dart';
-import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/message/message_avatar.dart';
 
 class MessageUser extends StatelessWidget {
@@ -31,7 +29,7 @@ class MessageUser extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool hasSeen = false;
+    // bool hasSeen = false;
     DateTime lastMessTime = lastMessageTime.toDate();
     return InkWell(
       onTap: () async {
