@@ -22,6 +22,37 @@ class MemberListPage extends StatefulWidget {
 }
 
 class _MemberListPageState extends State<MemberListPage> {
+  List<dynamic> _memberList = [];
+
+  _initMemberList() async {
+    final groupSnapshot = await FirebaseFirestore.instance
+        .collection('groups')
+        .doc(widget.groupId)
+        .get();
+    final groupMemberIds = groupSnapshot.get('members');
+
+    List<dynamic> groupMember = [];
+
+    for (var id in groupMemberIds) {
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(getId(id))
+          .get();
+      groupMember.add(documentSnapshot.data());
+    }
+
+    setState(() {
+      _memberList = groupMember;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _initMemberList();
+  }
+
   String getName(String res) {
     return res.substring(res.indexOf('_') + 1);
   }
@@ -77,11 +108,22 @@ class _MemberListPageState extends State<MemberListPage> {
                         children: [
                           Row(
                             children: [
-                              CircleAvatar(
-                                radius:
-                                    MediaQuery.of(context).size.width * 0.05,
-                                backgroundColor: Colors.black12,
-                              ),
+                              _memberList.length > 0 &&
+                                      _memberList[index]['avatar'] != null
+                                  ? CircleAvatar(
+                                      radius:
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                      backgroundImage: NetworkImage(
+                                          _memberList[index]['avatar']),
+                                      backgroundColor: Colors.black12,
+                                    )
+                                  : CircleAvatar(
+                                      radius:
+                                          MediaQuery.of(context).size.width *
+                                              0.05,
+                                      backgroundColor: Colors.black12,
+                                    ),
                               SizedBox(
                                 width: 8,
                               ),
