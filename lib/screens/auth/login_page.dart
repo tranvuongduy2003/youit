@@ -1,10 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:you_it/config/route/routes.dart';
-import 'package:you_it/config/themes/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:you_it/service/database_service.dart';
+import 'package:you_it/widgets/stateless/show_snackbar.dart';
+
 import 'package:you_it/widgets/stateless/sign_button.dart';
+import 'package:you_it/config/themes/app_colors.dart';
+import 'package:you_it/config/route/routes.dart';
 
 import '../../widgets/stateful/input_password.dart';
 import '../../widgets/stateless/input.dart';
@@ -33,6 +35,9 @@ class _LoginPageState extends State<LoginPage> {
           email: _email, password: _password);
 
       DatabaseService(uid: credential.user!.uid).setUserOnlineStatus(true);
+      setState(() {
+        _isLoading = false;
+      });
 
       Navigator.of(context)
           .pushReplacementNamed(Routes.bottomNavBarWithGroupListPage);
@@ -44,6 +49,11 @@ class _LoginPageState extends State<LoginPage> {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Wrong password provided for that user.')));
       }
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      ShowSnackbar().showSnackBar(context, Colors.red, e);
     }
     setState(() {
       _isLoading = false;
@@ -52,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final input = GlobalKey<FormState>();
+    // final input = GlobalKey<FormState>();
     return _isLoading
         ? Stack(
             children: [

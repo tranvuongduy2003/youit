@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:you_it/config/route/routes.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
 import 'package:you_it/widgets/stateful/input_password.dart';
@@ -30,8 +28,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         FirebaseAuth.instance.signOut();
         Navigator.of(context).pushNamed(Routes.logInPage);
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text(
-                'Mật khẩu đã thay đổi thành công.\n Vui lòng đăng nhập lại')));
+          content:
+              Text('Mật khẩu đã thay đổi thành công.\n Vui lòng đăng nhập lại'),
+          backgroundColor: Colors.green,
+        ));
       }
     } on FirebaseAuthException catch (e) {
       showDialog(
@@ -65,71 +65,75 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           }),
       body: Form(
         key: _formField,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InputPassword(
-                  label: 'Mật khẩu mới',
-                  labelColor: Colors.black,
-                  hintText: 'Nhập mật khẩu mới',
-                  textColor: Colors.black,
-                  textfieldColor: Colors.transparent.withOpacity(0.5),
-                  handleChange: (value) {
-                    setState(() {
-                      _newPassword = value;
-                    });
-                    if (value != _confirmNewPassword) {
-                      setState(() {
-                        _checkPasswordMatched = false;
-                      });
-                    } else {
-                      setState(() {
-                        _checkPasswordMatched = true;
-                      });
-                    }
-                  },
-                  exception:
-                      r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$'),
-              SizedBox(
-                height: 30,
+        child: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InputPassword(
+                      label: 'Mật khẩu mới',
+                      labelColor: Colors.black,
+                      hintText: 'Nhập mật khẩu mới',
+                      textColor: Colors.black,
+                      textfieldColor: Colors.transparent.withOpacity(0.5),
+                      handleChange: (value) {
+                        setState(() {
+                          _newPassword = value;
+                        });
+                        if (value != _confirmNewPassword) {
+                          setState(() {
+                            _checkPasswordMatched = false;
+                          });
+                        } else {
+                          setState(() {
+                            _checkPasswordMatched = true;
+                          });
+                        }
+                      },
+                      exception:
+                          r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$'),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  InputPassword(
+                      isConfirmed: _checkPasswordMatched,
+                      label: 'Nhập lại mật khẩu mới',
+                      labelColor: Colors.black,
+                      hintText: 'Nhập lại mật khẩu mới',
+                      textColor: Colors.black,
+                      textfieldColor: Colors.transparent.withOpacity(0.5),
+                      handleChange: (value) {
+                        setState(() {
+                          _confirmNewPassword = value;
+                        });
+                        if (_newPassword != value) {
+                          setState(() {
+                            _checkPasswordMatched = false;
+                          });
+                        } else {
+                          setState(() {
+                            _checkPasswordMatched = true;
+                          });
+                        }
+                      },
+                      exception:
+                          r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$'),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  SignButton(
+                      buttonText: 'Xác nhận',
+                      textColor: Colors.black,
+                      backgroundColor: Colors.yellow,
+                      handleOnPress: () {
+                        changePassword(context);
+                      })
+                ],
               ),
-              InputPassword(
-                  isConfirmed: _checkPasswordMatched,
-                  label: 'Nhập lại mật khẩu mới',
-                  labelColor: Colors.black,
-                  hintText: 'Nhập lại mật khẩu mới',
-                  textColor: Colors.black,
-                  textfieldColor: Colors.transparent.withOpacity(0.5),
-                  handleChange: (value) {
-                    setState(() {
-                      _confirmNewPassword = value;
-                    });
-                    if (_newPassword != value) {
-                      setState(() {
-                        _checkPasswordMatched = false;
-                      });
-                    } else {
-                      setState(() {
-                        _checkPasswordMatched = true;
-                      });
-                    }
-                  },
-                  exception:
-                      r'^.*(?=.{8,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!#%&@"]).*$'),
-              SizedBox(
-                height: 30,
-              ),
-              SignButton(
-                  buttonText: 'Xác nhận',
-                  textColor: Colors.black,
-                  backgroundColor: Colors.yellow,
-                  handleOnPress: () {
-                    changePassword(context);
-                  })
-            ],
+            ),
           ),
         ),
       ),

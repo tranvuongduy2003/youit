@@ -1,12 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
-import '../../widgets/stateful/input_password.dart';
 import '../../widgets/stateless/input.dart';
 import '../../widgets/stateless/sign_button.dart';
 
@@ -73,7 +68,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Container(
                     margin: EdgeInsets.only(top: 80, bottom: 50),
                     child: Text(
-                      'We will send to your email a password reset link',
+                      'Chúng tôi sẽ gửi link đổi lại mật khẩu vào email của bạn',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 32,

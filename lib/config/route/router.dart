@@ -106,6 +106,10 @@ class Router {
         {
           return MaterialPageRoute(builder: (_) => const ChangePasswordPage());
         }
+      // case Routes.addMemberPage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const AddMemberPage());
+      //   }
       default:
         {
           return MaterialPageRoute(

@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:you_it/config/themes/app_colors.dart';
-import 'package:you_it/service/database_service.dart';
 import 'package:you_it/widgets/stateless/circle_button.dart';
+import 'package:you_it/widgets/stateless/show_snackbar.dart';
 
 class GroupForm extends StatefulWidget {
   const GroupForm({
@@ -24,59 +25,94 @@ class _GroupFormState extends State<GroupForm> {
 
   Future _createNewGroup(
       String userId, String userName, String groupName) async {
-    setState(() {
-      _isLoading = true;
-    });
     String value = controller.text;
 
     if (value != '') {
-      final CollectionReference groupsCollection =
-          FirebaseFirestore.instance.collection('groups');
-      final CollectionReference usersCollection =
-          FirebaseFirestore.instance.collection('users');
-      // DatabaseService(uid: user!.uid)
-      //     .createGroup(userName, user!.uid, value)
-      //     .then((val) {
-      //   setState(() {
-      //     _isLoading = false;
-      //   });
-      //   Navigator.of(context).pop();
-      // });
-      DocumentReference groupDocumentReference = await groupsCollection.add({
-        'groupName': groupName,
-        'groupIcon': '',
-        'admin': '${userId}_$userName',
-        'members': [],
-        'groupId': '',
-        'description': '',
-        'createAt': DateTime.now(),
-        'recentMessage': '',
-        'recentMessageSender': '',
-      });
+      try {
+        setState(() {
+          _isLoading = true;
+        });
+        final CollectionReference groupsCollection =
+            FirebaseFirestore.instance.collection('groups');
+        final CollectionReference usersCollection =
+            FirebaseFirestore.instance.collection('users');
+        // DatabaseService(uid: user!.uid)
+        //     .createGroup(userName, user!.uid, value)
+        //     .then((val) {
+        //   setState(() {
+        //     _isLoading = false;
+        //   });
+        //   Navigator.of(context).pop();
+        // });
+        DocumentReference groupDocumentReference = await groupsCollection.add({
+          'groupName': groupName,
+          'groupIcon': '',
+          'admin': '${userId}_$userName',
+          'members': [],
+          'groupId': '',
+          'description': '',
+          'createAt': DateTime.now(),
+          'recentMessage': '',
+          'recentMessageSender': '',
+        });
 
-      await groupDocumentReference.update({
-        'members': FieldValue.arrayUnion(['${userId}_$userName']),
-        'groupId': groupDocumentReference.id,
-      });
+        await groupDocumentReference.update({
+          'members': FieldValue.arrayUnion(['${userId}_$userName']),
+          'groupId': groupDocumentReference.id,
+        });
 
-      DocumentReference userDocumentReference = usersCollection.doc(userId);
-      await userDocumentReference.update({
-        'groups':
-            FieldValue.arrayUnion(['${groupDocumentReference.id}_$groupName'])
-      });
+        DocumentReference userDocumentReference = usersCollection.doc(userId);
+        await userDocumentReference.update({
+          'groups':
+              FieldValue.arrayUnion(['${groupDocumentReference.id}_$groupName'])
+        });
+        if (context.mounted) {
+          ShowSnackbar()
+              .showSnackBar(context, Colors.green, 'Tạo group thành công');
+        }
+        setState(() {
+          _isLoading = false;
+        });
+      } on FirebaseException catch (e) {
+        ShowSnackbar().showSnackBar(context, Colors.red, e);
+        setState(() {
+          _isLoading = false;
+        });
+      } on PlatformException catch (e) {
+        ShowSnackbar().showSnackBar(context, Colors.red, e);
+        setState(() {
+          _isLoading = false;
+        });
+      } catch (e) {
+        ShowSnackbar().showSnackBar(context, Colors.red, e);
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
-    setState(() {
-      _isLoading = false;
-    });
   }
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      titlePadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      contentPadding: EdgeInsets.symmetric(horizontal: 20),
+      actionsPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(56),
+        borderRadius: BorderRadius.circular(20),
       ),
+      title: Text(
+        'Tên nhóm',
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          color: Colors.black,
+        ),
+        textAlign: TextAlign.center,
+      ),
+      content: enterName(context),
       actions: [
         Column(
           children: <Widget>[
@@ -104,7 +140,7 @@ class _GroupFormState extends State<GroupForm> {
               'Tạo nhóm',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 22,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black.withOpacity(0.8),
               ),
@@ -127,7 +163,7 @@ class _GroupFormState extends State<GroupForm> {
               'Hủy',
               style: TextStyle(
                 fontFamily: 'Montserrat',
-                fontSize: 22,
+                fontSize: 16,
                 fontWeight: FontWeight.w600,
                 color: AppColors.black.withOpacity(0.8),
               ),
@@ -135,58 +171,39 @@ class _GroupFormState extends State<GroupForm> {
           ],
         ),
       ],
-      actionsPadding: EdgeInsets.symmetric(vertical: 10),
       actionsAlignment: MainAxisAlignment.spaceAround,
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Text(
-              'Tên nhóm',
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 22,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
-          ),
-          enterName(context),
-        ],
-      ),
     );
   }
 
-  Widget enterName(context) => Container(
-        margin: EdgeInsets.only(top: 10),
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: 50,
-        alignment: Alignment.center,
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
-          color: AppColors.white,
-          border: Border.all(
-            color: AppColors.black.withOpacity(0.11),
-            width: 0.5,
-          ),
+  Widget enterName(context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: 50,
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(30),
+        color: AppColors.white,
+        border: Border.all(
+          color: AppColors.black.withOpacity(0.11),
+          width: 0.5,
         ),
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-            hintStyle: TextStyle(
-              color: AppColors.black.withOpacity(0.5),
-              fontSize: 19,
-            ),
-            hintText: 'Nhập tên nhóm...',
-            border: InputBorder.none,
+      ),
+      child: TextField(
+        controller: controller,
+        decoration: InputDecoration(
+          hintStyle: TextStyle(
+            color: AppColors.black.withOpacity(0.5),
+            fontSize: 18,
           ),
-          style: TextStyle(
-            color: AppColors.black.withOpacity(1),
-            fontSize: 19,
-          ),
+          hintText: 'Nhập tên nhóm...',
+          border: InputBorder.none,
         ),
-      );
+        style: TextStyle(
+          color: AppColors.black.withOpacity(1),
+          fontSize: 18,
+        ),
+      ),
+    );
+  }
 }

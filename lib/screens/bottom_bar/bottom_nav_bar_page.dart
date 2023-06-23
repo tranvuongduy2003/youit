@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -6,7 +5,6 @@ import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
-import '../../screens/home/home_page.dart';
 import '../../screens/message/message_page.dart';
 import '../../screens/profile/profile_page.dart';
 import '../../widgets/stateless/drawer/drawer_and_bottom_nav.dart';
@@ -22,6 +20,7 @@ class BottomNavBarPage extends StatefulWidget {
   final Widget currentWidget;
   final String groupId;
   final String groupName;
+
   final int selectedIndexDrawer;
 
   @override
@@ -29,7 +28,7 @@ class BottomNavBarPage extends StatefulWidget {
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
-  int selectedIndex = 2;
+  int selectedIndex = 1;
   bool _isShowAppBar = true;
   bool _isShowDrawer = false;
   bool _showDrawerAndBottomNav = false;
@@ -52,7 +51,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget?> widgetOptions = [
-      HomePage(),
+      // HomePage(),
       MessagePage(),
       widget.currentWidget,
       ProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
@@ -63,7 +62,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
       body: DrawerAndBottomNav(
         selectedIndexDrawer: widget.selectedIndexDrawer,
         groupId: widget.groupId,
-        groupName: widget.groupName,
         openDrawer: _openDrawer,
         closeDrawer: _closeDrawer,
         isShowDrawer: _isShowDrawer,
@@ -92,7 +90,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   setState(
                     () {
                       selectedIndex = index;
-                      if (index != 2) {
+                      if (index != 1) {
                         _isShowAppBar = false;
                       } else {
                         _showDrawerAndBottomNav = false;
@@ -104,12 +102,12 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   _isShowDrawer = false;
                 },
                 items: [
-                  BottomNavigationBarItem(
-                    label: 'Home',
-                    icon: ImageIcon(
-                      AssetImage('assets/images/home.png'),
-                    ),
-                  ),
+                  // BottomNavigationBarItem(
+                  //   label: 'Home',
+                  //   icon: ImageIcon(
+                  //     AssetImage('assets/images/home.png'),
+                  //   ),
+                  // ),
                   BottomNavigationBarItem(
                     label: 'Chat',
                     icon: ImageIcon(

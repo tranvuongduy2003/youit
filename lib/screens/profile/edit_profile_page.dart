@@ -102,7 +102,7 @@ class EditProfilePage extends StatelessWidget {
                 MaterialPageRoute(
                   builder: ((context) => EditLinkPage(
                       githubLink: linkgh,
-                      gitlabLink: linkgh,
+                      gitlabLink: linkgl,
                       linkedin: linkedin)),
                 ),
               ),
@@ -260,10 +260,12 @@ class EditProfilePage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (ctx) => EditInfoPage(
                                 address: data['address'],
-                                birthday: (data['dob'] as Timestamp).toDate(),
-                                department: data['khoa'],
+                                birthday: data['dob'] == null
+                                    ? DateTime(1)
+                                    : (data['dob'] as Timestamp).toDate(),
+                                department: data['khoa'] ?? '',
                                 fullName: data['userName'],
-                                session: data['session'],
+                                session: data['session'] ?? -1,
                               ),
                             ),
                           ),
@@ -271,10 +273,13 @@ class EditProfilePage extends StatelessWidget {
                       ],
                     ),
                     buildInformationRow('Tên', data['userName']),
-                    buildInformationRow('Khoa', data['khoa']),
+                    buildInformationRow(
+                      'Khoa',
+                      data['khoa'] ?? 'Chưa cập nhật',
+                    ),
                     buildInformationRow(
                         'Khoá',
-                        data['session'] == -1
+                        data['session'] == null
                             ? 'Chưa cập nhật'
                             : 'K${data['session']}'),
                     buildInformationRow(
@@ -284,9 +289,13 @@ class EditProfilePage extends StatelessWidget {
                           : data['address'],
                     ),
                     buildInformationRow(
-                        'Ngày sinh',
-                        DateFormat('dd - MM - yyyy')
-                            .format((data['dob'] as Timestamp).toDate())),
+                      'Ngày sinh',
+                      data['dob'] == null
+                          ? 'Chưa cập nhật'
+                          : DateFormat('dd - MM - yyyy').format(
+                              (data['dob'] as Timestamp).toDate(),
+                            ),
+                    ),
                     const SizedBox(height: 3),
                     const Divider(),
                     buildLinkInformationRow(context, data['githubLink'],

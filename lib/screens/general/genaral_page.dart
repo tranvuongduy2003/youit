@@ -1,15 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../service/database_service.dart';
+import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/header_bar.dart';
 import '../../widgets/stateless/text_circle_button.dart';
-
-import '../../widgets/stateless/circle_button.dart';
 
 class GeneralPage extends StatefulWidget {
   const GeneralPage({super.key});
@@ -62,32 +60,32 @@ class _GeneralPageState extends State<GeneralPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextCircleButton(
-                    btn: CircleButton(
-                        isImageButton: false,
-                        icon: Icon(
-                          Icons.sunny,
-                          color: Colors.white,
-                          size: 33,
-                        ),
-                        buttonColor: Colors.white,
-                        onPressed: () {},
-                        size: 60),
-                    txt: 'Chế độ',
-                  ),
+                  // TextCircleButton(
+                  //   btn: CircleButton(
+                  //       isImageButton: false,
+                  //       icon: Icon(
+                  //         Icons.sunny,
+                  //         color: Colors.white,
+                  //         size: 30,
+                  //       ),
+                  //       buttonColor: Colors.white,
+                  //       onPressed: () {},
+                  //       size: 50),
+                  //   txt: 'Chế độ',
+                  // ),
                   TextCircleButton(
                     btn: CircleButton(
                         isImageButton: false,
                         icon: Icon(
                           Icons.key_sharp,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: AppColors.yellow,
                         onPressed: () {
                           Navigator.of(context)
                               .pushNamed(Routes.changePasswordPage);
                         },
-                        size: 60),
+                        size: 50),
                     txt: 'Đổi mật khẩu',
                   ),
                   TextCircleButton(
@@ -95,13 +93,13 @@ class _GeneralPageState extends State<GeneralPage> {
                         isImageButton: false,
                         icon: Icon(
                           Icons.logout,
-                          size: 33,
+                          size: 30,
                         ),
                         buttonColor: AppColors.pinkRed,
                         onPressed: () {
                           signOut(context);
                         },
-                        size: 60),
+                        size: 50),
                     txt: 'Đăng xuất',
                   ),
                 ],

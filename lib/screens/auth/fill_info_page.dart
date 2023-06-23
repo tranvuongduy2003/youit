@@ -241,8 +241,8 @@ class _FillInfoPageState extends State<FillInfoPage> {
                                   MaterialStatePropertyAll(AppColors.white),
                               foregroundColor: MaterialStatePropertyAll(
                                   AppColors.primaryColor)),
-                          onPressed: () =>
-                              Navigator.of(context).pushNamed(Routes.homePage),
+                          onPressed: () => Navigator.of(context)
+                              .pushNamed(Routes.bottomNavBarWithGroupListPage),
                         ),
                         ElevatedButton(
                           child: Text('Cập nhật'),

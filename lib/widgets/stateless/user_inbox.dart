@@ -10,7 +10,7 @@ class UserInbox extends StatelessWidget {
         children: <Widget>[
           CircleAvatar(
             radius: 20,
-            backgroundImage: NetworkImage("https://picsum.photos/200"),
+            backgroundImage: NetworkImage('https://picsum.photos/200'),
           ),
         ],
       ),

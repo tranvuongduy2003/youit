@@ -75,101 +75,100 @@ class MessageWidget extends StatelessWidget {
               );
             }
             return StreamBuilder(
-              stream: FirebaseFirestore.instance
-                  .collection('groups')
-                  .doc(groupId)
-                  .collection('messages')
-                  .limit(30)
-                  .orderBy('createAt', descending: true)
-                  .snapshots(),
-              builder: (ctx, snapshot) {
-                var userId = FirebaseAuth.instance.currentUser!.uid;
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
+                stream: FirebaseFirestore.instance
+                    .collection('groups')
+                    .doc(groupId)
+                    .collection('messages')
+                    .limit(30)
+                    .orderBy('createAt', descending: true)
+                    .snapshots(),
+                builder: (ctx, snapshot) {
+                  var userId = FirebaseAuth.instance.currentUser!.uid;
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
 
-                if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Something went wrong.'),
-                  );
-                }
+                  if (snapshot.hasError) {
+                    return const Center(
+                      child: Text('Something went wrong.'),
+                    );
+                  }
 
-                final chatDocs = snapshot.data!.docs;
+                  final chatDocs = snapshot.data!.docs;
 
-                return Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    mainAxisAlignment: chatDocs.isEmpty
-                        ? MainAxisAlignment.end
-                        : MainAxisAlignment.start,
-                    children: [
-                      chatDocs.isEmpty
-                          ? NoMessageWidget(groupName: groupName)
-                          : Expanded(
-                              child: ListView.builder(
-                                reverse: true,
-                                itemBuilder: (ctx, index) {
-                                  final chatMessage = chatDocs[index].data();
-                                  final nextChatMessage =
-                                      index + 1 < chatDocs.length
-                                          ? chatDocs[index + 1].data()
-                                          : null;
+                  return Container(
+                    padding: EdgeInsets.symmetric(horizontal: 8),
+                    child: Column(
+                      mainAxisAlignment: chatDocs.isEmpty
+                          ? MainAxisAlignment.end
+                          : MainAxisAlignment.start,
+                      children: [
+                        chatDocs.isEmpty
+                            ? NoMessageWidget(groupName: groupName)
+                            : Expanded(
+                                child: ListView.builder(
+                                  reverse: true,
+                                  itemBuilder: (ctx, index) {
+                                    final chatMessage = chatDocs[index].data();
+                                    final nextChatMessage =
+                                        index + 1 < chatDocs.length
+                                            ? chatDocs[index + 1].data()
+                                            : null;
 
-                                  final currentMessageUserId =
-                                      chatMessage['senderId'];
-                                  final nextMessageUserId =
-                                      nextChatMessage != null
-                                          ? nextChatMessage['senderId']
-                                          : null;
-                                  final nextUserIsSame =
-                                      nextMessageUserId == currentMessageUserId;
+                                    final currentMessageUserId =
+                                        chatMessage['senderId'];
+                                    final nextMessageUserId =
+                                        nextChatMessage != null
+                                            ? nextChatMessage['senderId']
+                                            : null;
+                                    final nextUserIsSame = nextMessageUserId ==
+                                        currentMessageUserId;
 
-                                  if (nextUserIsSame) {
-                                    return MessageBubble.next(
-                                      message: chatMessage['message'],
-                                      imageUrl: chatMessage['imageUrl'],
-                                      fileUrl: chatMessage['fileUrl'],
-                                      isMe: authenticatedUser.uid ==
-                                          currentMessageUserId,
-                                    );
-                                  } else {
-                                    return MessageBubble.first(
-                                      userImage: chatMessage['avatar'] ?? "",
-                                      imageUrl: chatMessage['imageUrl'],
-                                      fileUrl: chatMessage['fileUrl'],
-                                      username: chatMessage['sender'],
-                                      message: chatMessage['message'],
-                                      isMe: authenticatedUser.uid ==
-                                          currentMessageUserId,
-                                    );
-                                  }
+                                    if (nextUserIsSame) {
+                                      return MessageBubble.next(
+                                        message: chatMessage['message'],
+                                        imageUrl: chatMessage['imageUrl'],
+                                        fileUrl: chatMessage['fileUrl'],
+                                        isMe: authenticatedUser.uid ==
+                                            currentMessageUserId,
+                                      );
+                                    } else {
+                                      return MessageBubble.first(
+                                        userImage: chatMessage['avatar'] ?? "",
+                                        imageUrl: chatMessage['imageUrl'],
+                                        fileUrl: chatMessage['fileUrl'],
+                                        username: chatMessage['sender'],
+                                        message: chatMessage['message'],
+                                        isMe: authenticatedUser.uid ==
+                                            currentMessageUserId,
+                                      );
+                                    }
 
-                                  // bool isMe = false;
+                                    // bool isMe = false;
 
-                                  // if (chatDocs[index]['senderId'] == userId) {
-                                  //   isMe = true;
-                                  // }
-                                  // return MessageTile(
-                                  //   isLast: index == 0,
-                                  //   messageTime: (chatDocs[index]['createAt']
-                                  //           as Timestamp)
-                                  //       .toDate(),
-                                  //   isMe: isMe,
-                                  //   message: chatDocs[index]['message'],
-                                  //   sender: chatDocs[index]['sender'],
-                                  // );
-                                },
-                                itemCount: chatDocs.length,
+                                    // if (chatDocs[index]['senderId'] == userId) {
+                                    //   isMe = true;
+                                    // }
+                                    // return MessageTile(
+                                    //   isLast: index == 0,
+                                    //   messageTime: (chatDocs[index]['createAt']
+                                    //           as Timestamp)
+                                    //       .toDate(),
+                                    //   isMe: isMe,
+                                    //   message: chatDocs[index]['message'],
+                                    //   sender: chatDocs[index]['sender'],
+                                    // );
+                                  },
+                                  itemCount: chatDocs.length,
+                                ),
                               ),
-                            ),
-                      NewMessage(groupId: groupId, groupName: groupName),
-                    ],
-                  ),
-                );
-              },
-            );
+                        NewMessage(groupId: groupId, groupName: groupName),
+                      ],
+                    ),
+                  );
+                });
           }),
     );
   }

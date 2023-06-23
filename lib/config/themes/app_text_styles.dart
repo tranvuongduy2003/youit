@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../config/themes/app_colors.dart';
 
 class AppTextStyles {
@@ -7,6 +8,21 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.fontColor,
     fontSize: 28,
+  );
+
+  static const emailSearch = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.startDust,
+    fontSize: 14,
+    fontStyle: FontStyle.italic,
+  );
+
+  static const mont23_600 = TextStyle(
+    fontFamily: 'Montserrat',
+    fontWeight: FontWeight.w600,
+    color: AppColors.inputValue,
+    fontSize: 23,
   );
 
   static const modalTitle = TextStyle(
@@ -74,7 +90,7 @@ class AppTextStyles {
 
   static const unSeenMessage = TextStyle(
     fontFamily: 'Montserrat',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     color: Color(0xFF070C1E),
     fontSize: 16,
   );

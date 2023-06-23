@@ -79,30 +79,45 @@ class DatabaseService {
     postDocumentReference.update({'postId': postDocumentReference.id});
   }
 
-  Future outGroup(String userName, String groupId, String groupName) async {
-    usersCollection.doc(uid).update({
+  Future<bool> outGroup(
+      String userName, String groupId, String groupName) async {
+    DocumentReference groupDocumentReference = groupsCollection.doc(groupId);
+    DocumentSnapshot groupSnapshot = await groupDocumentReference.get();
+
+    List<dynamic> members = groupSnapshot['members'] as List<dynamic>;
+
+    //neu so luong thanh vien lon hon 1 va user hien tai la admin thi return false
+    if (members.length > 1 &&
+        '${uid}_$userName' == groupSnapshot['admin'].toString()) {
+      return false;
+    }
+
+    await usersCollection.doc(uid).update({
       'groups': FieldValue.arrayRemove(['${groupId}_$groupName'])
     });
-    groupsCollection.doc(groupId).update({
+    await groupDocumentReference.update({
       'members': FieldValue.arrayRemove(['${uid}_$userName'])
     });
-    groupsCollection.doc(groupId).get().then((snapshot) {
-      List<dynamic> members = snapshot['members'];
-      if (members.isEmpty) {
-        groupsCollection.doc(groupId).delete();
-      }
-    });
+    //cap nhat lai members
+    groupSnapshot = await groupDocumentReference.get();
+    members = groupSnapshot['members'] as List<dynamic>;
+    print(members);
+    if (members.isEmpty) {
+      groupDocumentReference.delete();
+    }
+    return true;
   }
 
-  Future joinGroup(String groupId, String userName, String groupName) async {
-    DocumentReference userDocumentReference = usersCollection.doc(uid);
+  Future joinGroup(
+      String userId, String groupId, String userName, String groupName) async {
+    DocumentReference userDocumentReference = usersCollection.doc(userId);
     DocumentReference groupDocumentReference = groupsCollection.doc(groupId);
 
     await userDocumentReference.update({
       'groups': FieldValue.arrayUnion(['${groupId}_$groupName'])
     });
-    await groupDocumentReference.update({
-      'members': FieldValue.arrayUnion(['${uid}_$userName']),
+    return await groupDocumentReference.update({
+      'members': FieldValue.arrayUnion(['${userId}_$userName']),
     });
   }
 
@@ -156,6 +171,13 @@ class DatabaseService {
     final chatRoom = await chatsCollection
         .where('participants', arrayContains: [uid, destinationUserId]).get();
     return chatRoom.docs.isNotEmpty;
+  }
+
+  Future appointedAsAdmin(String groupId, String destinationUserId,
+      String destinationUserName) async {
+    return await groupsCollection
+        .doc(groupId)
+        .update({'admin': '${destinationUserId}_$destinationUserName'});
   }
 
   Future<String> startChat(String destinationUserId) async {
@@ -212,6 +234,36 @@ class DatabaseService {
       return chatQuerySnapshot.docs.first.id;
     } else {
       return '';
+    }
+  }
+
+  Future addMembers(
+      String groupId, Map<String, List<String>> usersSelected) async {
+    var snapshot = await groupsCollection.doc(groupId).get();
+    String groupName = snapshot.get('groupName');
+    print(groupName);
+    return usersSelected.forEach((userId, inforList) async {
+      await joinGroup(userId, groupId, inforList[0], groupName);
+    });
+  }
+
+  Future changeGroupName(
+      String groupId, String newGroupName, String oldGroupName) async {
+    DocumentReference groupDocumentReference = groupsCollection.doc(groupId);
+    groupDocumentReference.update({
+      'groupName': newGroupName,
+    });
+
+    QuerySnapshot members = await usersCollection
+        .where('groups', arrayContains: '${groupId}_$oldGroupName')
+        .get();
+    for (var member in members.docs) {
+      await usersCollection.doc(member.id).update({
+        'groups': FieldValue.arrayRemove(['${groupId}_$oldGroupName'])
+      });
+      await usersCollection.doc(member.id).update({
+        'groups': FieldValue.arrayUnion(['${groupId}_$newGroupName'])
+      });
     }
   }
 

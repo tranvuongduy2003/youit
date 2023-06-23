@@ -1,9 +1,7 @@
 import 'dart:core';
-import 'dart:core';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:you_it/service/database_service.dart';
@@ -145,7 +143,11 @@ class _EditInfoPageState extends State<EditInfoPage> {
   @override
   void initState() {
     super.initState();
-    birthDay = widget.birthday;
+    if (widget.birthday == DateTime(1)) {
+      birthDay = DateTime.now();
+    } else {
+      birthDay = widget.birthday;
+    }
     fullName = widget.fullName;
     department = widget.department;
     session = widget.session.toString();
@@ -216,9 +218,9 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     if (value == null) {
                       return 'Vui lòng nhập đầy đủ';
                     }
-                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return 'Sai cú pháp';
-                    }
+                    // if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                    //   return 'Sai cú pháp';
+                    // }
                     return null;
                   },
                   onChanged: (value) {
@@ -231,7 +233,7 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     '--Chọn--',
                     style: AppTextStyles.body,
                   ),
-                  value: department,
+                  value: (department == '') ? null : department,
                   decoration: InputDecoration(
                     border: UnderlineInputBorder(),
                     labelText: 'Khoa',

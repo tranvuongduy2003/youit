@@ -61,7 +61,7 @@ class _EditLinkPageState extends State<EditLinkPage> {
 
   @override
   Widget build(BuildContext context) {
-    final appBarTheme = AppBarTheme.of(context);
+    //  final appBarTheme = AppBarTheme.of(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -119,7 +119,9 @@ class _EditLinkPageState extends State<EditLinkPage> {
                     return null;
                   },
                   onChanged: (value) {
-                    github = value;
+                    setState(() {
+                      github = value;
+                    });
                   },
                 ),
                 TextFormField(
@@ -137,7 +139,9 @@ class _EditLinkPageState extends State<EditLinkPage> {
                     return null;
                   },
                   onChanged: (value) {
-                    gitlab = value;
+                    setState(() {
+                      gitlab = value;
+                    });
                   },
                 ),
                 TextFormField(
