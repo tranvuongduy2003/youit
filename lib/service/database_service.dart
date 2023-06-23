@@ -199,8 +199,13 @@ class DatabaseService {
         return querySnapshot.docs.first.id;
       } else {
         //chat room doesn't exist, join chat room
+        final documentSnapshot =
+            await usersCollection.doc(destinationUserId).get();
+        final destinationAvatar = documentSnapshot.get('avatar');
+
         DocumentReference chatDocumentReference = chatsCollection.doc();
         await chatDocumentReference.set({
+          'avatar': destinationAvatar,
           'participants': {
             uid: true,
             destinationUserId: true,

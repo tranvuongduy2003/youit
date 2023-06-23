@@ -3,14 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/widgets/stateless/header_bar.dart';
 
-import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
-
+import '../../config/themes/app_text_styles.dart';
+import '../../screens/profile/edit_profile_page.dart';
 import '../../service/database_service.dart';
 import '../../widgets/stateless/description.dart';
 import '../../widgets/stateless/link_information.dart';
-
-import '../../screens/profile/edit_profile_page.dart';
 import '../../widgets/stateless/personal_information.dart';
 import '../message/message_detail_page.dart';
 
@@ -114,8 +112,9 @@ class ProfilePage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
+                      CircleAvatar(
                         maxRadius: 40,
+                        backgroundImage: NetworkImage(data['avatar']),
                         backgroundColor: AppColors.primaryColor,
                       ),
                       SizedBox(
