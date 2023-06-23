@@ -12,12 +12,10 @@ import '../../widgets/stateless/text_circle_button.dart';
 class MoreInfoModal extends StatefulWidget {
   const MoreInfoModal({
     super.key,
-    required this.avtURL,
     required this.destinationUserId,
     required this.currentUserIsAdmin,
     required this.groupId,
   });
-  final String avtURL;
   final bool currentUserIsAdmin;
   final String destinationUserId;
   final String groupId;
@@ -64,10 +62,17 @@ class _MoreInfoModalState extends State<MoreInfoModal> {
                       children: [
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: CircleAvatar(
-                            radius: 40,
-                            backgroundImage: NetworkImage(widget.avtURL),
-                          ),
+                          child: futureSnapshot.data!['avatar'] != null &&
+                                  futureSnapshot.data!['avatar'] != ''
+                              ? CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: NetworkImage(
+                                      futureSnapshot.data!['avatar']),
+                                )
+                              : CircleAvatar(
+                                  radius: 40,
+                                  backgroundColor: Colors.black12,
+                                ),
                         ),
                         Expanded(
                           child: Text(

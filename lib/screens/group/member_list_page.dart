@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../widgets/stateless/circle_button.dart';
+import '../../widgets/stateless/delete_member_modal_button.dart';
 import '../../widgets/stateless/header_bar.dart';
 import '../../widgets/stateless/more_info_member_modal.dart';
-import '../../widgets/stateless/delete_member_modal_button.dart';
 
 class MemberListPage extends StatefulWidget {
   MemberListPage({
@@ -29,9 +29,6 @@ class _MemberListPageState extends State<MemberListPage> {
   String getId(String res) {
     return res.substring(0, res.indexOf('_'));
   }
-
-  String avtURL =
-      'https://media.istockphoto.com/id/1387522045/vi/anh/m%C3%A8o-x%C3%A1m-l%E1%BB%9Bn-v%C3%A0-nghi%C3%AAm-t%C3%BAc.jpg?s=612x612&w=0&k=20&c=xoWOttW9yoWSWk-ju-CwdDeygkyrCVClytGobWE4aZA=';
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +78,15 @@ class _MemberListPageState extends State<MemberListPage> {
                           Row(
                             children: [
                               CircleAvatar(
-                                radius: 26,
-                                backgroundImage: NetworkImage(avtURL),
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.05,
+                                backgroundColor: Colors.black12,
                               ),
                               SizedBox(
                                 width: 8,
                               ),
                               Container(
-                                width: MediaQuery.of(context).size.width * 0.3,
+                                width: MediaQuery.of(context).size.width * 0.4,
                                 //  alignment: Alignment.centerLeft,
                                 child: Text(
                                   getName(members[index]),
@@ -102,7 +100,8 @@ class _MemberListPageState extends State<MemberListPage> {
                                 Icon(
                                   Icons.star,
                                   color: Colors.red,
-                                  size: 30,
+                                  size:
+                                      MediaQuery.of(context).size.width * 0.05,
                                 ),
                             ],
                           ),
@@ -162,7 +161,6 @@ class _MemberListPageState extends State<MemberListPage> {
                                               groupId: widget.groupId,
                                               destinationUserId:
                                                   getId(members[index]),
-                                              avtURL: avtURL,
                                               currentUserIsAdmin:
                                                   currentUserId ==
                                                       getId(snapshot
