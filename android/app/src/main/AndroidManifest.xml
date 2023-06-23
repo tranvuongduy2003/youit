@@ -3,9 +3,9 @@
     package="com.example.you_it">
      <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="you_it"
+        android:label="You IT"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
 
         <provider
             android:name="vn.hunghd.flutterdownloader.DownloadedFileProvider"
