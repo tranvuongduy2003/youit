@@ -29,6 +29,9 @@ app.post("/send-group-message", async (req: Request, res: Response) => {
       title: title,
       body: body,
     },
+    data: {
+      topic: topic,
+    }
   };
 
   try {

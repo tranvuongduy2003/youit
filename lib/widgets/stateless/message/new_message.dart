@@ -82,7 +82,7 @@ class _NewMessageState extends State<NewMessage> {
           'createAt': DateTime.now(),
         });
         Client().sendMessageToGroup(
-            title: widget.groupName,
+            title: '${widget.groupName}: ${userData['userName']}',
             body: _fileUrl != null
                 ? 'Đã gửi một file.'
                 : _imageUrl != null

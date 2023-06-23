@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 
 class Client {
-  String baseUrl = '192.168.81.49:3000';
+  String baseUrl = '192.168.81.219:3000';
 
   Future<void> sendMessageToGroup({
     required String groupId,
