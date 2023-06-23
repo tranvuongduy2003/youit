@@ -295,13 +295,11 @@ class _GroupInformationPageState extends State<GroupInformationPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 CircleButton(
-                                    imageAsset:
-                                        'assets/images/announcement_bell.png',
-                                    buttonColor: AppColors.isabelline,
-                                    onPressed: () {},
-                                    size: 55),
-                                CircleButton(
-                                    imageAsset: 'assets/images/add_member.png',
+                                    isImageButton: false,
+                                    icon: Icon(
+                                      Icons.person_add_alt_1_outlined,
+                                      size: 30,
+                                    ),
                                     buttonColor: AppColors.isabelline,
                                     onPressed: () {
                                       Navigator.of(context).push(
