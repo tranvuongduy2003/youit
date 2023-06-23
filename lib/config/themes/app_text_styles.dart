@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../config/themes/app_colors.dart';
 
 class AppTextStyles {
@@ -89,7 +90,7 @@ class AppTextStyles {
 
   static const unSeenMessage = TextStyle(
     fontFamily: 'Montserrat',
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w400,
     color: Color(0xFF070C1E),
     fontSize: 16,
   );

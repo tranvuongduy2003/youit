@@ -10,10 +10,16 @@ class MessageAvatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        CircleAvatar(
-          radius: 35,
-          backgroundImage: NetworkImage("https://picsum.photos/200"),
-        ),
+        imageUrl != null && imageUrl != ''
+            ? CircleAvatar(
+                radius: 35,
+                backgroundImage: NetworkImage(imageUrl),
+                backgroundColor: Colors.black12,
+              )
+            : CircleAvatar(
+                radius: 35,
+                backgroundColor: Colors.black12,
+              ),
         Positioned(
           width: 20,
           height: 20,

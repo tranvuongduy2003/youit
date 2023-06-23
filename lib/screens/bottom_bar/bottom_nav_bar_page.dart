@@ -5,7 +5,6 @@ import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
-import '../../screens/home/home_page.dart';
 import '../../screens/message/message_page.dart';
 import '../../screens/profile/profile_page.dart';
 import '../../widgets/stateless/drawer/drawer_and_bottom_nav.dart';
@@ -29,7 +28,7 @@ class BottomNavBarPage extends StatefulWidget {
 }
 
 class _BottomNavBarPageState extends State<BottomNavBarPage> {
-  int selectedIndex = 2;
+  int selectedIndex = 1;
   bool _isShowAppBar = true;
   bool _isShowDrawer = false;
   bool _showDrawerAndBottomNav = false;
@@ -52,7 +51,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     final List<Widget?> widgetOptions = [
-      HomePage(),
+      // HomePage(),
       MessagePage(),
       widget.currentWidget,
       ProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
@@ -91,7 +90,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   setState(
                     () {
                       selectedIndex = index;
-                      if (index != 2) {
+                      if (index != 1) {
                         _isShowAppBar = false;
                       } else {
                         _showDrawerAndBottomNav = false;
@@ -103,12 +102,12 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
                   _isShowDrawer = false;
                 },
                 items: [
-                  BottomNavigationBarItem(
-                    label: 'Home',
-                    icon: ImageIcon(
-                      AssetImage('assets/images/home.png'),
-                    ),
-                  ),
+                  // BottomNavigationBarItem(
+                  //   label: 'Home',
+                  //   icon: ImageIcon(
+                  //     AssetImage('assets/images/home.png'),
+                  //   ),
+                  // ),
                   BottomNavigationBarItem(
                     label: 'Chat',
                     icon: ImageIcon(

@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/themes/app_text_styles.dart';
-
 import 'package:you_it/widgets/stateless/message/message_user.dart';
+
 import '../../widgets/stateless/header_bar.dart';
 
 class MessagePage extends StatefulWidget {
@@ -145,6 +144,7 @@ class _MessagePageState extends State<MessagePage> {
                                 lastMessage: data[index]['lastMessage'],
                                 userName: otherUserName,
                                 lastMessageTime: data[index]['lastMessageTime'],
+                                userAvatar: data[index]['avatar'],
                               );
                             }
 

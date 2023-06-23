@@ -4,7 +4,6 @@ import 'package:you_it/screens/general/genaral_page.dart';
 import 'package:you_it/screens/group/group_page.dart';
 
 import '../../config/themes/app_colors.dart';
-import '../home/home_page.dart';
 import '../message/message_page.dart';
 import '../profile/profile_page.dart';
 
@@ -18,9 +17,9 @@ class BottomNavBarWithGroupListPage extends StatefulWidget {
 
 class _BottomNavBarWithGroupListPageState
     extends State<BottomNavBarWithGroupListPage> {
-  int selectedIndex = 2;
+  int selectedIndex = 1;
   final List<Widget?> widgetOptions = [
-    HomePage(),
+    // HomePage(),
     MessagePage(),
     GroupPage(),
     ProfilePage(userId: FirebaseAuth.instance.currentUser!.uid),
@@ -49,12 +48,12 @@ class _BottomNavBarWithGroupListPageState
             });
           },
           items: [
-            BottomNavigationBarItem(
-              label: 'Home',
-              icon: ImageIcon(
-                AssetImage('assets/images/home.png'),
-              ),
-            ),
+            // BottomNavigationBarItem(
+            //   label: 'Home',
+            //   icon: ImageIcon(
+            //     AssetImage('assets/images/home.png'),
+            //   ),
+            // ),
             BottomNavigationBarItem(
               label: 'Chat',
               icon: ImageIcon(
