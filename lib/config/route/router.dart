@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:you_it/screens/auth/fill_info_page.dart';
 import 'package:you_it/screens/auth/forgot_password_page.dart';
-
-import 'package:you_it/screens/general/chang_password.dart';
-import 'package:you_it/screens/general/genaral_page.dart';
-
-import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/auth/login_page.dart';
 import 'package:you_it/screens/auth/signup_page.dart';
+import 'package:you_it/screens/auth/welcome_page.dart';
 import 'package:you_it/screens/bottom_bar/bottom_nav_bar_with_group_list_page.dart';
-
+import 'package:you_it/screens/general/chang_password.dart';
+import 'package:you_it/screens/general/genaral_page.dart';
+import 'package:you_it/screens/group/group_page.dart';
 import 'package:you_it/screens/message/message_page.dart';
 
-import 'package:you_it/screens/group/group_page.dart';
-
-import '../../screens/group/upload_file_page.dart';
-
-import '../../screens/home/home_page.dart';
 import './routes.dart';
+import '../../screens/home/home_page.dart';
 
 class Router {
   static Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -79,10 +73,10 @@ class Router {
       //   {
       //     return MaterialPageRoute(builder: (_) => const PostingPage());
       //   }
-      case Routes.uploadFilePage:
-        {
-          return MaterialPageRoute(builder: (_) => const UploadFilePage());
-        }
+      // case Routes.uploadFilePage:
+      //   {
+      //     return MaterialPageRoute(builder: (_) => const UploadFilePage());
+      //   }
       case Routes.generalPage:
         {
           return MaterialPageRoute(builder: (_) => const GeneralPage());

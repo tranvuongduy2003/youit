@@ -1,9 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/widgets/stateful/input_password.dart';
 import 'package:you_it/widgets/stateless/sign_button.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../config/route/routes.dart';
 import '../../widgets/stateless/input.dart';
@@ -22,12 +22,16 @@ class _SignUpPageState extends State<SignUpPage> {
   final _formField = GlobalKey<FormState>();
   bool _checkPasswordMatched = false;
   bool _isEmailExist = false;
+  bool _isLoading = false;
   String _fullName = '';
   String _email = '';
   String _confirmPassword = '';
   String _password = '';
 
   void _handleSignUp(context) async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       if (_formField.currentState!.validate() &&
           _password == _confirmPassword) {
@@ -54,9 +58,15 @@ class _SignUpPageState extends State<SignUpPage> {
             },
           );
         }
+        setState(() {
+          _isLoading = false;
+        });
         Navigator.of(context).pushNamed(Routes.fillInfoPage);
       }
     } on FirebaseAuthException catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
@@ -67,6 +77,9 @@ class _SignUpPageState extends State<SignUpPage> {
         _formField.currentState?.validate();
       }
     } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
       print(e);
     }
   }
@@ -203,6 +216,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: SignButton(
                       buttonText: 'Đăng kí',
                       textColor: AppColors.white,
+                      loading: _isLoading,
                       backgroundColor: AppColors.primaryColor,
                       handleOnPress: () => _handleSignUp(context),
                     ),

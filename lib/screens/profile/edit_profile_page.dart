@@ -1,13 +1,17 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:you_it/screens/profile/edit_description_page.dart';
 import 'package:you_it/screens/profile/edit_info_page.dart';
 import 'package:you_it/screens/profile/edit_link_page.dart';
 import 'package:you_it/widgets/stateless/header_bar.dart';
 
-import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({
@@ -22,6 +26,63 @@ class EditProfilePage extends StatelessWidget {
       title,
       style: AppTextStyles.sectionTitle,
     );
+  }
+
+  handleTakePhoto() async {
+    try {
+      final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+        maxWidth: 150,
+      );
+
+      if (pickedImage == null) {
+        return;
+      }
+
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('images')
+          .child('${pickedImage.name}');
+
+      print(pickedImage.path);
+      await storageRef.putFile(File(pickedImage.path));
+      final imageUrl = await storageRef.getDownloadURL();
+
+      await FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'avatar': imageUrl,
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  handleUploadPhoto() async {
+    try {
+      final pickedImage = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+        maxWidth: 150,
+      );
+
+      if (pickedImage == null) {
+        return;
+      }
+
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('images')
+          .child('${pickedImage.name}');
+
+      await storageRef.putFile(File(pickedImage.path));
+      final imageUrl = await storageRef.getDownloadURL();
+
+      await FirebaseFirestore.instance.collection('users').doc(userId).update({
+        'avatar': imageUrl,
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   Widget buildLinkInformationRow(
@@ -141,16 +202,35 @@ class EditProfilePage extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
-                    const Center(
+                    Center(
                       child: CircleAvatar(
                         backgroundImage: NetworkImage(
-                          'https://i.pinimg.com/564x/95/28/c9/9528c96c953ef26053bfa83b0eda9fdb.jpg',
+                          data['avatar'] ?? '',
                         ),
+                        backgroundColor: Colors.black12,
                         radius: 40,
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Wrap(
+                            children: [
+                              ListTile(
+                                leading: Icon(Icons.camera),
+                                title: Text('Take a photo'),
+                                onTap: handleTakePhoto,
+                              ),
+                              ListTile(
+                                leading: Icon(Icons.photo),
+                                title: Text('Choose a photo'),
+                                onTap: handleUploadPhoto,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
                       style: ElevatedButton.styleFrom(
                         minimumSize:
                             Size(MediaQuery.of(context).size.width * 0.5, 27),

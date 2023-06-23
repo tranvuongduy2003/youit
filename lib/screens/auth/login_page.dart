@@ -7,6 +7,7 @@ import 'package:you_it/widgets/stateless/show_snackbar.dart';
 import 'package:you_it/widgets/stateless/sign_button.dart';
 import 'package:you_it/config/themes/app_colors.dart';
 import 'package:you_it/config/route/routes.dart';
+
 import '../../widgets/stateful/input_password.dart';
 import '../../widgets/stateless/input.dart';
 
@@ -182,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               SignButton(
+                                loading: _isLoading,
                                 buttonText: 'Đăng nhập',
                                 textColor: AppColors.white,
                                 backgroundColor: AppColors.primaryColor,

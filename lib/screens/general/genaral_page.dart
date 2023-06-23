@@ -5,10 +5,9 @@ import '../../config/route/routes.dart';
 import '../../config/themes/app_colors.dart';
 import '../../config/themes/app_text_styles.dart';
 import '../../service/database_service.dart';
+import '../../widgets/stateless/circle_button.dart';
 import '../../widgets/stateless/header_bar.dart';
 import '../../widgets/stateless/text_circle_button.dart';
-
-import '../../widgets/stateless/circle_button.dart';
 
 class GeneralPage extends StatefulWidget {
   const GeneralPage({super.key});
@@ -61,19 +60,19 @@ class _GeneralPageState extends State<GeneralPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextCircleButton(
-                    btn: CircleButton(
-                        isImageButton: false,
-                        icon: Icon(
-                          Icons.sunny,
-                          color: Colors.white,
-                          size: 30,
-                        ),
-                        buttonColor: Colors.white,
-                        onPressed: () {},
-                        size: 50),
-                    txt: 'Chế độ',
-                  ),
+                  // TextCircleButton(
+                  //   btn: CircleButton(
+                  //       isImageButton: false,
+                  //       icon: Icon(
+                  //         Icons.sunny,
+                  //         color: Colors.white,
+                  //         size: 30,
+                  //       ),
+                  //       buttonColor: Colors.white,
+                  //       onPressed: () {},
+                  //       size: 50),
+                  //   txt: 'Chế độ',
+                  // ),
                   TextCircleButton(
                     btn: CircleButton(
                         isImageButton: false,
