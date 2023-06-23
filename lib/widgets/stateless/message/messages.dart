@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:you_it/widgets/stateless/message/message_tile.dart';
 
 class Messages extends StatelessWidget {
@@ -31,7 +30,7 @@ class Messages extends StatelessWidget {
               final currentUserId = FirebaseAuth.instance.currentUser!.uid;
               final bool isMe = (chatDocs['senderId'] == currentUserId);
 
-              final messageTime = (chatDocs['createAt'] as Timestamp).toDate();
+              //   final messageTime = (chatDocs['createAt'] as Timestamp).toDate();
 
               print(index);
               print(chatDocs['text']);

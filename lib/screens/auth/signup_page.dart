@@ -86,7 +86,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    final input = GlobalKey<FormState>();
+    //final input = GlobalKey<FormState>();
     return Scaffold(
       body: Stack(
         children: <Widget>[

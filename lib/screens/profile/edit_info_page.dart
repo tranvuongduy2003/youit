@@ -1,9 +1,7 @@
 import 'dart:core';
-import 'dart:core';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:you_it/service/database_service.dart';
@@ -220,9 +218,9 @@ class _EditInfoPageState extends State<EditInfoPage> {
                     if (value == null) {
                       return 'Vui lòng nhập đầy đủ';
                     }
-                    if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                      return 'Sai cú pháp';
-                    }
+                    // if (!RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
+                    //   return 'Sai cú pháp';
+                    // }
                     return null;
                   },
                   onChanged: (value) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../config/themes/app_colors.dart';
 
 class InputPassword extends StatefulWidget {
   final label;
@@ -61,6 +60,7 @@ class _InputPasswordState extends State<InputPassword> {
                 if (widget.isConfirmed == false) {
                   return 'Mật khẩu nhập lại không chính xác';
                 }
+                return null;
               },
               obscureText: passToggle,
               decoration: InputDecoration(

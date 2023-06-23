@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:you_it/screens/group/posting_page.dart';
 import 'package:you_it/service/database_service.dart';
 
-import '../../config/themes/app_text_styles.dart';
 import '../../config/themes/app_colors.dart';
+import '../../config/themes/app_text_styles.dart';
 import '../../widgets/stateless/circle_button.dart';
 
 class ActivityPage extends StatefulWidget {
-  const ActivityPage({super.key, required this.groupId});
+  const ActivityPage(
+      {super.key, required this.groupId, required this.groupName});
 
   final String groupId;
+  final String groupName;
 
   @override
   State<ActivityPage> createState() => _ActivityPageState();
@@ -67,7 +69,9 @@ class _ActivityPageState extends State<ActivityPage> {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
                                         builder: (ctx) => PostingPage(
-                                            groupId: widget.groupId),
+                                          groupId: widget.groupId,
+                                          groupName: widget.groupName,
+                                        ),
                                       ),
                                     );
                                   }
@@ -112,8 +116,9 @@ class _ActivityPageState extends State<ActivityPage> {
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     PostingPage(
-                                                        groupId:
-                                                            widget.groupId),
+                                                  groupId: widget.groupId,
+                                                  groupName: widget.groupName,
+                                                ),
                                               ),
                                             );
                                           }

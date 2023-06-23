@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slider_drawer/flutter_slider_drawer.dart';
@@ -15,11 +14,13 @@ class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({
     this.currentWidget = const GroupPage(),
     required this.groupId,
+    required this.groupName,
     required this.selectedIndexDrawer,
   });
 
   final Widget currentWidget;
   final String groupId;
+  final String groupName;
 
   final int selectedIndexDrawer;
 
