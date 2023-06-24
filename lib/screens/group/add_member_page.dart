@@ -144,9 +144,19 @@ class _AddMemberPageState extends State<AddMemberPage> {
                     margin: EdgeInsets.only(left: 10),
                     child: Column(
                       children: [
-                        CircleAvatar(
-                          radius: 30,
-                        ),
+                        usersSelected.values.elementAt(index)[1] != ''
+                            ? CircleAvatar(
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.05,
+                                backgroundImage: NetworkImage(
+                                    usersSelected.values.elementAt(index)[1]),
+                                backgroundColor: Colors.black12,
+                              )
+                            : CircleAvatar(
+                                radius:
+                                    MediaQuery.of(context).size.width * 0.05,
+                                backgroundColor: Colors.black12,
+                              ),
                         Text(
                           usersSelected.values.elementAt(index)[0],
                           style: TextStyle(
@@ -207,6 +217,7 @@ class _AddMemberPageState extends State<AddMemberPage> {
                             usersSelected.keys.contains(usersData[index].id);
                         final userEmail = usersData[index]['email'];
                         final userName = usersData[index]['userName'];
+                        final userAvtUrl = usersData[index]['avatar'];
 
                         //search trong thi return tat ca
                         //neu search trong hoac ten cua user co chua doan chu trong search thi return user do
@@ -216,15 +227,31 @@ class _AddMemberPageState extends State<AddMemberPage> {
                                 .toLowerCase()
                                 .contains(searchText.toLowerCase())) {
                           return UserCard(
+                            avatar: userAvtUrl != null
+                                ? CircleAvatar(
+                                    radius: MediaQuery.of(context).size.width *
+                                        0.05,
+                                    backgroundImage: NetworkImage(userAvtUrl),
+                                    backgroundColor: Colors.black12,
+                                  )
+                                : CircleAvatar(
+                                    radius: MediaQuery.of(context).size.width *
+                                        0.05,
+                                    backgroundColor: Colors.black12,
+                                  ),
                             handlerChange: () {
                               setState(() {
                                 if (isSelected) {
                                   usersSelected.remove(usersData[index].id);
                                 } else {
+                                  String avt = '';
+                                  if (userAvtUrl != null) {
+                                    avt = userAvtUrl;
+                                  }
                                   usersSelected.addAll({
                                     usersData[index].id: [
                                       userName,
-                                      //  usersData[index]['khoa'],
+                                      avt,
                                     ]
                                   });
                                 }
@@ -258,12 +285,14 @@ class UserCard extends StatefulWidget {
     required this.email,
     required this.userName,
     required this.handlerChange,
+    required this.avatar,
   });
 
   final bool isSelected;
   final String userName;
   final String email;
   final VoidCallback handlerChange;
+  final Widget avatar;
 
   @override
   State<UserCard> createState() => _UserCardState();
@@ -295,7 +324,7 @@ class _UserCardState extends State<UserCard> {
                 Icons.circle_outlined,
                 color: Colors.blue,
               ),
-        leading: CircleAvatar(backgroundColor: Colors.red),
+        leading: widget.avatar,
         title: Text(
           widget.userName,
           style: AppTextStyles.mont23_600,
